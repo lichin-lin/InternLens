@@ -1,0 +1,16 @@
+image: node
+
+before_script:
+    - node -v
+    - npm -v
+    - pwd
+    - npm i
+    - cp src/js/api/Config.js.sample src/js/api/Config.js
+
+lint:
+    script:
+        - npm run lint
+
+build:
+    script:
+        - npm run build
