@@ -15,7 +15,6 @@ export default CSSModules(class extends Component {
     render () {
         return (
             <StyleRoot>
-
                 <App>
                     <Box justify='start'
                       align='center'
@@ -51,7 +50,7 @@ export default CSSModules(class extends Component {
                         align='center'
                         wrap={true}
                         pad='medium'
-                        margin='small'
+                        margin='none'
                         size='full'
                         flex={true}
                         full='horizontal'

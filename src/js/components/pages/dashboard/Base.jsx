@@ -12,12 +12,15 @@ import Search from 'grommet/components/Search'
 import Header from 'grommet/components/Header'
 import Actions from 'grommet/components/icons/base/Actions'
 import CloseIcon from 'grommet/components/icons/base/Close'
+import WorkshopIcon from 'grommet/components/icons/base/Workshop'
 import Tiles from 'grommet/components/Tiles'
 import Tile from 'grommet/components/Tile'
 import Layer from 'grommet/components/Layer'
 import Button from 'grommet/components/Button'
-import List from 'grommet/components/List'
-import ListItem from 'grommet/components/ListItem'
+import Paragraph from 'grommet/components/Paragraph'
+import Heading from 'grommet/components/Heading'
+// import List from 'grommet/components/List'
+// import ListItem from 'grommet/components/ListItem'
 import Animate from 'grommet/components/Animate'
 
 @Radium
@@ -28,22 +31,29 @@ export default CSSModules(class extends Component {
         this.toggleWindowClose = this.toggleWindowClose.bind(this)
         this.getMoreIntern = this.getMoreIntern.bind(this)
         this.startFilter = this.startFilter.bind(this)
+        this.show = this.show.bind(this)
         this.state = {
             copyInternList: {},
             renderInternList: {},
             filterInput: '',
             currentIndex: 1,
             oneQueryCount: 10,
-            isWindowClose: true
+            isWindowClose: true,
+            WindowContentIndex: 1,
+            isLoading: true,
+            isListEnd: false
         }
     }
     changeFilterInput (event) {
         this.setState({filterInput: event.target.value})
     }
     startFilter () {
-        if (this.state.filterInput === '') {
-            return
-        }
+        // if (this.state.filterInput === '') {
+        //     return
+        // }
+        this.setState({renderInternList: {}})
+        this.setState({currentIndex: 0})
+        this.setState({isListEnd: false})
         let rowData = this.props.Intern.list
         let filterData = {}
         _.map(rowData, (el, id) => {
@@ -62,19 +72,37 @@ export default CSSModules(class extends Component {
                 ...filterData
             }
         })
+        console.log(filterData)
     }
-    toggleWindowClose (id) {
+    toggleWindowOpen (id) {
+        console.log(id)
+        this.setState({WindowContentIndex: id})
         this.setState({isWindowClose: !this.state.isWindowClose})
     }
+    toggleWindowClose () {
+        this.setState({isWindowClose: !this.state.isWindowClose})
+    }
+    show () {
+        console.log(this.state)
+    }
     getMoreIntern () {
-        if (this.props.Intern.isLoading === true) {
+        if (this.state.isListEnd === true) {
+            return
+        }
+        if (this.state.isLoading === true) {
             return
         }
         let pushInList = {}
+        let isEnd = 0
         for (let count = 0; count < this.state.oneQueryCount; count++) {
             let t = this.state.currentIndex + count
             if (this.props.Intern.list[t] !== undefined) {
-                pushInList[t] = this.props.Intern.list[t]
+                pushInList[t] = this.state.copyInternList[t]
+            } else {
+                isEnd += 1
+                if (isEnd >= this.state.oneQueryCount) {
+                    this.setState({isListEnd: true})
+                }
             }
         }
         this.setState({
@@ -88,7 +116,17 @@ export default CSSModules(class extends Component {
     componentWillMount () {
         this.props.setLoading()
         .then(() => {
-            return this.props.getInternList(0, 35)
+            return this.props.getInternList(0, 30)
+        })
+        .then(() => {
+            this.setState({
+                copyInternList: {
+                    ...this.props.Intern.list
+                }
+            })
+        })
+        .then(() => {
+            this.setState({isLoading: false})
         })
     }
     render () {
@@ -106,6 +144,7 @@ export default CSSModules(class extends Component {
                       label='排序'
                       inline={false}
                       primary={false}
+                      onClick={this.show}
                       size='small'>
                       <Anchor href='#'
                         className='active'>
@@ -123,10 +162,12 @@ export default CSSModules(class extends Component {
                       placeHolder='使用透視鏡!'
                       onDOMChange={this.changeFilterInput}
                       dropAlign={{'right': 'right'}} />
-                  </Box>
-                  <Button
-                      icon={<CloseIcon />}
-                      onClick={this.startFilter}/>
+                    </Box>
+                    <Button
+                        icon={<WorkshopIcon />}
+                        label='查詢'
+                        plain={true}
+                        onClick={this.startFilter}/>
                 </Header>
                 <Tiles fill={true}
                     flush={false}
@@ -134,7 +175,8 @@ export default CSSModules(class extends Component {
                 {
                     // this.props.Intern.list.filter(this.isSearchMatch).map((intern, id) =>
                     _.map(this.state.renderInternList, (intern, id) =>
-                        <Animate key={id} enter={{'animation': 'fade', 'duration': 1000, 'delay': 0}}
+                        intern === undefined
+                        ? null : <Animate key={id} enter={{'animation': 'fade', 'duration': 1000, 'delay': 0}}
                             keep={false}>
                             <Tile size='medium'>
                                 <Card heading={intern['Name']}
@@ -148,7 +190,8 @@ export default CSSModules(class extends Component {
                                     headingStrong={false}
                                     link= {
                                         <Anchor
-                                            onClick={this.toggleWindowClose}
+                                            onClick={this.toggleWindowOpen.bind(this, id)}
+                                            id={id}
                                             label='查看心得全文'
                                             style={{
                                                 marginTop: '10px'
@@ -169,21 +212,32 @@ export default CSSModules(class extends Component {
                     <Button
                         icon={<CloseIcon />}
                         onClick={this.toggleWindowClose}/>
-                    <List>
+                    <Tiles fill={true}>
                         {
-                            _.map(this.props.Intern.list[0], (el, id) =>
-                                <ListItem key={id} justify='between'
-                                    separator='horizontal'>
-                                    <span>
-                                        <b>{id}</b>
-                                    </span>
-                                    <span className='secondary'>
-                                        {el}
-                                    </span>
-                                </ListItem>
+                            _.map(this.props.Intern.list[this.state.WindowContentIndex], (el, id) =>
+                                <Tile key={id} separator='top'
+                                    align='start'
+                                    basis='1/2'
+                                    style={{
+                                        padding: '15px'
+                                    }}>
+                                    <Header size='small'
+                                        pad={{'horizontal': 'small'}}>
+                                        <Heading tag='h4'
+                                            strong={true}
+                                            margin='none'>
+                                            <b>{id}</b>
+                                        </Heading>
+                                    </Header>
+                                    <Box pad='small'>
+                                        <Paragraph margin='none'>
+                                            {el}
+                                        </Paragraph>
+                                    </Box>
+                                </Tile>
                             )
                         }
-                    </List>
+                    </Tiles>
                 </Layer>
             </div>
         )
