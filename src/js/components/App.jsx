@@ -20,7 +20,7 @@ export default CSSModules(class extends Component {
     }
     componentDidMount () {
         this.props.getInternList()
-        this.props.router.push('/dashboard')
+        this.props.router.push('/InternLens/dashboard')
     }
     render () {
         return (
