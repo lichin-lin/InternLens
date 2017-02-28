@@ -2,17 +2,14 @@ import React, { Component } from 'react'
 import Containers from 'containers'
 import CSSModules from 'react-css-modules'
 import Radium, { StyleRoot } from 'radium'
-import { Link } from 'react-router'
+// import { Link } from 'react-router'
 import App from 'grommet/components/App'
 import Box from 'grommet/components/Box'
+import Title from 'grommet/components/Title'
 
 @Radium
 export default CSSModules(class extends Component {
-    componentWillMount () {
-        console.log('get api')
-    }
     componentDidMount () {
-        this.props.getInternList('0', '9')
         this.props.router.push('/InternLens/dashboard')
     }
     render () {
@@ -38,12 +35,15 @@ export default CSSModules(class extends Component {
                         size='full'
                         full='horizontal'
                         colorIndex='light-1'>
-                        <Link to={`/dashboard`}>
+                        {/* <Link to={`/InternLens/dashboard`}>
                             總版dashboard
-                        </Link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <Link to={`/favorite`}>
+                        </Link>&nbsp;&nbsp;&nbsp; */}
+                        <Title>
+                            InternLens
+                        </Title>&nbsp;&nbsp;&nbsp;
+                        {/* <Link to={`/InternLens/dashboard`}>
                             心願單favorite
-                        </Link>
+                        </Link> */}
                       </Box>
 
                       <Box direction='row'

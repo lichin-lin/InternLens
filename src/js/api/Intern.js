@@ -4,6 +4,7 @@ export default {
     get: (startIndex, endIndex) => {
         startIndex = startIndex.toString()
         endIndex = endIndex.toString()
+        console.log(startIndex, endIndex)
         return firebase.database().ref('/list').orderByKey().startAt(startIndex).endAt(endIndex).once('value').then(function (snapshot) {
             return snapshot.val()
         })

@@ -2,7 +2,7 @@ import { handleActions } from 'redux-actions'
 
 const initialState = {
     list: {},
-    isLoading: false
+    isLoading: true
 }
 
 export default handleActions({
