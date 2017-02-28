@@ -31,9 +31,12 @@ export default CSSModules(class extends Component {
         this.changeFilterInput = this.changeFilterInput.bind(this)
         this.isSearchMatch = this.isSearchMatch.bind(this)
         this.toggleWindowClose = this.toggleWindowClose.bind(this)
+        this.getMoreIntern = this.getMoreIntern.bind(this)
         this.state = {
             filterInput: '',
-            isWindowClose: true
+            isWindowClose: true,
+            currentIndex: 0,
+            isLoading: false
         }
     }
     changeFilterInput (event) {
@@ -41,7 +44,7 @@ export default CSSModules(class extends Component {
         this.setState({filterInput: event.target.value})
     }
     isSearchMatch (value) {
-        let target = value['你之前去哪實習呢？']
+        let target = value['Name']
         if (target === '') {
             return true
         } else if (target.indexOf(this.state.filterInput) >= 0) {
@@ -51,13 +54,25 @@ export default CSSModules(class extends Component {
     toggleWindowClose (id) {
         this.setState({isWindowClose: !this.state.isWindowClose})
     }
+    getMoreIntern () {
+        if (this.state.isLoading === true) {
+            return
+        }
+        this.state.isLoading = true
+        this.props.getInternList(this.state.currentIndex, this.state.currentIndex + 10)
+        .then(() => {
+            this.state.isLoading = false
+            this.setState({currentIndex: this.state.currentIndex + 10})
+        })
+    }
     render () {
+        console.log(this.props.Intern)
         return (
             <div style={{
                 'width': '100%'
             }}>
                 <Header>
-                  <Title>
+                  <Title onClick={this.getMoreIntern}>
                       InternLens
                   </Title>
                   <Box flex={true}
@@ -89,17 +104,19 @@ export default CSSModules(class extends Component {
                   </Box>
                 </Header>
                 <Tiles fill={true}
-                    flush={false}>
+                    flush={false}
+                    onMore={this.getMoreIntern}>
                 {
-                    this.props.Intern.list.filter(this.isSearchMatch).map((intern, id) =>
-                        <Animate enter={{'animation': 'fade', 'duration': 1000, 'delay': 0}}
+                    // this.props.Intern.list.filter(this.isSearchMatch).map((intern, id) =>
+                    _.map(this.props.Intern.list, (intern, id) =>
+                        <Animate key={id} enter={{'animation': 'fade', 'duration': 1000, 'delay': 0}}
                             keep={false}>
-                            <Tile size='medium' key={id}>
-                                <Card heading={intern['你之前去哪實習呢？']}
+                            <Tile size='medium'>
+                                <Card heading={intern['Name']}
                                     description={
                                         <Dotdotdot clamp={3}>
                                             <div style={{lineHeight: '1.5', minHeight: '75px'}}>
-                                                {intern['可以跟我們分享更多實際實習生訓練制度、學習方面心得？(好、壞皆可)']}
+                                                {intern['Review']}
                                             </div>
                                         </Dotdotdot>
                                     }
@@ -131,7 +148,7 @@ export default CSSModules(class extends Component {
                     <List>
                         {
                             _.map(this.props.Intern.list[0], (el, id) =>
-                                <ListItem justify='between'
+                                <ListItem key={id} justify='between'
                                     separator='horizontal'>
                                     <span>
                                         <b>{id}</b>

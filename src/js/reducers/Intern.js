@@ -1,17 +1,31 @@
 import { handleActions } from 'redux-actions'
-// import _ from 'lodash'
 
 const initialState = {
-    list: []
+    list: {},
+    isLoading: false
 }
 
 export default handleActions({
     GET_INTERNLIST: {
         next (state, action) {
-            console.log(action.payload)
+            let obj = action.payload
+            if (Array.isArray(action.payload)) {
+                let arr = action.payload
+                obj = {}
+                for (let i = 0; i < arr.length; ++i) {
+                    if (arr[i] === undefined) {
+                        continue
+                    }
+                    obj[arr[i]['ID']] = arr[i]
+                }
+            }
             return {
                 ...state,
-                list: action.payload
+                list: {
+                    ...state.list,
+                    ...obj
+                },
+                isLoading: false
             }
         },
         throw (state, { payload }) {

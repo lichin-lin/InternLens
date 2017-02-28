@@ -6,7 +6,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    getInternList: () => dispatch(Actions.Intern.get())
+    getInternList: (start, end) => dispatch(Actions.Intern.get(start, end))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Components.App)

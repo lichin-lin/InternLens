@@ -8,18 +8,11 @@ import Box from 'grommet/components/Box'
 
 @Radium
 export default CSSModules(class extends Component {
-    constructor (props) {
-        super(props)
-        this.getInternList = this.getInternList.bind(this)
-    }
-    getInternList () {
-        this.props.getInternList()
-    }
     componentWillMount () {
         console.log('get api')
     }
     componentDidMount () {
-        this.props.getInternList()
+        this.props.getInternList('0', '9')
         this.props.router.push('/InternLens/dashboard')
     }
     render () {
