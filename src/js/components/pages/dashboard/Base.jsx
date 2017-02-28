@@ -20,8 +20,7 @@ import Layer from 'grommet/components/Layer'
 import Button from 'grommet/components/Button'
 import List from 'grommet/components/List'
 import ListItem from 'grommet/components/ListItem'
-// import Heading from 'grommet/components/Heading'
-// import Paragraph from 'grommet/components/Paragraph'
+import Animate from 'grommet/components/Animate'
 
 @Radium
 export default CSSModules(class extends Component {
@@ -93,54 +92,31 @@ export default CSSModules(class extends Component {
                     flush={false}>
                 {
                     this.props.Intern.list.filter(this.isSearchMatch).map((intern, id) =>
-                        <Tile size='medium' key={id}>
-                            <Card heading={intern['你之前去哪實習呢？']}
-                                // description={<Truncate lines={100} ellipsis={<span>...</span>}>{intern['可以跟我們分享更多實際實習生訓練制度、學習方面心得？(好、壞皆可)']}</Truncate>}
-                                description={
-                                    <Dotdotdot clamp={3}>
-                                        <div style={{lineHeight: '1.5', minHeight: '75px'}}>
-                                            {intern['可以跟我們分享更多實際實習生訓練制度、學習方面心得？(好、壞皆可)']}
-                                        </div>
-                                    </Dotdotdot>
-                                }
-                                headingStrong={false}
-                                link= {
-                                    <Anchor
-                                        onClick={this.toggleWindowClose}
-                                        label='查看心得全文'
-                                        style={{
-                                            marginTop: '10px'
-                                        }} />
-                                }
-                                style={{
-                                    width: '100%'
-                                }}/>
-                        </Tile>
-                        // <Tile separator='top'
-                        //     align='start'
-                        //     style={{
-                        //         width: '100%'
-                        //     }}>
-                        //     <Header size='small'
-                        //         pad={{'horizontal': 'small'}}>
-                        //         <Heading tag='h4'
-                        //             strong={true}
-                        //             margin='none'>
-                        //             {intern['你之前去哪實習呢？']}
-                        //         </Heading>
-                        //     </Header>
-                        //     <Box pad='small'>
-                        //         <Paragraph margin='none'>
-                        //             {/* <Truncate lines={1} ellipsis={<span>...</span>}>{intern['可以跟我們分享更多實際實習生訓練制度、學習方面心得？(好、壞皆可)']}</Truncate> */}
-                        //             <Dotdotdot clamp={3}>
-                        //                 <div style={{
-                        //                     lineHeight: '1.5'
-                        //                 }}>{intern['可以跟我們分享更多實際實習生訓練制度、學習方面心得？(好、壞皆可)']}</div>
-                        //             </Dotdotdot>
-                        //             {/* {intern['可以跟我們分享更多實際實習生訓練制度、學習方面心得？(好、壞皆可)']} */}
-                        //         </Paragraph>
-                        //     </Box>
-                        // </Tile>
+                        <Animate enter={{'animation': 'fade', 'duration': 1000, 'delay': 0}}
+                            keep={false}>
+                            <Tile size='medium' key={id}>
+                                <Card heading={intern['你之前去哪實習呢？']}
+                                    description={
+                                        <Dotdotdot clamp={3}>
+                                            <div style={{lineHeight: '1.5', minHeight: '75px'}}>
+                                                {intern['可以跟我們分享更多實際實習生訓練制度、學習方面心得？(好、壞皆可)']}
+                                            </div>
+                                        </Dotdotdot>
+                                    }
+                                    headingStrong={false}
+                                    link= {
+                                        <Anchor
+                                            onClick={this.toggleWindowClose}
+                                            label='查看心得全文'
+                                            style={{
+                                                marginTop: '10px'
+                                            }} />
+                                    }
+                                    style={{
+                                        width: '100%'
+                                    }}/>
+                            </Tile>
+                        </Animate>
                     )
 
                 }
