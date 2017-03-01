@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Containers from 'js/containers'
 import CSSModules from 'react-css-modules'
 import Dotdotdot from 'react-dotdotdot'
 import Radium from 'radium'
@@ -11,16 +12,10 @@ import Anchor from 'grommet/components/Anchor'
 import Search from 'grommet/components/Search'
 import Header from 'grommet/components/Header'
 import Actions from 'grommet/components/icons/base/Actions'
-import CloseIcon from 'grommet/components/icons/base/Close'
 import WorkshopIcon from 'grommet/components/icons/base/Workshop'
 import Tiles from 'grommet/components/Tiles'
 import Tile from 'grommet/components/Tile'
-import Layer from 'grommet/components/Layer'
 import Button from 'grommet/components/Button'
-import Paragraph from 'grommet/components/Paragraph'
-import Heading from 'grommet/components/Heading'
-// import List from 'grommet/components/List'
-// import ListItem from 'grommet/components/ListItem'
 import Animate from 'grommet/components/Animate'
 
 @Radium
@@ -37,7 +32,7 @@ export default CSSModules(class extends Component {
             renderInternList: {},
             filterInput: '',
             currentIndex: 1,
-            oneQueryCount: 10,
+            oneQueryCount: 5,
             isWindowClose: true,
             WindowContentIndex: 1,
             isLoading: true,
@@ -116,7 +111,7 @@ export default CSSModules(class extends Component {
     componentWillMount () {
         this.props.setLoading()
         .then(() => {
-            return this.props.getInternList(0, 30)
+            return this.props.getInternList(0, 20)
         })
         .then(() => {
             this.setState({
@@ -205,40 +200,9 @@ export default CSSModules(class extends Component {
                     )
                 }
                 </Tiles>
-                <Layer closer={true}
-                    align='center'
-                    flush={true}
-                    hidden={this.state.isWindowClose}>
-                    <Button
-                        icon={<CloseIcon />}
-                        onClick={this.toggleWindowClose}/>
-                    <Tiles fill={true}>
-                        {
-                            _.map(this.props.Intern.list[this.state.WindowContentIndex], (el, id) =>
-                                <Tile key={id} separator='top'
-                                    align='start'
-                                    basis='1/2'
-                                    style={{
-                                        padding: '15px'
-                                    }}>
-                                    <Header size='small'
-                                        pad={{'horizontal': 'small'}}>
-                                        <Heading tag='h4'
-                                            strong={true}
-                                            margin='none'>
-                                            <b>{id}</b>
-                                        </Heading>
-                                    </Header>
-                                    <Box pad='small'>
-                                        <Paragraph margin='none'>
-                                            {el}
-                                        </Paragraph>
-                                    </Box>
-                                </Tile>
-                            )
-                        }
-                    </Tiles>
-                </Layer>
+                <Containers.Inner
+                    title={this.props.Intern.list[this.state.WindowContentIndex]['Name']}
+                    />
             </div>
         )
     }
