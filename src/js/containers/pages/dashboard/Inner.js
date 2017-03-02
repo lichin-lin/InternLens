@@ -2,8 +2,10 @@ import { connect } from 'react-redux'
 import Components from 'components'
 // import Actions from 'js/actions'
 
-const mapStateToProps = (state) => ({
-    Intern: state.Intern
+const mapStateToProps = (state, ownProps) => ({
+    InnerContent: {
+        ...ownProps
+    }
 })
 
 const mapDispatchToProps = (dispatch) => ({

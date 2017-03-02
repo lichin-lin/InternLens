@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-// import Containers from 'js/containers'
+import Containers from 'js/containers'
 import CSSModules from 'react-css-modules'
 import Dotdotdot from 'react-dotdotdot'
 import Radium from 'radium'
@@ -12,19 +12,11 @@ import Anchor from 'grommet/components/Anchor'
 import Search from 'grommet/components/Search'
 import Header from 'grommet/components/Header'
 import Actions from 'grommet/components/icons/base/Actions'
-// import CloseIcon from 'grommet/components/icons/base/Close'
 import WorkshopIcon from 'grommet/components/icons/base/Workshop'
 import Tiles from 'grommet/components/Tiles'
 import Tile from 'grommet/components/Tile'
 import Button from 'grommet/components/Button'
 import Animate from 'grommet/components/Animate'
-// import Layer from 'grommet/components/Layer'
-// import Value from 'grommet/components/Value'
-// import Paragraph from 'grommet/components/Paragraph'
-// import Heading from 'grommet/components/Heading'
-// import Label from 'grommet/components/Label'
-// import List from 'grommet/components/List'
-// import ListItem from 'grommet/components/ListItem'
 
 @Radium
 export default CSSModules(class extends Component {
@@ -208,7 +200,9 @@ export default CSSModules(class extends Component {
                     )
                 }
                 </Tiles>
-                {/* <Containers.Inner /> */}
+                <Containers.pages.dashboard.Inner
+                    isClose={this.state.isWindowClose}
+                    content={this.props.Intern.list[this.state.WindowContentIndex]}/>
             </div>
         )
     }
