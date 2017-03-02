@@ -202,7 +202,8 @@ export default CSSModules(class extends Component {
                 </Tiles>
                 <Containers.pages.dashboard.Inner
                     isClose={this.state.isWindowClose}
-                    content={this.props.Intern.list[this.state.WindowContentIndex]}/>
+                    content={this.props.Intern.list[this.state.WindowContentIndex]}
+                    onClose={this.toggleWindowClose}/>
             </div>
         )
     }

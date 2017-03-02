@@ -28,15 +28,14 @@ export default CSSModules(class Inner extends Component {
     }
     updatePropsToState (newProps) {
         console.log('this update: ', newProps)
+        console.log('this update: ', this.props)
         this.setState({isClose: newProps.isClose})
         this.setState({content: newProps.content})
     }
     componentDidMount () {
-        console.log('did mount')
         this.updatePropsToState(this.state)
     }
     componentWillReceiveProps (nextProps) {
-        console.log('will receive')
         this.updatePropsToState(nextProps)
     }
     render () {
@@ -51,10 +50,10 @@ export default CSSModules(class Inner extends Component {
                         hidden={this.state.isClose}>
                             <Button
                                 icon={<CloseIcon />}
-                                onClick={this.toggleWindowClose}/>
+                                onClick={this.props.onClose}/>
                             <Tiles fill={true}>
                                 {
-                                    <Box justify='start' align='center' wrap={false} pad='medium' margin='small' colorIndex='light-2' onClick={false} onFocus={false}>
+                                    <Box justify='start' align='center' wrap={false} pad='medium' margin='small' colorIndex='light-2'>
                                       <Heading strong={true}
                                           uppercase={false}
                                           truncate={false}
@@ -64,10 +63,10 @@ export default CSSModules(class Inner extends Component {
                                       <Label>
                                           {this.state.content['Job_Title']},{this.state.content['Start_Year']}
                                       </Label>
-                                      <Box direction='row' justify='start' align='center' wrap={true} pad='medium' margin='small' colorIndex='light-1' onClick={false} onFocus={false}>
+                                      <Box direction='row' justify='start' align='center' wrap={true} pad='medium' margin='small' colorIndex='light-1'>
                                             {
                                                 [this.state.content['Week_Hour'], this.state.content['Rating'], this.state.content['Payment']].map((content, id) =>
-                                                    <Box key={id} direction='row' justify='start' align='center' wrap={true} pad='medium' margin='small' colorIndex='light-2' onClick={false} onFocus={false}>
+                                                    <Box key={id} direction='row' justify='start' align='center' wrap={true} pad='medium' margin='small' colorIndex='light-2'>
                                                       <Heading tag='h4'
                                                           align='center'>
                                                           {content}
@@ -76,12 +75,12 @@ export default CSSModules(class Inner extends Component {
                                                 )
                                             }
                                       </Box>
-                                      <Box direction='row' justify='start' align='start' wrap={false} pad='medium' margin='small' colorIndex='light-1' onClick={false} onFocus={false}>
-                                          <Box direction='column' justify='start' align='center' wrap={true} pad='medium' margin='small' colorIndex='light-2' onClick={false} onFocus={false}>
+                                      <Box direction='row' justify='start' align='start' wrap={false} pad='medium' margin='small' colorIndex='light-1'>
+                                          <Box direction='column' justify='start' align='center' wrap={true} pad='medium' margin='small' colorIndex='light-2'>
                                             <Value value={'實習經歷'} colorIndex='accent-1' />
                                             {
                                                 [this.state.content['Content'], this.state.content['Reason'], this.state.content['Review']].map((content, id) =>
-                                                    <Box key={id} direction='column' justify='start' align='center' wrap={true} pad='medium' margin='small' colorIndex='light-2' onClick={false} onFocus={false}>
+                                                    <Box key={id} direction='column' justify='start' align='center' wrap={true} pad='medium' margin='small' colorIndex='light-2'>
                                                       <Heading tag='h4'
                                                           align='center'>
                                                           {content}
@@ -90,11 +89,11 @@ export default CSSModules(class Inner extends Component {
                                                 )
                                             }
                                           </Box>
-                                          <Box direction='column' justify='start' align='center' wrap={true} pad='medium' margin='small' colorIndex='light-2' onClick={false} onFocus={false}>
+                                          <Box direction='column' justify='start' align='center' wrap={true} pad='medium' margin='small' colorIndex='light-2'>
                                             <Value value={'其他補充'} colorIndex='accent-1' />
                                             {
                                                 [this.state.content['Duration'], this.state.content['Protection'], this.state.content['Advice'], this.state.content['Future']].map((content, id) =>
-                                                    <Box key={id} direction='column' justify='start' align='center' wrap={true} pad='medium' margin='small' colorIndex='light-2' onClick={false} onFocus={false}>
+                                                    <Box key={id} direction='column' justify='start' align='center' wrap={true} pad='medium' margin='small' colorIndex='light-2'>
                                                       <Heading tag='h4'
                                                           align='center'>
                                                           {content}
