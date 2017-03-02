@@ -37,7 +37,7 @@
 /* eslint-disable indent, no-unused-vars, no-multiple-empty-lines, max-nested-callbacks, space-before-function-paren, quotes, comma-spacing */
 'use strict';
 
-var precacheConfig = [["bundle.0f34e66b84b972b183e0.js","aa8083e914c8c2aed8f7f3de19a0f8bb"],["bundle.5a506fd83901924438ba.js","e5b07f52078935675ea7457b86d46b30"],["index.html","c6e4631fe2b92705b692efdf48cf9102"],["vendor.c20c9d506ce7ca97668d.js","153fc33cf0637553e27ce655cf5d0fb7"],["vendor.f6e60bff96567d459b0b.js","6b1c68d23e56c550f7b895b7716f8fdb"]];
+var precacheConfig = [["bundle.13345309883a8689cc35.js","714ca5e08eedc839a85ff68d6e452837"],["bundle.5a506fd83901924438ba.js","e5b07f52078935675ea7457b86d46b30"],["index.html","37d230e4f9fa60c89f61fba4c9668691"],["styles.98af576d169a388736f0.css","7f1e2db61355d34436341027ad298341"],["vendor.a46c908f0da22efd6e4b.js","1efc2eaf797db9217dfd13dc2178465f"],["vendor.f6e60bff96567d459b0b.js","6b1c68d23e56c550f7b895b7716f8fdb"]];
 var cacheName = 'sw-precache-v3-sw-precache-' + (self.registration ? self.registration.scope : '');
 
 
