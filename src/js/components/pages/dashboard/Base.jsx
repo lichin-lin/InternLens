@@ -23,18 +23,17 @@ export default CSSModules(class extends Component {
     constructor (props) {
         super(props)
         this.changeFilterInput = this.changeFilterInput.bind(this)
-        this.toggleWindowClose = this.toggleWindowClose.bind(this)
+        this.toggleWindowOpen = this.toggleWindowOpen.bind(this)
         this.getMoreIntern = this.getMoreIntern.bind(this)
         this.startFilter = this.startFilter.bind(this)
-        this.show = this.show.bind(this)
         this.state = {
             copyInternList: {},
             renderInternList: {},
             filterInput: '',
             currentIndex: 1,
             oneQueryCount: 5,
-            isWindowClose: true,
             WindowContentIndex: 1,
+            isWindowClose: true,
             isLoading: true,
             isListEnd: false
         }
@@ -73,12 +72,6 @@ export default CSSModules(class extends Component {
         console.log(id)
         this.setState({WindowContentIndex: id})
         this.setState({isWindowClose: !this.state.isWindowClose})
-    }
-    toggleWindowClose () {
-        this.setState({isWindowClose: !this.state.isWindowClose})
-    }
-    show () {
-        console.log(this.state)
     }
     getMoreIntern () {
         if (this.state.isListEnd === true) {
@@ -139,7 +132,6 @@ export default CSSModules(class extends Component {
                       label='排序'
                       inline={false}
                       primary={false}
-                      onClick={this.show}
                       size='small'>
                       <Anchor href='#'
                         className='active'>
@@ -168,7 +160,6 @@ export default CSSModules(class extends Component {
                     flush={false}
                     onMore={this.getMoreIntern}>
                 {
-                    // this.props.Intern.list.filter(this.isSearchMatch).map((intern, id) =>
                     _.map(this.state.renderInternList, (intern, id) =>
                         intern === undefined
                         ? null : <Animate key={id} enter={{'animation': 'fade', 'duration': 700, 'delay': 0}}
@@ -185,7 +176,7 @@ export default CSSModules(class extends Component {
                                     headingStrong={false}
                                     link= {
                                         <Anchor
-                                            onClick={this.toggleWindowOpen.bind(this, id)}
+                                            onClick={() => { this.toggleWindowOpen(id) }}
                                             id={id}
                                             label='查看心得全文'
                                             style={{
@@ -202,8 +193,8 @@ export default CSSModules(class extends Component {
                 </Tiles>
                 <Containers.pages.dashboard.Inner
                     isClose={this.state.isWindowClose}
-                    content={this.props.Intern.list[this.state.WindowContentIndex]}
-                    onClose={this.toggleWindowClose}/>
+                    content={this.state.renderInternList[this.state.WindowContentIndex]}
+                    onClose={() => this.toggleWindowOpen(1)}/>
             </div>
         )
     }

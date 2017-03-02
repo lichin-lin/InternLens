@@ -17,20 +17,17 @@ export default CSSModules(class Inner extends Component {
     constructor (props) {
         super(props)
         this.updatePropsToState = this.updatePropsToState.bind(this)
-        this.toggleWindowClose = this.toggleWindowClose.bind(this)
         this.state = {
             isClose: true,
             content: {}
         }
     }
-    toggleWindowClose () {
-        this.setState({isClose: !this.state.isClose})
-    }
     updatePropsToState (newProps) {
-        console.log('this update: ', newProps)
         console.log('this update: ', this.props)
-        this.setState({isClose: newProps.isClose})
-        this.setState({content: newProps.content})
+        this.setState({
+            isClose: newProps.isClose,
+            content: newProps.content
+        })
     }
     componentDidMount () {
         this.updatePropsToState(this.state)
