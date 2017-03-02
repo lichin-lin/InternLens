@@ -5,7 +5,7 @@ import Radium, { StyleRoot } from 'radium'
 // import { Link } from 'react-router'
 import App from 'grommet/components/App'
 import Box from 'grommet/components/Box'
-import Title from 'grommet/components/Title'
+// import Title from 'grommet/components/Title'
 
 @Radium
 export default CSSModules(class extends Component {
@@ -25,26 +25,7 @@ export default CSSModules(class extends Component {
                       flex={true}
                       full={true}
                       colorIndex='light-2'>
-                      <Box direction='row'
-                        justify='center'
-                        align='center'
-                        wrap={true}
-                        pad='medium'
-                        margin='none'
-                        size='full'
-                        full='horizontal'
-                        colorIndex='light-1'>
-                        {/* <Link to={`/InternLens/dashboard`}>
-                            總版dashboard
-                        </Link>&nbsp;&nbsp;&nbsp; */}
-                        <Title>
-                            InternLens
-                        </Title>&nbsp;&nbsp;&nbsp;
-                        {/* <Link to={`/InternLens/dashboard`}>
-                            心願單favorite
-                        </Link> */}
-                      </Box>
-
+                    <Containers.common.Navbar />
                       <Box direction='row'
                         justify='start'
                         align='center'
