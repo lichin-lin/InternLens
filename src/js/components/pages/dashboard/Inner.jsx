@@ -44,57 +44,101 @@ export default CSSModules(class Inner extends Component {
                     : <Layer closer={true}
                         align='center'
                         flush={true}
-                        hidden={this.state.isClose}>
+                        hidden={this.state.isClose}
+                        style={{
+                            width: '100%',
+                            '.grommetux-layer__container': {
+                                width: '100%'
+                            }
+                        }}>
                             <Button
                                 icon={<CloseIcon />}
                                 onClick={this.props.onClose}/>
                             <Tiles fill={true}>
                                 {
-                                    <Box justify='start' align='center' wrap={false} pad='medium' margin='small' colorIndex='light-2'>
+                                    <Box justify='start' align='center' wrap={false} pad='medium' margin='small'
+                                        style={{
+                                            height: '100%',
+                                            padding: '6px'
+                                        }}>
                                       <Heading strong={true}
                                           uppercase={false}
                                           truncate={false}
                                           align='center'>
                                           {this.state.content['Name']}
                                       </Heading>
-                                      <Label>
-                                          {this.state.content['Job_Title']},{this.state.content['Start_Year']}
+                                        <Label style={{
+                                            margin: '12px'
+                                        }}>
+                                            {this.state.content['Job_Title']}
+                                            {(this.state.content['Job_Title'].length > 0 && this.state.content['Start_Year'].length > 0) ? ', ' : ''}
+                                            {this.state.content['Start_Year']}
                                       </Label>
-                                      <Box direction='row' justify='start' align='center' wrap={true} pad='medium' margin='small' colorIndex='light-1'>
+                                      <Box className="InnerTipsContain" direction='row' justify='start' align='center' wrap={false} pad='medium' margin='small'>
                                             {
-                                                [this.state.content['Week_Hour'], this.state.content['Rating'], this.state.content['Payment']].map((content, id) =>
-                                                    <Box key={id} direction='row' justify='start' align='center' wrap={true} pad='medium' margin='small' colorIndex='light-2'>
-                                                      <Heading tag='h4'
-                                                          align='center'>
-                                                          {content}
-                                                      </Heading>
+                                                [
+                                                    {'title': '單週時數', 'content': this.state.content['Week_Hour']},
+                                                    {'title': '綜合評價', 'content': this.state.content['Rating']},
+                                                    {'title': '給付薪資', 'content': this.state.content['Payment']}
+                                                ].map((el, id) =>
+                                                    <Box className="InnerTips" key={id} direction='row' justify='start' align='center' wrap={true} pad='medium' margin='small'>
+                                                            <Heading tag='h3' align='center' strong={true}>
+                                                                {el.title}
+                                                            </Heading>
+                                                        <Heading tag='h4' align='center'>
+                                                            {el.content.length > 0 ? el.content : '發文者並未提供'}
+                                                        </Heading>
                                                     </Box>
                                                 )
                                             }
                                       </Box>
-                                      <Box direction='row' justify='start' align='start' wrap={false} pad='medium' margin='small' colorIndex='light-1'>
-                                          <Box direction='column' justify='start' align='center' wrap={true} pad='medium' margin='small' colorIndex='light-2'>
+                                      <Box direction='row' justify='start' align='start' wrap={false} pad='medium' margin='small'
+                                          style={{
+                                              width: '100%'
+                                          }}>
+                                          <Box className="InnerBox" direction='column' justify='start' align='start' wrap={true} pad='medium' margin='small' colorIndex='light-2'>
                                             <Value value={'實習經歷'} colorIndex='accent-1' />
                                             {
-                                                [this.state.content['Content'], this.state.content['Reason'], this.state.content['Review']].map((content, id) =>
-                                                    <Box key={id} direction='column' justify='start' align='center' wrap={true} pad='medium' margin='small' colorIndex='light-2'>
-                                                      <Heading tag='h4'
-                                                          align='center'>
-                                                          {content}
-                                                      </Heading>
+                                                [
+                                                    {'title': '實習工作內容', 'content': this.state.content['Content']},
+                                                    {'title': '實習總體心得', 'content': this.state.content['Review']},
+                                                    {'title': '你覺得實習合理嗎?', 'content': this.state.content['Reason']}
+                                                ].map((el, id) =>
+                                                    <Box key={id} direction='column' justify='start' align='start' wrap={true} pad='medium' margin='small'
+                                                        style={{
+                                                            width: '100%',
+                                                            paddingLeft: '0px'
+                                                        }}>
+                                                        <Heading tag='h4' strong={true} align='start'>
+                                                            {el.title}
+                                                        </Heading>
+                                                        <Heading tag='h4' align='start'>
+                                                            {el.content.length > 0 ? el.content : '發文者並未提供'}
+                                                        </Heading>
                                                     </Box>
                                                 )
                                             }
                                           </Box>
-                                          <Box direction='column' justify='start' align='center' wrap={true} pad='medium' margin='small' colorIndex='light-2'>
+                                          <Box className="InnerBox" direction='column' justify='start' align='start' wrap={true} pad='medium' margin='small' colorIndex='light-2'>
                                             <Value value={'其他補充'} colorIndex='accent-1' />
                                             {
-                                                [this.state.content['Duration'], this.state.content['Protection'], this.state.content['Advice'], this.state.content['Future']].map((content, id) =>
-                                                    <Box key={id} direction='column' justify='start' align='center' wrap={true} pad='medium' margin='small' colorIndex='light-2'>
-                                                      <Heading tag='h4'
-                                                          align='center'>
-                                                          {content}
-                                                      </Heading>
+                                                [
+                                                    {'title': '實習長度', 'content': this.state.content['Duration']},
+                                                    {'title': '勞健保', 'content': this.state.content['Protection']},
+                                                    {'title': '給實習者建議', 'content': this.state.content['Advice']},
+                                                    {'title': '對未來有何幫助', 'content': this.state.content['Future']}
+                                                ].map((el, id) =>
+                                                    <Box key={id} direction='column' justify='start' align='start' wrap={true} pad='medium' margin='small'
+                                                        style={{
+                                                            width: '100%',
+                                                            paddingLeft: '0px'
+                                                        }}>
+                                                        <Heading tag='h4' strong={true} align='start'>
+                                                            {el.title}
+                                                        </Heading>
+                                                        <Heading tag='h4' align='start'>
+                                                            {el.content.length > 0 ? el.content : '發文者並未提供'}
+                                                        </Heading>
                                                     </Box>
                                                 )
                                             }
@@ -108,4 +152,4 @@ export default CSSModules(class Inner extends Component {
             </div>
         )
     }
-})
+}, require('./Inner.styl'))

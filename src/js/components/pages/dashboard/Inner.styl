@@ -1,0 +1,26 @@
+$md-size = 44.9375em
+.grommetux-layer__container
+    width: 100%
+
+// @media screen and (max-width: $md-size)
+.InnerTipsContain
+    padding: 0 !important
+    flex-direction: column !important
+    flex-wrap: nowrap !important
+    align-items: stretch !important
+    .InnerTips
+        position: relative
+        flex: 1
+        flex-basis: 33.3% !important
+        align-items: center !important
+        border: 3px solid #0AF
+        border-radius: 5px
+        box-sizing: content-box
+@media screen and (min-width: $md-size)
+    .InnerTipsContain
+        max-width: $md-size
+        flex-direction: row !important
+        .InnerTips
+            flex-direction: column !important
+    .InnerBox
+        width: 50%

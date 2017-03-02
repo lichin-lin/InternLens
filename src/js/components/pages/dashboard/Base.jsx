@@ -104,7 +104,7 @@ export default CSSModules(class extends Component {
     componentWillMount () {
         this.props.setLoading()
         .then(() => {
-            return this.props.getInternList(0, 10)
+            return this.props.getInternList(0, 50)
         })
         .then(() => {
             this.setState({
@@ -194,7 +194,7 @@ export default CSSModules(class extends Component {
                 <Containers.pages.dashboard.Inner
                     isClose={this.state.isWindowClose}
                     content={this.state.renderInternList[this.state.WindowContentIndex]}
-                    onClose={() => this.toggleWindowOpen(1)}/>
+                    onClose={() => this.toggleWindowOpen(30)}/>
             </div>
         )
     }
