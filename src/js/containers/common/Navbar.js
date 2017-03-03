@@ -3,7 +3,7 @@ import Components from 'components'
 import Action from 'js/actions'
 
 const mapStateToProps = (state) => ({
-    currentUser: state.Session
+    currentUser: state.Session.AuthData
 })
 
 const mapDispatchToProps = (dispatch) => ({

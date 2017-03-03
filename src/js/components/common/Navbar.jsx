@@ -18,15 +18,15 @@ export default CSSModules(class extends Component {
     }
     FBLogin () {
         this.props.FBLogin().then((state) => {
-            cookie.save('user', state.payload)
-            this.setState({displayName: this.props.currentUser.AuthData.user.displayName})
+            cookie.save('user', state.payload.user)
+            this.setState({displayName: this.props.currentUser.user.displayName})
         })
     }
     componentWillMount () {
-        let user = cookie.load('user')
-        if (user !== undefined) {
-            this.props.CookieLogin(user)
-            this.setState({displayName: user.user.displayName})
+        let checkUser = cookie.load('user')
+        if (checkUser !== undefined) {
+            this.props.CookieLogin(checkUser)
+            this.setState({displayName: checkUser.displayName})
         }
     }
     render () {

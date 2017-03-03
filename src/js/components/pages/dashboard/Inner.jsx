@@ -5,7 +5,7 @@ import Radium from 'radium'
 
 import Box from 'grommet/components/Box'
 import CloseIcon from 'grommet/components/icons/base/Close'
-import Tiles from 'grommet/components/Tiles'
+// import Tiles from 'grommet/components/Tiles'
 import Layer from 'grommet/components/Layer'
 import Label from 'grommet/components/Label'
 import Button from 'grommet/components/Button'
@@ -54,8 +54,6 @@ export default CSSModules(class Inner extends Component {
                             <Button
                                 icon={<CloseIcon />}
                                 onClick={this.props.onClose}/>
-                            <Tiles fill={true}>
-                                {
                                     <Box justify='start' align='center' wrap={false} pad='medium' margin='small'
                                         style={{
                                             height: '100%',
@@ -145,8 +143,6 @@ export default CSSModules(class Inner extends Component {
                                           </Box>
                                       </Box>
                                     </Box>
-                                }
-                            </Tiles>
                         </Layer>
                 }
             </div>
