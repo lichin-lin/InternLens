@@ -48,7 +48,7 @@ export default CSSModules(class extends Component {
                   direction='row'
                   responsive={false}>
                   <Button
-                      label={this.state.displayName.length <= 0
+                      label={this.state.displayName === undefined || this.state.displayName.length <= 0
                           ? '登入' : 'Hi! ' + this.state.displayName}
                       plain={true}
                       onClick={this.FBLogin}
