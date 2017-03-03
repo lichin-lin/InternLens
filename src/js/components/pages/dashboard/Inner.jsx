@@ -5,7 +5,7 @@ import Radium from 'radium'
 
 import Box from 'grommet/components/Box'
 import CloseIcon from 'grommet/components/icons/base/Close'
-import Tiles from 'grommet/components/Tiles'
+// import Tiles from 'grommet/components/Tiles'
 import Layer from 'grommet/components/Layer'
 import Label from 'grommet/components/Label'
 import Button from 'grommet/components/Button'
@@ -54,10 +54,10 @@ export default CSSModules(class Inner extends Component {
                             <Button
                                 icon={<CloseIcon />}
                                 onClick={this.props.onClose}/>
-                            <Tiles fill={true}
+                            <Box justify='start' align='center' wrap={false} pad='medium' margin='small'
                                 className='BoxWrapper'>
                                 {
-                                    <Box justify='start' align='center' wrap={false} pad='medium' margin='small'
+                                    <div
                                         style={{
                                             height: '100%',
                                             padding: '6px'
@@ -82,7 +82,7 @@ export default CSSModules(class Inner extends Component {
                                                     {'title': '綜合評價', 'content': this.state.content['Rating']},
                                                     {'title': '給付薪資', 'content': this.state.content['Payment']}
                                                 ].map((el, id) =>
-                                                    <Box className="InnerTips" key={id} direction='row' justify='start' align='center' wrap={true} pad='medium' margin='small'>
+                                                    <Box className="InnerTips" key={id} direction='row' justify='start' align='center' wrap={false} pad='medium' margin='small'>
                                                             <Heading tag='h3' align='center' strong={true}>
                                                                 {el.title}
                                                             </Heading>
@@ -145,9 +145,9 @@ export default CSSModules(class Inner extends Component {
                                             }
                                           </Box>
                                       </Box>
-                                    </Box>
+                                  </div>
                                 }
-                                </Tiles>
+                                </Box>
                         </Layer>
                 }
             </div>

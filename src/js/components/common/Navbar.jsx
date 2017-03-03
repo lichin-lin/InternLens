@@ -19,7 +19,9 @@ export default CSSModules(class extends Component {
     FBLogin () {
         this.props.FBLogin().then((state) => {
             cookie.save('user', state.payload.user)
-            this.setState({displayName: this.props.currentUser.user.displayName})
+            if (state.payload.user !== undefined) {
+                this.setState({displayName: this.props.currentUser.user.displayName})
+            }
         })
     }
     componentWillMount () {
