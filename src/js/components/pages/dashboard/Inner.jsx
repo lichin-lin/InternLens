@@ -60,7 +60,8 @@ export default CSSModules(class Inner extends Component {
                                     <div
                                         style={{
                                             height: '100%',
-                                            padding: '6px'
+                                            padding: '0px',
+                                            margin: '0px'
                                         }}>
                                       <Heading strong={true}
                                           uppercase={false}
@@ -75,7 +76,7 @@ export default CSSModules(class Inner extends Component {
                                             {(this.state.content['Job_Title'].length > 0 && this.state.content['Start_Year'].length > 0) ? ', ' : ''}
                                             {this.state.content['Start_Year']}
                                       </Label>
-                                      <Box className="InnerTipsContain" direction='row' justify='start' align='center' wrap={false} pad='medium' margin='small'>
+                                      <div className="InnerTipsContain">
                                             {
                                                 [
                                                     {'title': '單週時數', 'content': this.state.content['Week_Hour']},
@@ -92,7 +93,7 @@ export default CSSModules(class Inner extends Component {
                                                     </Box>
                                                 )
                                             }
-                                      </Box>
+                                      </div>
                                       <Box direction='row' justify='start' align='start' wrap={false} pad='medium' margin='small'
                                           style={{
                                               width: '100%'
