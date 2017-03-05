@@ -2,6 +2,7 @@ import { handleActions } from 'redux-actions'
 
 const initialState = {
     list: {},
+    favorite: {},
     isLoading: true
 }
 
@@ -29,7 +30,37 @@ export default handleActions({
             }
         },
         throw (state, { payload }) {
-            console.log('qq')
+            console.log('qq intern list')
+            return state
+        }
+    },
+    GET_FAVORITE: {
+        next (state, action) {
+            return {
+                ...state,
+                favorite: {
+                    ...state.favorite,
+                    ...action.payload
+                }
+            }
+        },
+        throw (state, { payload }) {
+            console.log('qq favorite')
+            return state
+        }
+    },
+    TOGGLE_FAVORITE: {
+        next (state, action) {
+            return {
+                ...state,
+                favorite: {
+                    ...state.favorite,
+                    ...action.payload
+                }
+            }
+        },
+        throw (state, { payload }) {
+            console.log('qq favorite toggle')
             return state
         }
     }

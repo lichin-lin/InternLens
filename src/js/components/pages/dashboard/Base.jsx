@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import Containers from 'js/containers'
 import CSSModules from 'react-css-modules'
-import Dotdotdot from 'react-dotdotdot'
+// import Dotdotdot from 'react-dotdotdot'
 import Radium from 'radium'
 import _ from 'lodash'
 
 import Box from 'grommet/components/Box'
-import Card from 'grommet/components/Card'
+// import Card from 'grommet/components/Card'
 import Menu from 'grommet/components/Menu'
 import Anchor from 'grommet/components/Anchor'
 import Search from 'grommet/components/Search'
@@ -14,9 +14,12 @@ import Header from 'grommet/components/Header'
 import Actions from 'grommet/components/icons/base/Actions'
 import WorkshopIcon from 'grommet/components/icons/base/Workshop'
 import Tiles from 'grommet/components/Tiles'
-import Tile from 'grommet/components/Tile'
+// import Tile from 'grommet/components/Tile'
 import Button from 'grommet/components/Button'
-import Animate from 'grommet/components/Animate'
+// import Animate from 'grommet/components/Animate'
+
+// import FavoriteIcon from 'grommet/components/icons/base/Favorite'
+// import ContactIcon from 'grommet/components/icons/base/Contact'
 
 @Radium
 export default CSSModules(class extends Component {
@@ -107,6 +110,9 @@ export default CSSModules(class extends Component {
             return this.props.getInternList(0, 10)
         })
         .then(() => {
+            return this.props.getFavorite()
+        })
+        .then(() => {
             this.setState({
                 copyInternList: {
                     ...this.props.Intern.list
@@ -162,32 +168,14 @@ export default CSSModules(class extends Component {
                 {
                     _.map(this.state.renderInternList, (intern, id) =>
                         intern === undefined
-                        ? null : <Animate key={id} enter={{'animation': 'fade', 'duration': 700, 'delay': 0}}
-                            keep={false}>
-                            <Tile size='medium'>
-                                <Card heading={intern['Name']}
-                                    description={
-                                        <Dotdotdot clamp={3}>
-                                            <div style={{lineHeight: '1.5', minHeight: '75px'}}>
-                                                {intern['Review']}
-                                            </div>
-                                        </Dotdotdot>
-                                    }
-                                    headingStrong={false}
-                                    link= {
-                                        <Anchor
-                                            onClick={() => { this.toggleWindowOpen(id) }}
-                                            id={id}
-                                            label='查看心得全文'
-                                            style={{
-                                                marginTop: '10px'
-                                            }} />
-                                    }
-                                    style={{
-                                        width: '100%'
-                                    }}/>
-                            </Tile>
-                        </Animate>
+                        ? null : <Containers.pages.dashboard.InternBox
+                                    id={id}
+                                    key={id}
+                                    Content={intern}
+                                    onClose={() => this.toggleWindowOpen(id)}
+                                    FavoriteCount={this.props.Intern.favorite}
+                                    currentUserId={this.props.Session.AuthData.uid}
+                                    MessageCount={10}/>
                     )
                 }
                 </Tiles>
