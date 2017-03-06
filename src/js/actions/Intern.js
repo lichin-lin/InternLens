@@ -5,5 +5,6 @@ export default {
     getInternList: createAction('GET_INTERNLIST', Api.Intern.getInternList),
     getFavorite: createAction('GET_FAVORITE', Api.Intern.getFavorite),
     toggleFavorite: createAction('TOGGLE_FAVORITE', Api.Intern.toggleFavorite),
-    setLoading: createAction('SET_LOADING', Api.Intern.setLoading)
+    setLoading: createAction('SET_LOADING', Api.Intern.setLoading),
+    getMessage: createAction('GET_MESSAGE', Api.Intern.getMessage)
 }

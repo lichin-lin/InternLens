@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import CSSModules from 'react-css-modules'
 import Radium from 'radium'
+import Containers from 'js/containers'
 // import _ from 'lodash'
 
 import Box from 'grommet/components/Box'
 import CloseIcon from 'grommet/components/icons/base/Close'
-// import Tiles from 'grommet/components/Tiles'
 import Layer from 'grommet/components/Layer'
 import Label from 'grommet/components/Label'
 import Button from 'grommet/components/Button'
@@ -19,20 +19,24 @@ export default CSSModules(class Inner extends Component {
         this.updatePropsToState = this.updatePropsToState.bind(this)
         this.state = {
             isClose: true,
-            content: {}
+            content: {},
+            postId: 0
         }
     }
     updatePropsToState (newProps) {
         console.log('this update: ', this.props)
         this.setState({
             isClose: newProps.isClose,
-            content: newProps.content
+            content: newProps.content,
+            postId: newProps.postId
         })
     }
     componentDidMount () {
+        console.log('inner did mount')
         this.updatePropsToState(this.state)
     }
     componentWillReceiveProps (nextProps) {
+        console.log('inner will receive')
         this.updatePropsToState(nextProps)
     }
     render () {
@@ -148,6 +152,9 @@ export default CSSModules(class Inner extends Component {
                                       </Box>
                                   </div>
                                 }
+                                <div>
+                                    <Containers.pages.dashboard.MessageBox id={this.state.postId}/>
+                                </div>
                                 </Box>
                         </Layer>
                 }

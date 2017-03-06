@@ -44,5 +44,12 @@ export default {
                 resolve(true)
             }
         )
+    },
+    getMessage: (id) => {
+        console.log('get ', id)
+        return firebase.database().ref('/messageMap').orderByChild('postId').equalTo(id.toString()).once('value').then(function (snapshot) {
+            console.log('in api get message: ', snapshot.val())
+            return snapshot.val()
+        })
     }
 }

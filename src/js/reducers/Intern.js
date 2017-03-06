@@ -3,6 +3,7 @@ import { handleActions } from 'redux-actions'
 const initialState = {
     list: {},
     favorite: {},
+    message: {},
     isLoading: true
 }
 
@@ -61,6 +62,20 @@ export default handleActions({
         },
         throw (state, { payload }) {
             console.log('qq favorite toggle')
+            return state
+        }
+    },
+    GET_MESSAGE: {
+        next (state, action) {
+            return {
+                ...state,
+                message: {
+                    ...action.payload
+                }
+            }
+        },
+        throw (state, { payload }) {
+            console.log('qq message toggle')
             return state
         }
     }

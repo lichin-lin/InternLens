@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
 import Containers from 'js/containers'
 import CSSModules from 'react-css-modules'
-// import Dotdotdot from 'react-dotdotdot'
 import Radium from 'radium'
 import _ from 'lodash'
 
 import Box from 'grommet/components/Box'
-// import Card from 'grommet/components/Card'
 import Menu from 'grommet/components/Menu'
 import Anchor from 'grommet/components/Anchor'
 import Search from 'grommet/components/Search'
@@ -14,12 +12,7 @@ import Header from 'grommet/components/Header'
 import Actions from 'grommet/components/icons/base/Actions'
 import WorkshopIcon from 'grommet/components/icons/base/Workshop'
 import Tiles from 'grommet/components/Tiles'
-// import Tile from 'grommet/components/Tile'
 import Button from 'grommet/components/Button'
-// import Animate from 'grommet/components/Animate'
-
-// import FavoriteIcon from 'grommet/components/icons/base/Favorite'
-// import ContactIcon from 'grommet/components/icons/base/Contact'
 
 @Radium
 export default CSSModules(class extends Component {
@@ -72,9 +65,11 @@ export default CSSModules(class extends Component {
         console.log(filterData)
     }
     toggleWindowOpen (id) {
-        console.log(id)
-        this.setState({WindowContentIndex: id})
-        this.setState({isWindowClose: !this.state.isWindowClose})
+        this.props.getMessage(id)
+        .then(() => {
+            this.setState({WindowContentIndex: id})
+            this.setState({isWindowClose: !this.state.isWindowClose})
+        })
     }
     getMoreIntern () {
         if (this.state.isListEnd === true) {
@@ -182,6 +177,7 @@ export default CSSModules(class extends Component {
                 <Containers.pages.dashboard.Inner
                     isClose={this.state.isWindowClose}
                     content={this.state.renderInternList[this.state.WindowContentIndex]}
+                    postId={this.state.WindowContentIndex}
                     onClose={() => this.toggleWindowOpen(30)}/>
             </div>
         )
