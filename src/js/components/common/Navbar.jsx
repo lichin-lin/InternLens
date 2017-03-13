@@ -46,25 +46,50 @@ export default CSSModules(class extends Component {
                     InternLens
                 </Title>&nbsp;&nbsp;&nbsp;
                 <Box flex={true}
-                  justify='end'
+                  justify='start'
                   direction='row'
                   responsive={false}>
-                  <Button
-                      label={this.state.displayName === undefined || this.state.displayName.length <= 0
-                          ? '登入' : 'Hi! ' + this.state.displayName}
-                      plain={true}
-                      onClick={this.FBLogin}
-                      style={{
-                          color: '#676767',
-                          opacity: '1'
-                      }}/>
-                  <Button
-                      label='心願單'
-                      plain={true}
-                      style={{
-                          color: '#676767',
-                          opacity: '1'
-                      }}/>
+                    <Button
+                        label='懶人包'
+                        plain={true}
+                        onClick={() => { console.log('click') }}
+                        style={{
+                            color: '#676767',
+                            opacity: '1'
+                        }}/>
+                    <Button
+                        label='關於本站'
+                        plain={true}
+                        onClick={() => { console.log('click') }}
+                        style={{
+                            color: '#676767',
+                            opacity: '1'
+                        }}/>
+                    <Box flex={true}
+                        justify='end'
+                        direction='row'
+                        responsive={false}>
+                        <Button
+                            label={this.state.displayName === undefined || this.state.displayName.length <= 0
+                                ? '登入' : 'Hi! ' + this.state.displayName}
+                            plain={true}
+                            onClick={this.FBLogin}
+                            style={{
+                                color: '#676767',
+                                opacity: '1'
+                            }}/>
+                        <Button
+                            label='提交心得'
+                            plain={false}
+                            href='#'
+                            onClick={() => { console.log('click') }}
+                            style={{
+                                border: 'none',
+                                color: 'white',
+                                background: '#0353A4',
+                                opacity: '1'
+                            }}/>
+                    </Box>
                   </Box>
               </Box>
         )

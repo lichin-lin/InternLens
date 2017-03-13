@@ -28,9 +28,9 @@ export default CSSModules(class extends Component {
                     <Containers.common.Navbar />
                       <Box direction='row'
                         justify='start'
-                        align='center'
+                        align='start'
                         wrap={true}
-                        pad='medium'
+                        pad='none'
                         margin='none'
                         size='full'
                         flex={true}

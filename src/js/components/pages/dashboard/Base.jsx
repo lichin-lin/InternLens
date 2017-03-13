@@ -10,9 +10,9 @@ import Anchor from 'grommet/components/Anchor'
 import Search from 'grommet/components/Search'
 import Header from 'grommet/components/Header'
 import Actions from 'grommet/components/icons/base/Actions'
-import WorkshopIcon from 'grommet/components/icons/base/Workshop'
+// import WorkshopIcon from 'grommet/components/icons/base/Workshop'
 import Tiles from 'grommet/components/Tiles'
-import Button from 'grommet/components/Button'
+// import Button from 'grommet/components/Button'
 
 @Radium
 export default CSSModules(class extends Component {
@@ -127,21 +127,24 @@ export default CSSModules(class extends Component {
                   <Box flex={true}
                     justify='end'
                     direction='row'
-                    responsive={false}>
-                    <Menu responsive={true}
-                      icon={<Actions />}
-                      label='排序'
-                      inline={false}
-                      primary={false}
-                      size='small'>
-                      <Anchor href='#'
-                        className='active'>
-                        人氣點閱
-                      </Anchor>
-                      <Anchor href='#'>
-                        最多留言
-                      </Anchor>
-                    </Menu>
+                    responsive={false}
+                    style={{
+                        padding: '150px 20px',
+                        background: '#A8E0FF',
+                        position: 'relative'
+                    }}>
+                    <div
+                        style={{
+                            position: 'absolute',
+                            width: '100%',
+                            height: '347.5px',
+                            top: '0',
+                            left: '0',
+                            opacity: '0.35',
+                            background: 'url("http://i.imgur.com/KTwxuTh.png")',
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center'
+                        }}></div>
                     <Search inline={true}
                       fill={true}
                       size='small'
@@ -149,13 +152,29 @@ export default CSSModules(class extends Component {
                       iconAlign='start'
                       placeHolder='使用透視鏡!'
                       onDOMChange={this.changeFilterInput}
+                      onKeyPress={this.startFilter}
+                      responsive={false}
                       dropAlign={{'right': 'right'}} />
+                      <Menu responsive={true}
+                        icon={<Actions />}
+                        label='排序'
+                        inline={false}
+                        primary={false}
+                        size='small'>
+                        <Anchor href='#'
+                          className='active'>
+                          人氣點閱
+                        </Anchor>
+                        <Anchor href='#'>
+                          最多留言
+                        </Anchor>
+                      </Menu>
                     </Box>
-                    <Button
+                    {/* <Button
                         icon={<WorkshopIcon />}
                         label='查詢'
                         plain={true}
-                        onClick={this.startFilter}/>
+                        onClick={this.startFilter}/> */}
                 </Header>
                 <Tiles fill={true}
                     flush={false}
