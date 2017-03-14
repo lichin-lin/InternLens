@@ -5,14 +5,15 @@ import Radium from 'radium'
 import _ from 'lodash'
 
 import Box from 'grommet/components/Box'
-import Menu from 'grommet/components/Menu'
-import Anchor from 'grommet/components/Anchor'
+// import Menu from 'grommet/components/Menu'
+// import Anchor from 'grommet/components/Anchor'
 import Search from 'grommet/components/Search'
 import Header from 'grommet/components/Header'
-import Actions from 'grommet/components/icons/base/Actions'
+// import Actions from 'grommet/components/icons/base/Actions'
 // import WorkshopIcon from 'grommet/components/icons/base/Workshop'
 import Tiles from 'grommet/components/Tiles'
 // import Button from 'grommet/components/Button'
+import Heading from 'grommet/components/Heading'
 
 @Radium
 export default CSSModules(class extends Component {
@@ -126,10 +127,10 @@ export default CSSModules(class extends Component {
                 <Header>
                   <Box flex={true}
                     justify='end'
-                    direction='row'
+                    direction='column'
                     responsive={false}
                     style={{
-                        padding: '150px 20px',
+                        padding: '100px 20px',
                         background: '#A8E0FF',
                         position: 'relative'
                     }}>
@@ -137,14 +138,30 @@ export default CSSModules(class extends Component {
                         style={{
                             position: 'absolute',
                             width: '100%',
-                            height: '347.5px',
+                            height: '100%',
                             top: '0',
                             left: '0',
-                            opacity: '0.35',
-                            background: 'url("http://i.imgur.com/KTwxuTh.png")',
+                            opacity: '0.25',
+                            backgroundImage: 'url("http://i.imgur.com/KTwxuTh.png")',
                             backgroundSize: 'cover',
                             backgroundPosition: 'center'
                         }}></div>
+                    <Heading uppercase={true}
+                      truncate={false}
+                      strong={true}
+                      align='center'
+                      margin='none'>
+                      Sample Heading
+                    </Heading>
+                    <Heading truncate={false}
+                      align='center'
+                      tag='h4'
+                      margin='none'
+                      style={{
+                          marginBottom: '50px'
+                      }}>
+                      分享你的真實工時、薪資資訊，讓我們一起改善資訊不透明的現況
+                    </Heading>
                     <Search inline={true}
                       fill={true}
                       size='small'
@@ -154,8 +171,12 @@ export default CSSModules(class extends Component {
                       onDOMChange={this.changeFilterInput}
                       onKeyPress={this.startFilter}
                       responsive={false}
-                      dropAlign={{'right': 'right'}} />
-                      <Menu responsive={true}
+                      dropAlign={{'right': 'right'}}
+                      style={{
+                          border: '2px solid #50514F',
+                          margin: '0 auto'
+                      }} />
+                      {/* <Menu responsive={true}
                         icon={<Actions />}
                         label='排序'
                         inline={false}
@@ -168,7 +189,7 @@ export default CSSModules(class extends Component {
                         <Anchor href='#'>
                           最多留言
                         </Anchor>
-                      </Menu>
+                      </Menu> */}
                     </Box>
                     {/* <Button
                         icon={<WorkshopIcon />}
