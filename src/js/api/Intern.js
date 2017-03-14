@@ -18,7 +18,7 @@ export default {
     toggleFavorite: (postId, userId) => {
         let temp = []
         let targetIndex = -1
-        firebase.database().ref('/favoriteMap').orderByKey().once('value').then(function (snapshot) {
+        return firebase.database().ref('/favoriteMap').orderByKey().once('value').then(function (snapshot) {
             temp = snapshot.val()
             snapshot.val().map((el, id) => {
                 if (postId.toString() === el.postId.toString() && userId.toString() === el.userId.toString()) {
@@ -50,6 +50,18 @@ export default {
         return firebase.database().ref('/messageMap').orderByChild('postId').equalTo(id.toString()).once('value').then(function (snapshot) {
             console.log('in api get message: ', snapshot.val())
             return snapshot.val()
+        })
+    },
+    postMessage: (msg) => {
+        console.log(msg)
+        let temp = []
+        return firebase.database().ref('/messageMap').once('value').then(function (snapshot) {
+            temp = snapshot.val()
+            console.log('in api get message: ', snapshot.val())
+            temp.push(msg)
+        })
+        .then(() => {
+            firebase.database().ref('/messageMap').set(temp)
         })
     }
 }

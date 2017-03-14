@@ -6,5 +6,6 @@ export default {
     getFavorite: createAction('GET_FAVORITE', Api.Intern.getFavorite),
     toggleFavorite: createAction('TOGGLE_FAVORITE', Api.Intern.toggleFavorite),
     setLoading: createAction('SET_LOADING', Api.Intern.setLoading),
-    getMessage: createAction('GET_MESSAGE', Api.Intern.getMessage)
+    getMessage: createAction('GET_MESSAGE', Api.Intern.getMessage),
+    postMessage: createAction('POST_MESSAGE', Api.Intern.postMessage)
 }

@@ -7,6 +7,7 @@ import _ from 'lodash'
 import { Tag, Timeline } from 'antd'
 import Box from 'grommet/components/Box'
 import Value from 'grommet/components/Value'
+import Heading from 'grommet/components/Heading'
 import Paragraph from 'grommet/components/Paragraph'
 import 'antd/dist/antd.css'
 
@@ -52,19 +53,28 @@ export default CSSModules(class MessageBox extends Component {
                     <Timeline>
                     {
                         _.map(this.props.messageList, (el, id) =>
-                        <Timeline.Item color="#50514F" className="comment">
-                            <div key={id} style={{ marginBottom: '20px' }}>
+                        <Timeline.Item color="#50514F" className="comment" key={id}>
+                            <div style={{ marginBottom: '20px' }}>
                                 <Heading align='start' strong={false} margin='none' uppercase={false} truncate={false} tag='h4' style={{ marginLeft: '3px' }}>
                                     {this.showTime(el.sendTime)}
                                 </Heading>
                                 <div>
-                                    <Tag color="#6FBFF4">薪水支付合理</Tag>
-                                    <Tag color="#6FBFF4">mentor很罩</Tag>
-                                    <Tag color="#6FBFF4">工作內容合理</Tag>
+                                    {
+                                        _.map(el.tags, (value, id) =>
+                                            value === 1
+                                            ? <Tag color="#6FBFF4">{id}</Tag>
+                                            : null
+                                        )
+                                    }
                                 </div>
-                                <div style={{ marginTop: 4 }}>
-                                    <Tag color="#F37996">妹子不夠多</Tag>
-                                    <Tag color="#F37996">公司太大</Tag>
+                                <div>
+                                    {
+                                        _.map(el.tags, (value, id) =>
+                                            value === -1
+                                            ? <Tag color="#F37996">{id}</Tag>
+                                            : null
+                                        )
+                                    }
                                 </div>
                                 <Paragraph size='medium' style={{ marginLeft: '6px', margin: '12px 0' }}>
                                     {el.content}

@@ -21,6 +21,7 @@ export default CSSModules(class extends Component {
             cookie.save('user', state.payload.user)
             if (state.payload.user !== undefined) {
                 this.setState({displayName: this.props.currentUser.user.displayName})
+                location.href = location.href
             }
         })
     }

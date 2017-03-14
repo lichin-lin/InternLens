@@ -34,23 +34,27 @@ export default CSSModules(class Inner extends Component {
             information: newProps.Content
         })
         let nextFavoriteCounter = 0
+        let isFavorite = false
         _.map(newProps.FavoriteCount, (el) => {
             if (el.postId.toString() === newProps.id.toString()) {
                 nextFavoriteCounter += 1
                 if (newProps.currentUserId !== undefined) {
                     if (el.userId.toString() === newProps.currentUserId.toString()) {
-                        this.setState({isFavorite: true})
+                        isFavorite = true
                     }
                 }
             }
         })
         this.setState({
+            isFavorite: isFavorite,
             favoriteCount: nextFavoriteCounter
         })
     }
     toggleFavorite () {
         this.props.toggleFavorite(this.state.id, this.props.currentUserId)
-        this.props.getFavorite()
+        .then(() => {
+            this.props.getFavorite()
+        })
     }
     componentDidMount () {
         this.updatePropsToState(this.props)

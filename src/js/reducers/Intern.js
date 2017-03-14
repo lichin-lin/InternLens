@@ -40,7 +40,6 @@ export default handleActions({
             return {
                 ...state,
                 favorite: {
-                    ...state.favorite,
                     ...action.payload
                 }
             }
