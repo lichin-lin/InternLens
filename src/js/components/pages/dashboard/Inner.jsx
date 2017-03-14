@@ -63,6 +63,7 @@ export default CSSModules(class Inner extends Component {
                                 {
                                     <div
                                         style={{
+                                            width: '100%',
                                             height: '100%',
                                             padding: '0px',
                                             margin: '0px'
@@ -98,9 +99,11 @@ export default CSSModules(class Inner extends Component {
                                                 )
                                             }
                                       </div>
-                                      <Box direction='row' justify='start' align='start' wrap={false} pad='medium' margin='small'
+                                      <Box direction='row' justify='start' align='start' wrap={false} pad='none' margin='small'
                                           style={{
-                                              width: '100%'
+                                              width: '100%',
+                                              margin: '0px',
+                                              alignItems: 'stretch'
                                           }}>
                                           <Box className="InnerBox" direction='column' justify='start' align='start' wrap={true} pad='medium' margin='small' colorIndex='light-2'>
                                             <Value value={'實習經歷'} colorIndex='accent-1' />
@@ -152,7 +155,10 @@ export default CSSModules(class Inner extends Component {
                                       </Box>
                                   </div>
                                 }
-                                <div>
+                                <div style={{
+                                    width: '100%',
+                                    padding: '6px'
+                                }}>
                                     <Containers.pages.dashboard.MessageBox id={this.state.postId}/>
                                 </div>
                                 </Box>
