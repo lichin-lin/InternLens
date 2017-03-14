@@ -66,7 +66,7 @@ export default CSSModules(class Inner extends Component {
                     style={{
                         marginBottom: '40px'
                     }}>
-                    <Tile size='medium'>
+                    <Tile className="InternBox" size='medium'>
                         <Card heading={this.state.information['Name'] !== undefined ? this.state.information['Name'] : null}
                             description={
                                 <Dotdotdot clamp={3}>

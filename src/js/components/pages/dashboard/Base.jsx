@@ -124,7 +124,9 @@ export default CSSModules(class extends Component {
             <div style={{
                 'width': '100%'
             }}>
-                <Header>
+                <Header style={{
+                    marginBottom: '50px'
+                }}>
                   <Box flex={true}
                     justify='end'
                     direction='column'
@@ -214,7 +216,7 @@ export default CSSModules(class extends Component {
                     )
                 }
                 </Tiles>
-                <Containers.pages.dashboard.Inner
+                <Containers.pages.dashboard.InnerContent.Base
                     isClose={this.state.isWindowClose}
                     content={this.state.renderInternList[this.state.WindowContentIndex]}
                     postId={this.state.WindowContentIndex}

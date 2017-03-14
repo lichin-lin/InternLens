@@ -1,10 +1,8 @@
 import Base from './Base'
-import Inner from './Inner'
 import InternBox from './InternBox'
-import MessageBox from './MessageBox'
+import InnerContent from './InnerContent'
 export default {
     Base,
-    Inner,
     InternBox,
-    MessageBox
+    InnerContent
 }

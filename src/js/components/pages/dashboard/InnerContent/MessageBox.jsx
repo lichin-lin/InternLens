@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
+import Containers from 'js/containers'
 import CSSModules from 'react-css-modules'
 import Radium from 'radium'
 import _ from 'lodash'
 
+import { Tag, Timeline } from 'antd'
 import Box from 'grommet/components/Box'
 import Value from 'grommet/components/Value'
-import Heading from 'grommet/components/Heading'
 import Paragraph from 'grommet/components/Paragraph'
-import { Tag, Timeline, Icon } from 'antd'
 import 'antd/dist/antd.css'
 
 @Radium
@@ -53,19 +53,8 @@ export default CSSModules(class MessageBox extends Component {
                     {
                         _.map(this.props.messageList, (el, id) =>
                         <Timeline.Item color="#50514F" className="comment">
-                            <div key={id}
-                                style={{
-                                    marginBottom: '20px'
-                                }}>
-                                <Heading align='start'
-                                    strong={false}
-                                    margin='none'
-                                    uppercase={false}
-                                    truncate={false}
-                                    tag='h4'
-                                    style={{
-                                        marginLeft: '3px'
-                                    }}>
+                            <div key={id} style={{ marginBottom: '20px' }}>
+                                <Heading align='start' strong={false} margin='none' uppercase={false} truncate={false} tag='h4' style={{ marginLeft: '3px' }}>
                                     {this.showTime(el.sendTime)}
                                 </Heading>
                                 <div>
@@ -77,23 +66,14 @@ export default CSSModules(class MessageBox extends Component {
                                     <Tag color="#F37996">妹子不夠多</Tag>
                                     <Tag color="#F37996">公司太大</Tag>
                                 </div>
-                                <Paragraph size='medium'
-                                    style={{
-                                        marginLeft: '6px',
-                                        margin: '12px 0'
-                                    }}>
+                                <Paragraph size='medium' style={{ marginLeft: '6px', margin: '12px 0' }}>
                                     {el.content}
                                 </Paragraph>
                             </div>
                         </Timeline.Item>
                         )
                     }
-                <Timeline.Item className="addcomment"
-                    dot={<Icon type="message" style={{ fontSize: '24px' }}/>}
-                    color="#50514F"
-                    style={{
-                        background: '#f5f5f5'
-                    }}>我要留言</Timeline.Item>
+                    <Containers.pages.dashboard.InnerContent.MessageForm />
                 </Timeline>
             </Box>
         )

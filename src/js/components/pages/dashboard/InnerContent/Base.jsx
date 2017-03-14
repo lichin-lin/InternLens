@@ -13,7 +13,7 @@ import Heading from 'grommet/components/Heading'
 import Value from 'grommet/components/Value'
 
 @Radium
-export default CSSModules(class Inner extends Component {
+export default CSSModules(class Base extends Component {
     constructor (props) {
         super(props)
         this.updatePropsToState = this.updatePropsToState.bind(this)
@@ -159,7 +159,7 @@ export default CSSModules(class Inner extends Component {
                                     width: '100%',
                                     padding: '6px'
                                 }}>
-                                    <Containers.pages.dashboard.MessageBox id={this.state.postId}/>
+                                    <Containers.pages.dashboard.InnerContent.MessageBox id={this.state.postId}/>
                                 </div>
                                 </Box>
                         </Layer>
@@ -167,4 +167,4 @@ export default CSSModules(class Inner extends Component {
             </div>
         )
     }
-}, require('./Inner.styl'))
+}, require('./Base.styl'))
