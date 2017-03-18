@@ -10,7 +10,6 @@ export default {
         })
     },
     getFavorite: () => {
-        console.log('yo!')
         return firebase.database().ref('/favoriteMap').orderByKey().once('value').then(function (snapshot) {
             return snapshot.val()
         })
@@ -54,14 +53,8 @@ export default {
     },
     postMessage: (msg) => {
         console.log(msg)
-        let temp = []
-        return firebase.database().ref('/messageMap').once('value').then(function (snapshot) {
-            temp = snapshot.val()
-            console.log('in api get message: ', snapshot.val())
-            temp.push(msg)
-        })
-        .then(() => {
-            firebase.database().ref('/messageMap').set(temp)
+        return firebase.database().ref('/messageMap').push().set({
+            ...msg
         })
     }
 }

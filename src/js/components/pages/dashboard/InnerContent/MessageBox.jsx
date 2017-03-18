@@ -11,16 +11,31 @@ import Heading from 'grommet/components/Heading'
 import Paragraph from 'grommet/components/Paragraph'
 import 'antd/dist/antd.css'
 
+const key2good = {
+    money: '薪水支付合理',
+    jobs: '工作內容合適',
+    dev: '良好工作環境'
+}
+const key2bad = {
+    money: '薪水支付不合理',
+    jobs: '工作內容不合適',
+    dev: '須改善工作環境'
+}
 @Radium
 export default CSSModules(class MessageBox extends Component {
     constructor (props) {
         super(props)
         this.updatePropsToState = this.updatePropsToState.bind(this)
         this.showTime = this.showTime.bind(this)
+        this.refreshMessage = this.refreshMessage.bind(this)
         this.state = {
             id: 0,
             messageList: []
         }
+    }
+    refreshMessage () {
+        console.log('id: ', this.state.id)
+        this.props.getMessage(this.state.id)
     }
     updatePropsToState (newProps) {
         console.log(newProps)
@@ -35,9 +50,11 @@ export default CSSModules(class MessageBox extends Component {
     }
     componentDidMount () {
         console.log('Messagebox did mount', this.props)
+        this.updatePropsToState(this.props)
     }
     componentWillReceiveProps (nextProps) {
         console.log('Messagebox will receive', nextProps)
+        this.updatePropsToState(nextProps)
     }
     render () {
         return (
@@ -62,7 +79,7 @@ export default CSSModules(class MessageBox extends Component {
                                     {
                                         _.map(el.tags, (value, id) =>
                                             value === 1
-                                            ? <Tag color="#6FBFF4">{id}</Tag>
+                                            ? <Tag color="#6FBFF4" key={id}>{key2good[id]}</Tag>
                                             : null
                                         )
                                     }
@@ -71,7 +88,7 @@ export default CSSModules(class MessageBox extends Component {
                                     {
                                         _.map(el.tags, (value, id) =>
                                             value === -1
-                                            ? <Tag color="#F37996">{id}</Tag>
+                                            ? <Tag color="#F37996" key={id}>{key2bad[id]}</Tag>
                                             : null
                                         )
                                     }
@@ -83,7 +100,7 @@ export default CSSModules(class MessageBox extends Component {
                         </Timeline.Item>
                         )
                     }
-                    <Containers.pages.dashboard.InnerContent.MessageForm />
+                    <Containers.pages.dashboard.InnerContent.MessageForm refreshMessage={this.refreshMessage} postId={this.state.id}/>
                 </Timeline>
             </Box>
         )
