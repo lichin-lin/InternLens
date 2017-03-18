@@ -92,7 +92,7 @@ export default CSSModules(class MessageBox extends Component {
                         </Timeline.Item>
                         )
                     }
-                    <Containers.pages.dashboard.InnerContent.MessageForm refreshMessage={this.refreshMessage} postId={this.state.id}/>
+                    <Containers.pages.dashboard.InnerContent.MessageForm refreshMessage={this.refreshMessage} postId={this.state.id} userId={this.props.Session.AuthData.uid}/>
                 </Timeline>
             </Box>
         )
