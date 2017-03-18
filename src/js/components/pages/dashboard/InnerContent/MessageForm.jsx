@@ -4,7 +4,7 @@ import Containers from 'js/containers'
 import Radium from 'radium'
 import _ from 'lodash'
 
-import { Timeline, Input, Icon } from 'antd'
+import { Timeline, Input, Icon, message } from 'antd'
 import Form from 'grommet/components/Form'
 import FormField from 'grommet/components/FormField'
 import CheckBox from 'grommet/components/CheckBox'
@@ -16,7 +16,6 @@ export default CSSModules(class MessageBox extends Component {
         super(props)
         this.updatePropsToState = this.updatePropsToState.bind(this)
         this.toggleTag = this.toggleTag.bind(this)
-        this.sendMessage = this.sendMessage.bind(this)
         this.toggleAgreement = this.toggleAgreement.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
         this.state = {
@@ -32,19 +31,6 @@ export default CSSModules(class MessageBox extends Component {
             }
         }
     }
-    sendMessage (e) {
-        console.log('e: ', e)
-        e.preventDefault()
-        console.log('send: ', this.state)
-        // this.props.postMessage(this.state)
-        // .then(() => {
-        //     this.props.refreshMessage(this.state.postId)
-        // })
-        // .then(() => {
-        //     let newTags = { money: 0, jobs: 0, dev: 0 }
-        //     this.setState({tags: newTags})
-        // })
-    }
     updatePropsToState (newProps) {
         console.log('in message form: ', newProps)
         this.setState({
@@ -59,11 +45,11 @@ export default CSSModules(class MessageBox extends Component {
     handleSubmit (event) {
         event.preventDefault()
         if (this.props.Session.AuthData.uid === undefined) {
-            console.log('not login yet')
+            message.error('尚未登入無法留言唷')
             return
         }
         if (this.state.content === null || this.state.content === '' || this.state.agreement === false) {
-            console.log('can`t submitted')
+            message.warning('留言內容空白或是未同意留言合約')
             return
         }
         this.props.postMessage(this.state)
