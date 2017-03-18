@@ -46,7 +46,7 @@ export default CSSModules(class MessageBox extends Component {
     render () {
         return (
             <div style={{
-                marginBottom: '5px'
+                margin: '0 0 5px 10px'
             }}>
                  <b>{key2title[this.state.key]}:</b>
                 <CheckableTag

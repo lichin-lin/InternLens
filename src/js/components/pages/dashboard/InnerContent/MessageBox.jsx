@@ -59,7 +59,7 @@ export default CSSModules(class MessageBox extends Component {
                     style={{
                         marginBottom: '20px'
                     }}/>
-                    <Timeline>
+                <Timeline style={{width: '100%'}}>
                     {
                         _.map(this.props.messageList, (el, id) =>
                         <Timeline.Item color="#50514F" className="comment" key={id}>
@@ -75,8 +75,8 @@ export default CSSModules(class MessageBox extends Component {
                                             : null
                                         )
                                     }
-                                </div>
-                                <div>
+                                {/* </div>
+                                <div> */}
                                     {
                                         _.map(el.tags, (value, id) =>
                                             value === -1

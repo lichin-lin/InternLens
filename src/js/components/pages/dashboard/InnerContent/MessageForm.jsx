@@ -4,14 +4,11 @@ import Containers from 'js/containers'
 import Radium from 'radium'
 import _ from 'lodash'
 
-import { Timeline, Icon } from 'antd'
+import { Timeline, Input, Icon } from 'antd'
 import Form from 'grommet/components/Form'
-import Button from 'grommet/components/Button'
-import TextInput from 'grommet/components/TextInput'
 import FormField from 'grommet/components/FormField'
+import CheckBox from 'grommet/components/CheckBox'
 import 'antd/dist/antd.css'
-
-import ReCAPTCHA from 'react-google-recaptcha'
 
 @Radium
 export default CSSModules(class MessageBox extends Component {
@@ -20,12 +17,14 @@ export default CSSModules(class MessageBox extends Component {
         this.updatePropsToState = this.updatePropsToState.bind(this)
         this.toggleTag = this.toggleTag.bind(this)
         this.sendMessage = this.sendMessage.bind(this)
-        this.reChange = this.reChange.bind(this)
+        this.toggleAgreement = this.toggleAgreement.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
         this.state = {
             postId: '2',
             sendTime: 1488763912855,
             userId: 'cRwuLyQjRyVEJs5YwMJOADeOqkv2',
             content: '',
+            agreement: false,
             tags: {
                 money: 0,
                 jobs: 0,
@@ -34,16 +33,17 @@ export default CSSModules(class MessageBox extends Component {
         }
     }
     sendMessage (e) {
-        console.log('send: ', this.state)
+        console.log('e: ', e)
         e.preventDefault()
-        this.props.postMessage(this.state)
-        .then(() => {
-            this.props.refreshMessage(this.state.postId)
-        })
-        .then(() => {
-            let newTags = { money: 0, jobs: 0, dev: 0 }
-            this.setState({tags: newTags})
-        })
+        console.log('send: ', this.state)
+        // this.props.postMessage(this.state)
+        // .then(() => {
+        //     this.props.refreshMessage(this.state.postId)
+        // })
+        // .then(() => {
+        //     let newTags = { money: 0, jobs: 0, dev: 0 }
+        //     this.setState({tags: newTags})
+        // })
     }
     updatePropsToState (newProps) {
         console.log('in message form: ', newProps)
@@ -52,15 +52,35 @@ export default CSSModules(class MessageBox extends Component {
             userId: newProps.userId === undefined ? null : newProps.userId
         })
     }
-    reChange (e) {
-        console.log('Captcha value:', e)
+    toggleAgreement () {
+        let temp = this.state.agreement
+        this.setState({agreement: !temp})
+    }
+    handleSubmit (event) {
+        event.preventDefault()
+        if (this.props.Session.AuthData.uid === undefined) {
+            console.log('not login yet')
+            return
+        }
+        if (this.state.content === null || this.state.content === '' || this.state.agreement === false) {
+            console.log('can`t submitted')
+            return
+        }
+        this.props.postMessage(this.state)
+        .then(() => {
+            this.props.refreshMessage(this.state.postId)
+        })
+        .then(() => {
+            let newTags = { money: 0, jobs: 0, dev: 0 }
+            this.setState({content: ''})
+            this.setState({tags: newTags})
+            this.setState({agreement: false})
+        })
     }
     toggleTag (key, value) {
         let temp = this.state.tags
-        // console.log(temp, key, value)
         temp[key] = value
         this.setState({ tags: temp })
-        // console.log(this.state.tags)
     }
     componentDidMount () {
         this.updatePropsToState(this.props)
@@ -71,17 +91,17 @@ export default CSSModules(class MessageBox extends Component {
     render () {
         return (
             <Timeline.Item className="addcomment" dot={<Icon type="message" style={{ fontSize: '24px' }}/>} color="#50514F" style={{ background: '#f5f5f5', marginTop: '10px' }}>
-                <Form>
-                    <FormField
-                        label='我要留言'
-                        style={{
-                            borderRadius: '5px'
-                        }}>
-                        <TextInput onDOMChange={(event) => { this.setState({content: event.target.value}) }}/>
-                    </FormField>
+                <Form onSubmit={this.handleSubmit}>
+                    <Input rows={4}
+                        size="large"
+                        type="textarea"
+                        placeholder="我要留言"
+                        value={this.state.content}
+                        onChange={(event) => { this.setState({content: event.target.value}) }}
+                        style={{borderRadius: '5px', fontSize: '20px'}} />
                     <div>
                         <div style={{
-                            margin: '10px 0 20px'
+                            margin: '10px 0 20px 10px'
                         }}><strong>並選取以下符合的描述</strong>
                         </div>
                       {_.map(this.state.tags, (value, id) => (
@@ -92,20 +112,16 @@ export default CSSModules(class MessageBox extends Component {
                             toggleTag={this.toggleTag}/>
                       ))}
                     </div>
-                    <ReCAPTCHA
-                      ref="recaptcha"
-                      sitekey="6LdgeRkUAAAAADy_3m92NQUEMiQp3ols6n8ti2KL"
-                      onChange={this.reChange}
-                    />
-                    <Button label='提繳留言'
-                        type='submit'
-                        primary={true}
-                        accent={true}
-                        onClick={this.sendMessage}
-                        style={{
-                            marginTop: '20px',
-                            borderRadius: '5px'
-                        }}/>
+                    <fieldset>
+                      <FormField>
+                        <CheckBox id='agree'
+                          name='agree'
+                          checked={this.state.agreement}
+                          onChange={this.toggleAgreement}
+                          label='我知道這是匿名留言，但是我不謾罵並為言論負責' />
+                      </FormField>
+                    </fieldset>
+                <input className="submitBtn" type="submit" value="送出留言" />
                 </Form>
             </Timeline.Item>
         )
