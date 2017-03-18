@@ -53,6 +53,8 @@ export default {
     },
     postMessage: (msg) => {
         console.log(msg)
+        let currentTimeStamp = Math.floor(new Date())
+        msg['sendTime'] = currentTimeStamp
         return firebase.database().ref('/messageMap').push().set({
             ...msg
         })

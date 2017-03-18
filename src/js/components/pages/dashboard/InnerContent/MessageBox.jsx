@@ -3,6 +3,7 @@ import Containers from 'js/containers'
 import CSSModules from 'react-css-modules'
 import Radium from 'radium'
 import _ from 'lodash'
+import Time from 'react-time'
 
 import { Tag, Timeline } from 'antd'
 import Box from 'grommet/components/Box'
@@ -73,7 +74,7 @@ export default CSSModules(class MessageBox extends Component {
                         <Timeline.Item color="#50514F" className="comment" key={id}>
                             <div style={{ marginBottom: '20px' }}>
                                 <Heading align='start' strong={false} margin='none' uppercase={false} truncate={false} tag='h4' style={{ marginLeft: '3px' }}>
-                                    {this.showTime(el.sendTime)}
+                                    <Time value={el.sendTime} format="YYYY/MM/DD HH:mm" />
                                 </Heading>
                                 <div>
                                     {

@@ -3,7 +3,8 @@ import Components from 'components'
 import Actions from 'js/actions'
 
 const mapStateToProps = (state, ownProps) => ({
-    messageList: state.Intern.message
+    messageList: state.Intern.message,
+    Session: state.Session
 })
 
 const mapDispatchToProps = (dispatch) => ({

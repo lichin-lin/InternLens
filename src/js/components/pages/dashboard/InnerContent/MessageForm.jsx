@@ -11,6 +11,8 @@ import TextInput from 'grommet/components/TextInput'
 import FormField from 'grommet/components/FormField'
 import 'antd/dist/antd.css'
 
+import ReCAPTCHA from 'react-google-recaptcha'
+
 @Radium
 export default CSSModules(class MessageBox extends Component {
     constructor (props) {
@@ -18,6 +20,7 @@ export default CSSModules(class MessageBox extends Component {
         this.updatePropsToState = this.updatePropsToState.bind(this)
         this.toggleTag = this.toggleTag.bind(this)
         this.sendMessage = this.sendMessage.bind(this)
+        this.reChange = this.reChange.bind(this)
         this.state = {
             postId: '2',
             sendTime: 1488763912855,
@@ -45,8 +48,12 @@ export default CSSModules(class MessageBox extends Component {
     updatePropsToState (newProps) {
         console.log('in message form: ', newProps)
         this.setState({
-            postId: newProps.postId
+            postId: newProps.postId,
+            userId: newProps.userId === undefined ? null : newProps.userId
         })
+    }
+    reChange (e) {
+        console.log('Captcha value:', e)
     }
     toggleTag (key, value) {
         let temp = this.state.tags
@@ -87,6 +94,11 @@ export default CSSModules(class MessageBox extends Component {
                             toggleTag={this.toggleTag}/>
                       ))}
                     </div>
+                    <ReCAPTCHA
+                      ref="recaptcha"
+                      sitekey="6LdgeRkUAAAAADy_3m92NQUEMiQp3ols6n8ti2KL"
+                      onChange={this.reChange}
+                    />
                     <Button label='提繳留言'
                         type='submit'
                         primary={true}
