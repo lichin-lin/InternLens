@@ -21,6 +21,7 @@ export default CSSModules(class extends Component {
         super(props)
         this.changeFilterInput = this.changeFilterInput.bind(this)
         this.toggleWindowOpen = this.toggleWindowOpen.bind(this)
+        this.toggleWindowClose = this.toggleWindowClose.bind(this)
         this.getMoreIntern = this.getMoreIntern.bind(this)
         this.startFilter = this.startFilter.bind(this)
         this.state = {
@@ -63,14 +64,18 @@ export default CSSModules(class extends Component {
                 ...filterData
             }
         })
-        console.log(filterData)
     }
     toggleWindowOpen (id) {
+        console.log('toggle')
         this.props.getMessage(id)
         .then(() => {
             this.setState({WindowContentIndex: id})
             this.setState({isWindowClose: !this.state.isWindowClose})
         })
+    }
+    toggleWindowClose () {
+        console.log('toggle close')
+        this.setState({isWindowClose: !this.state.isWindowClose})
     }
     getMoreIntern () {
         if (this.state.isListEnd === true) {
@@ -220,7 +225,7 @@ export default CSSModules(class extends Component {
                     isClose={this.state.isWindowClose}
                     content={this.state.renderInternList[this.state.WindowContentIndex]}
                     postId={this.state.WindowContentIndex}
-                    onClose={() => this.toggleWindowOpen(30)}/>
+                    onClose={() => this.toggleWindowClose()}/>
             </div>
         )
     }

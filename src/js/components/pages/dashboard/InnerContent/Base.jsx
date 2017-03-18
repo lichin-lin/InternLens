@@ -24,7 +24,6 @@ export default CSSModules(class Base extends Component {
         }
     }
     updatePropsToState (newProps) {
-        console.log('this update: ', this.props)
         this.setState({
             isClose: newProps.isClose,
             content: newProps.content,
@@ -32,11 +31,9 @@ export default CSSModules(class Base extends Component {
         })
     }
     componentDidMount () {
-        console.log('inner did mount')
         this.updatePropsToState(this.state)
     }
     componentWillReceiveProps (nextProps) {
-        console.log('inner will receive')
         this.updatePropsToState(nextProps)
     }
     render () {

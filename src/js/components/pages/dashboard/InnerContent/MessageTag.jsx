@@ -32,18 +32,15 @@ export default CSSModules(class MessageBox extends Component {
         }
     }
     updatePropsToState (newProps) {
-        console.log(newProps)
         this.setState({
             key: newProps.name,
             value: newProps.value
         })
     }
     componentDidMount () {
-        console.log('Messagebox did mount', this.props)
         this.updatePropsToState(this.props)
     }
     componentWillReceiveProps (nextProps) {
-        console.log('Messagebox will receive', nextProps)
         this.updatePropsToState(nextProps)
     }
     render () {

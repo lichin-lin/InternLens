@@ -27,7 +27,6 @@ export default CSSModules(class MessageBox extends Component {
     constructor (props) {
         super(props)
         this.updatePropsToState = this.updatePropsToState.bind(this)
-        this.showTime = this.showTime.bind(this)
         this.refreshMessage = this.refreshMessage.bind(this)
         this.state = {
             id: 0,
@@ -35,7 +34,6 @@ export default CSSModules(class MessageBox extends Component {
         }
     }
     refreshMessage () {
-        console.log('id: ', this.state.id)
         this.props.getMessage(this.state.id)
     }
     updatePropsToState (newProps) {
@@ -44,17 +42,10 @@ export default CSSModules(class MessageBox extends Component {
             id: newProps.id
         })
     }
-    showTime (stamp) {
-        console.log('init: ', stamp)
-        let d = new Date(stamp)
-        return (d.getDate() + '/' + (d.getMonth() + 1) + '/' + d.getFullYear())
-    }
     componentDidMount () {
-        console.log('Messagebox did mount', this.props)
         this.updatePropsToState(this.props)
     }
     componentWillReceiveProps (nextProps) {
-        console.log('Messagebox will receive', nextProps)
         this.updatePropsToState(nextProps)
     }
     render () {

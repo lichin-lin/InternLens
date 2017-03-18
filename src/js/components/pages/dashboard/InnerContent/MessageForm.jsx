@@ -63,11 +63,9 @@ export default CSSModules(class MessageBox extends Component {
         // console.log(this.state.tags)
     }
     componentDidMount () {
-        console.log('FORMMMMM did mount', this.props)
         this.updatePropsToState(this.props)
     }
     componentWillReceiveProps (nextProps) {
-        console.log('FORMMMMM will receive', nextProps)
         this.updatePropsToState(nextProps)
     }
     render () {
