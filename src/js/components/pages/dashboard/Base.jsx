@@ -10,6 +10,9 @@ import Header from 'grommet/components/Header'
 import Tiles from 'grommet/components/Tiles'
 import Heading from 'grommet/components/Heading'
 
+import Loading from 'react-loading'
+import InfiniteScroll from 'react-infinite-scroller'
+
 @Radium
 export default CSSModules(class extends Component {
     constructor (props) {
@@ -70,6 +73,7 @@ export default CSSModules(class extends Component {
         this.setState({isWindowClose: !this.state.isWindowClose})
     }
     getMoreIntern () {
+        console.log('qqqq')
         if (this.state.isListEnd === true) {
             return
         }
@@ -193,29 +197,33 @@ export default CSSModules(class extends Component {
                         </Anchor>
                       </Menu> */}
                     </Box>
-                    {/* <Button
-                        icon={<WorkshopIcon />}
-                        label='查詢'
-                        plain={true}
-                        onClick={this.startFilter}/> */}
                 </Header>
-                <Tiles fill={true}
-                    flush={false}
-                    onMore={this.getMoreIntern}>
-                {
-                    _.map(this.state.renderInternList, (intern, id) =>
-                        intern === undefined
-                        ? null : <Containers.pages.dashboard.InternBox
-                                    id={id}
-                                    key={id}
-                                    Content={intern}
-                                    onClose={() => this.toggleWindowOpen(id)}
-                                    FavoriteCount={this.props.Intern.favorite}
-                                    MessageCount={this.props.Intern.totalMessage}
-                                    currentUserId={this.props.Session.AuthData.uid}/>
-                    )
-                }
-                </Tiles>
+                <InfiniteScroll
+                    pageStart={0}
+                    loadMore={this.getMoreIntern}
+                    hasMore={true || false}
+                    loader={
+                        <div className="loader" style={{display: 'flex', justifyContent: 'center'}}>
+                            <Loading type='cylon' color='#50514F' />
+                        </div>}
+                >
+                    <Tiles fill={true}
+                        flush={false}>
+                    {
+                        _.map(this.state.renderInternList, (intern, id) =>
+                            intern === undefined
+                            ? null : <Containers.pages.dashboard.InternBox
+                                        id={id}
+                                        key={id}
+                                        Content={intern}
+                                        onClose={() => this.toggleWindowOpen(id)}
+                                        FavoriteCount={this.props.Intern.favorite}
+                                        MessageCount={this.props.Intern.totalMessage}
+                                        currentUserId={this.props.Session.AuthData.uid}/>
+                        )
+                    }
+                    </Tiles>
+                </InfiniteScroll>
                 <Containers.pages.dashboard.InnerContent.Base
                     isClose={this.state.isWindowClose}
                     content={this.state.renderInternList[this.state.WindowContentIndex]}
