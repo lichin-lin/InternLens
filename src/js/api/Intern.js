@@ -9,8 +9,13 @@ export default {
             return snapshot.val()
         })
     },
-    getFavorite: () => {
+    getAllFavorite: () => {
         return firebase.database().ref('/favoriteMap').orderByKey().once('value').then(function (snapshot) {
+            return snapshot.val()
+        })
+    },
+    getAllMessage: () => {
+        return firebase.database().ref('/messageMap').orderByKey().once('value').then(function (snapshot) {
             return snapshot.val()
         })
     },

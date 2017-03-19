@@ -3,7 +3,8 @@ import Api from 'js/api'
 
 export default {
     getInternList: createAction('GET_INTERNLIST', Api.Intern.getInternList),
-    getFavorite: createAction('GET_FAVORITE', Api.Intern.getFavorite),
+    getAllFavorite: createAction('GET_FAVORITE', Api.Intern.getAllFavorite),
+    getAllMessage: createAction('GET_ALLMESSAGE', Api.Intern.getAllMessage),
     toggleFavorite: createAction('TOGGLE_FAVORITE', Api.Intern.toggleFavorite),
     setLoading: createAction('SET_LOADING', Api.Intern.setLoading),
     getMessage: createAction('GET_MESSAGE', Api.Intern.getMessage),

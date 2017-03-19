@@ -10,7 +10,8 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     toggleFavorite: (pid, uid) => dispatch(Actions.Intern.toggleFavorite(pid, uid)),
-    getFavorite: () => dispatch(Actions.Intern.getFavorite())
+    getAllFavorite: () => dispatch(Actions.Intern.getAllFavorite()),
+    getAllMessage: () => dispatch(Actions.Intern.getAllMessage())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Components.pages.dashboard.InternBox)

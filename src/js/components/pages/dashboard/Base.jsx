@@ -5,14 +5,9 @@ import Radium from 'radium'
 import _ from 'lodash'
 
 import Box from 'grommet/components/Box'
-// import Menu from 'grommet/components/Menu'
-// import Anchor from 'grommet/components/Anchor'
 import Search from 'grommet/components/Search'
 import Header from 'grommet/components/Header'
-// import Actions from 'grommet/components/icons/base/Actions'
-// import WorkshopIcon from 'grommet/components/icons/base/Workshop'
 import Tiles from 'grommet/components/Tiles'
-// import Button from 'grommet/components/Button'
 import Heading from 'grommet/components/Heading'
 
 @Radium
@@ -29,7 +24,7 @@ export default CSSModules(class extends Component {
             renderInternList: {},
             filterInput: '',
             currentIndex: 1,
-            oneQueryCount: 5,
+            oneQueryCount: 6,
             WindowContentIndex: 1,
             isWindowClose: true,
             isLoading: true,
@@ -40,9 +35,6 @@ export default CSSModules(class extends Component {
         this.setState({filterInput: event.target.value})
     }
     startFilter () {
-        // if (this.state.filterInput === '') {
-        //     return
-        // }
         this.setState({renderInternList: {}})
         this.setState({currentIndex: 0})
         this.setState({isListEnd: false})
@@ -108,10 +100,13 @@ export default CSSModules(class extends Component {
     componentWillMount () {
         this.props.setLoading()
         .then(() => {
-            return this.props.getInternList(0, 10)
+            return this.props.getInternList(0, 50)
         })
         .then(() => {
-            return this.props.getFavorite()
+            return this.props.getAllFavorite()
+        })
+        .then(() => {
+            return this.props.getAllMessage()
         })
         .then(() => {
             this.setState({
@@ -216,8 +211,8 @@ export default CSSModules(class extends Component {
                                     Content={intern}
                                     onClose={() => this.toggleWindowOpen(id)}
                                     FavoriteCount={this.props.Intern.favorite}
-                                    currentUserId={this.props.Session.AuthData.uid}
-                                    MessageCount={10}/>
+                                    MessageCount={this.props.Intern.totalMessage}
+                                    currentUserId={this.props.Session.AuthData.uid}/>
                     )
                 }
                 </Tiles>

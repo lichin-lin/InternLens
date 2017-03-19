@@ -54,7 +54,13 @@ export default CSSModules(class Base extends Component {
                         }}>
                             <Button
                                 icon={<CloseIcon />}
-                                onClick={this.props.onClose}/>
+                                onClick={this.props.onClose}
+                                style={{
+                                    position: 'fixed',
+                                    background: 'white',
+                                    zIndex: '9999',
+                                    width: '100%'
+                                }}/>
                             <Box justify='start' align='center' wrap={false} pad='medium' margin='small'
                                 className='BoxWrapper'>
                                 {
@@ -62,7 +68,7 @@ export default CSSModules(class Base extends Component {
                                         style={{
                                             width: '100%',
                                             height: '100%',
-                                            padding: '0px',
+                                            padding: '50px 0px',
                                             margin: '0px'
                                         }}>
                                       <Heading strong={true}

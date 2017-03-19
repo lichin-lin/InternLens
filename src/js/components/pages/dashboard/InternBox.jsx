@@ -34,6 +34,7 @@ export default CSSModules(class Inner extends Component {
             information: newProps.Content
         })
         let nextFavoriteCounter = 0
+        let nextMessageCounter = 0
         let isFavorite = false
         _.map(newProps.FavoriteCount, (el) => {
             if (el.postId.toString() === newProps.id.toString()) {
@@ -45,15 +46,23 @@ export default CSSModules(class Inner extends Component {
                 }
             }
         })
+
+        _.map(newProps.MessageCount, (el) => {
+            if (el.postId.toString() === newProps.id.toString()) {
+                nextMessageCounter += 1
+            }
+        })
+
         this.setState({
             isFavorite: isFavorite,
-            favoriteCount: nextFavoriteCounter
+            favoriteCount: nextFavoriteCounter,
+            messageCount: nextMessageCounter
         })
     }
     toggleFavorite () {
         this.props.toggleFavorite(this.state.id, this.props.currentUserId)
         .then(() => {
-            this.props.getFavorite()
+            this.props.getAllFavorite()
         })
     }
     componentDidMount () {

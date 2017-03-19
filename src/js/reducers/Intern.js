@@ -3,7 +3,8 @@ import { handleActions } from 'redux-actions'
 const initialState = {
     list: {},
     favorite: {},
-    message: {},
+    totalMessage: {},
+    postMessage: {},
     isLoading: true
 }
 
@@ -49,6 +50,20 @@ export default handleActions({
             return state
         }
     },
+    GET_ALLMESSAGE: {
+        next (state, action) {
+            return {
+                ...state,
+                totalMessage: {
+                    ...action.payload
+                }
+            }
+        },
+        throw (state, { payload }) {
+            console.log('qq all message fail')
+            return state
+        }
+    },
     TOGGLE_FAVORITE: {
         next (state, action) {
             return {
@@ -68,7 +83,7 @@ export default handleActions({
         next (state, action) {
             return {
                 ...state,
-                message: {
+                postMessage: {
                     ...action.payload
                 }
             }

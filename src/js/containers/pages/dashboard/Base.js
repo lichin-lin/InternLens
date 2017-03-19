@@ -9,7 +9,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     getInternList: (start, end) => dispatch(Actions.Intern.getInternList(start, end)),
-    getFavorite: () => dispatch(Actions.Intern.getFavorite()),
+    getAllFavorite: () => dispatch(Actions.Intern.getAllFavorite()),
+    getAllMessage: () => dispatch(Actions.Intern.getAllMessage()),
     getMessage: (id) => dispatch(Actions.Intern.getMessage(id)),
     setLoading: () => dispatch(Actions.Intern.setLoading())
 })
