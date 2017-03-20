@@ -82,7 +82,8 @@ export default CSSModules(class extends Component {
                         <Button
                             label='提交心得'
                             plain={false}
-                            href='#'
+                            target='_blank'
+                            href='https://goo.gl/forms/d5KcGBZ1A83G8sR73'
                             onClick={() => { console.log('click') }}
                             style={{
                                 border: 'none',

@@ -9,6 +9,13 @@ export default {
             return snapshot.val()
         })
     },
+    getSinglePost: (id) => {
+        id = id - 1
+        return firebase.database().ref('/list/' + id).once('value').then(function (snapshot) {
+            console.log(snapshot.val())
+            return snapshot.val()
+        })
+    },
     getAllFavorite: () => {
         return firebase.database().ref('/favoriteMap').orderByKey().once('value').then(function (snapshot) {
             return snapshot.val()

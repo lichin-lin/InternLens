@@ -55,6 +55,7 @@ export default CSSModules(class MessageBox extends Component {
                     width: '100%',
                     margin: '0px'
                 }}>
+                {this.props.id}
                 <Value value={'留言評論'} colorIndex='accent-1'
                     style={{
                         marginBottom: '20px'

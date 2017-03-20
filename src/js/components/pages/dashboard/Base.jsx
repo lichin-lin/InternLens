@@ -104,7 +104,7 @@ export default CSSModules(class extends Component {
     componentWillMount () {
         this.props.setLoading()
         .then(() => {
-            return this.props.getInternList(0, 50)
+            return this.props.getInternList(0, 10)
         })
         .then(() => {
             return this.props.getAllFavorite()
@@ -173,7 +173,7 @@ export default CSSModules(class extends Component {
                       size='small'
                       value={this.state.filterInput}
                       iconAlign='start'
-                      placeHolder='使用透視鏡!'
+                      placeHolder='輸入公司名稱'
                       onDOMChange={this.changeFilterInput}
                       onKeyPress={this.startFilter}
                       responsive={false}

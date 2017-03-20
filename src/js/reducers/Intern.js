@@ -2,6 +2,7 @@ import { handleActions } from 'redux-actions'
 
 const initialState = {
     list: {},
+    singlePost: {},
     favorite: {},
     totalMessage: {},
     postMessage: {},
@@ -33,6 +34,20 @@ export default handleActions({
         },
         throw (state, { payload }) {
             console.log('qq intern list')
+            return state
+        }
+    },
+    GET_SINGLEPOST: {
+        next (state, action) {
+            return {
+                ...state,
+                singlePost: {
+                    ...action.payload
+                }
+            }
+        },
+        throw (state, { payload }) {
+            console.log('qq favorite')
             return state
         }
     },

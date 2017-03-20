@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import CSSModules from 'react-css-modules'
 import Radium from 'radium'
 import _ from 'lodash'
+import { Link } from 'react-router'
 import Dotdotdot from 'react-dotdotdot'
 
 import Card from 'grommet/components/Card'
@@ -90,13 +91,15 @@ export default CSSModules(class Inner extends Component {
                             }
                             headingStrong={false}
                             link= {
-                                <Anchor
-                                    onClick={this.props.onClose}
-                                    id={this.state.id.toString()}
-                                    label='查看心得全文'
-                                    style={{
-                                        marginTop: '10px'
-                                    }} />
+                                <Link to={`/InternLens/dashboard/post/${this.state.id}`}>
+                                    <Anchor
+                                        // onClick={this.props.onClose}
+                                        id={this.state.id.toString()}
+                                        label='查看心得全文'
+                                        style={{
+                                            marginTop: '10px'
+                                        }} />
+                                </Link>
                                 }
                                 style={{
                                     width: '100%'
