@@ -44,7 +44,8 @@ export default CSSModules(class MessageBox extends Component {
         }
         return (
             <div style={{
-                width: '100%'
+                width: '100%',
+                maxWidth: '1024px'
             }}>
                 <Box justify='start' align='center' wrap={false} pad='medium' margin='small'
                     className='BoxWrapper'>
