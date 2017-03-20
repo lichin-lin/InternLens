@@ -2,13 +2,14 @@ import React, { Component } from 'react'
 import CSSModules from 'react-css-modules'
 import cookie from 'react-cookie'
 import Radium from 'radium'
+import _ from 'lodash'
 
 import Title from 'grommet/components/Title'
 import Box from 'grommet/components/Box'
 import Button from 'grommet/components/Button'
 import SocialFacebookIcon from 'grommet/components/icons/base/SocialFacebook'
 import SocialGooglePlusIcon from 'grommet/components/icons/base/SocialGooglePlus'
-import { Modal } from 'antd'
+import { Modal, message } from 'antd'
 
 @Radium
 export default CSSModules(class extends Component {
@@ -43,6 +44,11 @@ export default CSSModules(class extends Component {
         })
     }
     showModal () {
+        console.log(this.props.currentUser)
+        if (_.size(this.props.currentUser) !== 0) {
+            message.info('已經登入過了!')
+            return
+        }
         this.setState({
             visible: true
         })
@@ -119,18 +125,6 @@ export default CSSModules(class extends Component {
                             onClick={this.showModal}
                             style={{
                                 color: '#676767',
-                                opacity: '1'
-                            }}/>
-                        <Button
-                            label='提交心得'
-                            plain={false}
-                            target='_blank'
-                            href='https://goo.gl/forms/d5KcGBZ1A83G8sR73'
-                            onClick={() => { console.log('click') }}
-                            style={{
-                                border: 'none',
-                                color: 'white',
-                                background: '#0353A4',
                                 opacity: '1'
                             }}/>
                     </Box>

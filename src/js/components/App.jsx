@@ -15,7 +15,9 @@ export default CSSModules(class extends Component {
     render () {
         return (
             <StyleRoot>
-                <App>
+                <App style={{
+                    maxWidth: '100%'
+                }}>
                     <Box justify='start'
                       align='center'
                       wrap={true}
@@ -27,7 +29,7 @@ export default CSSModules(class extends Component {
                       colorIndex='light-2'>
                     <Containers.common.Navbar />
                       <Box direction='row'
-                        justify='start'
+                        justify='center'
                         align='start'
                         wrap={true}
                         pad='none'

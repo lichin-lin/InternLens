@@ -2,12 +2,14 @@ import React, { Component } from 'react'
 import CSSModules from 'react-css-modules'
 import Radium from 'radium'
 import Containers from 'js/containers'
+import _ from 'lodash'
 
 import Box from 'grommet/components/Box'
 import Label from 'grommet/components/Label'
 import Heading from 'grommet/components/Heading'
 import Value from 'grommet/components/Value'
 
+import Loading from 'react-loading'
 @Radium
 export default CSSModules(class MessageBox extends Component {
     constructor (props) {
@@ -35,6 +37,11 @@ export default CSSModules(class MessageBox extends Component {
     }
 
     render () {
+        if (_.size(this.state.content) === 0) {
+            return (
+                <Loading type='cylon' color='#50514F' />
+            )
+        }
         return (
             <div>
                 <Box justify='start' align='center' wrap={false} pad='medium' margin='small'

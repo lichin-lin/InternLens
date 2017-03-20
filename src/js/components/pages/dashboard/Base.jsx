@@ -125,10 +125,13 @@ export default CSSModules(class extends Component {
     render () {
         return (
             <div style={{
-                'width': '100%'
+                'width': '100%',
+                'maxWidth': '1024px'
             }}>
                 <Header style={{
-                    marginBottom: '50px'
+                    marginBottom: '50px',
+                    display: 'flex',
+                    flexDirection: 'column'
                 }}>
                   <Box flex={true}
                     justify='end'
@@ -137,7 +140,9 @@ export default CSSModules(class extends Component {
                     style={{
                         padding: '100px 20px',
                         background: '#A8E0FF',
-                        position: 'relative'
+                        position: 'relative',
+                        margin: '0',
+                        width: '100%'
                     }}>
                     <div
                         style={{
@@ -156,31 +161,24 @@ export default CSSModules(class extends Component {
                       strong={true}
                       align='center'
                       margin='none'>
-                      Sample Heading
+                      實習透視鏡
                     </Heading>
                     <Heading truncate={false}
                       align='center'
                       tag='h4'
                       margin='none'
                       style={{
-                          marginBottom: '50px'
+                          marginBottom: '10px'
                       }}>
                       分享你的真實工時、薪資資訊，讓我們一起改善資訊不透明的現況
                     </Heading>
-                    <Search inline={true}
-                      fill={true}
-                      size='small'
-                      value={this.state.filterInput}
-                      iconAlign='start'
-                      placeHolder='輸入公司名稱'
-                      onDOMChange={this.changeFilterInput}
-                      onKeyPress={this.startFilter}
-                      responsive={false}
-                      dropAlign={{'right': 'right'}}
-                      style={{
-                          border: '2px solid #50514F',
-                          margin: '0 auto'
-                      }} />
+                      <div className="submitNewPost--contain">
+                          <a className="submitNewPost" target='_blank' href='https://goo.gl/forms/d5KcGBZ1A83G8sR73'>
+                              <button>
+                              提交實習心得
+                              </button>
+                          </a>
+                        </div>
                       {/* <Menu responsive={true}
                         icon={<Actions />}
                         label='排序'
@@ -196,6 +194,32 @@ export default CSSModules(class extends Component {
                         </Anchor>
                       </Menu> */}
                     </Box>
+                    <Box flex={true}
+                      justify='center'
+                      direction='column'
+                      responsive={false}
+                      style={{
+                          margin: '30px 0 0 0',
+                          position: 'relative',
+                          width: '100%',
+                          maxWidth: '768px'
+                      }}>
+                      <Search inline={true}
+                        fill={true}
+                        size='small'
+                        value={this.state.filterInput}
+                        iconAlign='start'
+                        placeHolder='輸入公司名稱'
+                        onDOMChange={this.changeFilterInput}
+                        onKeyPress={this.startFilter}
+                        responsive={false}
+                        dropAlign={{'right': 'right'}}
+                        style={{
+                            border: '2px solid #50514F',
+                            margin: '0 auto'
+                        }} />
+                    </Box>
+
                 </Header>
                 <InfiniteScroll
                     pageStart={0}
@@ -231,4 +255,4 @@ export default CSSModules(class extends Component {
             </div>
         )
     }
-})
+}, require('./Base.styl'))
