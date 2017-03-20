@@ -200,6 +200,7 @@ export default CSSModules(class extends Component {
                       responsive={false}
                       style={{
                           margin: '30px 0 0 0',
+                          padding: '0 15px',
                           position: 'relative',
                           width: '100%',
                           maxWidth: '768px'
