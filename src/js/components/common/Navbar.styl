@@ -1,0 +1,36 @@
+
+
+.loginContain
+    display: flex
+    justify-content: center
+    align-items: center
+    .FBSection,
+    .GoogleSection
+        cursor: pointer
+        display: flex
+        flex-direction: column
+        align-items: center
+        padding: 30px
+        border: 3px solid #3b5998
+        border-radius: 5px
+        width: 150px
+        margin: 0 15px
+        color: #3b5998
+        transition: all 0.25s ease
+        .grommetux-control-icon-social-facebook
+            fill: #3b5998
+        .grommetux-control-icon-social-google-plus
+            fill: #dd4b39
+        &:hover
+            background: #3b5998
+            color: white
+            transition: all 0.35s ease
+            .grommetux-control-icon-social-facebook,
+            .grommetux-control-icon-social-google-plus
+                fill: white
+    .GoogleSection
+        border-color: #dd4b39
+        color: #dd4b39
+        &:hover
+            background: #dd4b39
+            transition: all 0.35s ease

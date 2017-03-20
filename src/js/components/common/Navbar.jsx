@@ -6,14 +6,22 @@ import Radium from 'radium'
 import Title from 'grommet/components/Title'
 import Box from 'grommet/components/Box'
 import Button from 'grommet/components/Button'
+import SocialFacebookIcon from 'grommet/components/icons/base/SocialFacebook'
+import SocialGooglePlusIcon from 'grommet/components/icons/base/SocialGooglePlus'
+import { Modal } from 'antd'
 
 @Radium
 export default CSSModules(class extends Component {
     constructor (props) {
         super(props)
         this.FBLogin = this.FBLogin.bind(this)
+        this.GoogleLogin = this.GoogleLogin.bind(this)
+        this.handleOk = this.handleOk.bind(this)
+        this.handleCancel = this.handleCancel.bind(this)
+        this.showModal = this.showModal.bind(this)
         this.state = {
-            displayName: ''
+            displayName: '',
+            visible: false
         }
     }
     FBLogin () {
@@ -23,6 +31,32 @@ export default CSSModules(class extends Component {
                 this.setState({displayName: this.props.currentUser.user.displayName})
                 location.href = location.href
             }
+        })
+    }
+    GoogleLogin () {
+        this.props.GoogleLogin().then((state) => {
+            cookie.save('user', state.payload.user)
+            if (state.payload.user !== undefined) {
+                this.setState({displayName: this.props.currentUser.user.displayName})
+                location.href = location.href
+            }
+        })
+    }
+    showModal () {
+        this.setState({
+            visible: true
+        })
+    }
+    handleOk (e) {
+        console.log(e)
+        this.setState({
+            visible: false
+        })
+    }
+    handleCancel (e) {
+        console.log(e)
+        this.setState({
+            visible: false
         })
     }
     componentWillMount () {
@@ -43,6 +77,14 @@ export default CSSModules(class extends Component {
                 size='full'
                 full='horizontal'
                 colorIndex='light-1'>
+                <Modal title="歡迎登入" visible={this.state.visible}
+                  onOk={this.handleOk} onCancel={this.handleCancel}
+                  footer={[]}>
+                  <div className="loginContain">
+                      <div onClick={this.FBLogin} className="FBSection"><SocialFacebookIcon size='large'/>Facebook</div>
+                      <div onClick={this.GoogleLogin} className="GoogleSection"><SocialGooglePlusIcon size='large'/>Google</div>
+                  </div>
+                </Modal>
                 <Title>
                     InternLens
                 </Title>&nbsp;&nbsp;&nbsp;
@@ -74,7 +116,7 @@ export default CSSModules(class extends Component {
                             label={this.state.displayName === undefined || this.state.displayName.length <= 0
                                 ? '登入' : 'Hi! ' + this.state.displayName}
                             plain={true}
-                            onClick={this.FBLogin}
+                            onClick={this.showModal}
                             style={{
                                 color: '#676767',
                                 opacity: '1'
@@ -96,4 +138,4 @@ export default CSSModules(class extends Component {
               </Box>
         )
     }
-})
+}, require('./Navbar.styl'))

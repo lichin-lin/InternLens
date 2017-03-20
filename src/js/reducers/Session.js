@@ -19,7 +19,6 @@ export default handleActions({
             }
         }
     },
-
     FBLogout: {
         next (state, action) {
             return {
@@ -33,7 +32,19 @@ export default handleActions({
             }
         }
     },
-
+    GoogleLogin: {
+        next (state, action) {
+            return {
+                ...state,
+                AuthData: action.payload
+            }
+        },
+        throw (state, action) {
+            return {
+                AuthData: {}
+            }
+        }
+    },
     CookieLogin: {
         next (state, action) {
             return {
