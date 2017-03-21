@@ -27,7 +27,7 @@ export default CSSModules(class extends Component {
                       flex={true}
                       full={true}
                       colorIndex='light-2'>
-                    <Containers.common.Navbar />
+                    <Containers.common.Navbar {...this.props}/>
                       <Box direction='row'
                         justify='center'
                         align='start'

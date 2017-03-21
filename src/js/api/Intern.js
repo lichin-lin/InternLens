@@ -70,5 +70,21 @@ export default {
         return firebase.database().ref('/messageMap').push().set({
             ...msg
         })
+    },
+    setNickName: (uid, newname) => {
+        console.log(uid, newname)
+        let postData = {
+            uid: uid,
+            userName: newname
+        }
+        let updates = {}
+        updates['/nameMap/' + uid] = postData
+        return firebase.database().ref().update(updates)
+    },
+    getNickName: (uid) => {
+        return firebase.database().ref('/nameMap').orderByKey().equalTo(uid.toString()).once('value').then(function (snapshot) {
+            console.log('in get nickname: ', snapshot.val())
+            return snapshot.val()[uid]['userName']
+        })
     }
 }

@@ -44,9 +44,10 @@ export default CSSModules(class extends Component {
         })
     }
     showModal () {
-        console.log(this.props.currentUser)
+        console.log(this.props)
         if (_.size(this.props.currentUser) !== 0) {
             message.info('已經登入過了!')
+            this.props.router.push('/InternLens/setting')
             return
         }
         this.setState({

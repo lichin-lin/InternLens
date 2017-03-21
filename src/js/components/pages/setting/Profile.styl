@@ -1,0 +1,30 @@
+.btnContainer
+    margin-top: 30px
+    width: 100%
+    max-width: 480px
+    display: flex
+    justify-content: space-around
+    align-items: center
+    & div
+        width: calc(50% - 10px)
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: center
+        padding: 10px 20px
+        border: 1px solid black
+        border-radius: 2px
+        cursor: pointer
+        &:nth-child(1)
+            color: #fc636b
+            border-color: #fc636b
+        &:nth-child(2)
+            color: #0AF
+            border-color: #0AF
+.grommetux-form-field--focus
+    .grommetux-form-field__contents
+        border: none !important
+        box-shadow: none !important
+        input
+            border: none !important
+            box-shadow: none !important
