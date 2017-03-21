@@ -125,8 +125,8 @@ export default CSSModules(class extends Component {
     render () {
         return (
             <div style={{
-                'width': '100%',
-                'maxWidth': '1024px'
+                width: '100%',
+                maxWidth: '1024px'
             }}>
                 <Header style={{
                     marginBottom: '50px',
@@ -203,7 +203,7 @@ export default CSSModules(class extends Component {
                           padding: '0 15px',
                           position: 'relative',
                           width: '100%',
-                          maxWidth: '768px'
+                          maxWidth: '1024px'
                       }}>
                       <Search inline={true}
                         fill={true}

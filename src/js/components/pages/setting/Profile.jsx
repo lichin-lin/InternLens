@@ -117,8 +117,8 @@ export default CSSModules(class extends Component {
                         <div className="imgContainer">
                             <img src={this.props.Session.AuthData.photoURL} />
                         </div>
-                        <div className="changeName" onClick={this.showModal}>點此修改暱稱</div>
                         Hi 你的暱稱: {this.state.nickName}
+                        <div className="changeName" onClick={this.showModal}>點此修改暱稱</div>
                     </div>
                 </div>
                 {
