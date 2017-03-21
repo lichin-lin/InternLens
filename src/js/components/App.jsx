@@ -29,7 +29,7 @@ export default CSSModules(class extends Component {
                       colorIndex='light-2'>
                     <Containers.common.Navbar {...this.props}/>
                       <Box direction='row'
-                        justify='center'
+                        justify='start'
                         align='start'
                         wrap={true}
                         pad='none'

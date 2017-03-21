@@ -87,7 +87,13 @@ export default CSSModules(class extends Component {
     }
     render () {
         return (
-            <div>
+            <div style={{
+                width: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'flex-start',
+                alignItems: 'center'
+            }}>
                 <Modal title="修改暱稱" visible={this.state.visible}
                   onOk={this.handleOk} onCancel={this.handleCancel}
                   footer={[]}>
@@ -106,11 +112,22 @@ export default CSSModules(class extends Component {
                         <div onClick={this.handleOk}>確定修改 confirm</div>
                     </div>
                 </Modal>
-                <div>
-                    Hello: {this.props.Session.AuthData.displayName} 你的暱稱: {this.state.nickName}
+                <div className="userInfoContainer">
+                    <div className="userInfo">
+                        <div className="imgContainer">
+                            <img src={this.props.Session.AuthData.photoURL} />
+                        </div>
+                        <div className="changeName" onClick={this.showModal}>點此修改暱稱</div>
+                        Hi 你的暱稱: {this.state.nickName}
+                    </div>
                 </div>
-                <br />
-                <div onClick={this.showModal}>點此修改暱稱</div>
+                {
+                    this.state.nickName !== 'no the same'
+                    ? null : <div className="postContainer">
+
+                             </div>
+                }
+
             </div>
         )
     }
