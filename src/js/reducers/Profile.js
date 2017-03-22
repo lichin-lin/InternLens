@@ -2,6 +2,7 @@ import { handleActions } from 'redux-actions'
 
 const initialState = {
     nickName: '',
+    isFavorite: false,
     favoriteList: [],
     messageList: []
 }

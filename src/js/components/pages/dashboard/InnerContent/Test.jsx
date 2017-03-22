@@ -9,13 +9,16 @@ import Label from 'grommet/components/Label'
 import Heading from 'grommet/components/Heading'
 import Value from 'grommet/components/Value'
 import Loading from 'react-loading'
-import { FacebookButton } from 'react-social'
+import { FacebookButton, FacebookCount } from 'react-social'
+import SocialFacebookIcon from 'grommet/components/icons/base/SocialFacebook'
+import FavoriteIcon from 'grommet/components/icons/base/Favorite'
 
 @Radium
 export default CSSModules(class MessageBox extends Component {
     constructor (props) {
         super(props)
         this.updatePropsToState = this.updatePropsToState.bind(this)
+        this.toggleFavorite = this.toggleFavorite.bind(this)
         this.state = {
             content: {},
             postId: 0
@@ -36,7 +39,9 @@ export default CSSModules(class MessageBox extends Component {
     componentWillReceiveProps (nextProps) {
         this.updatePropsToState(nextProps)
     }
-
+    toggleFavorite () {
+        this.props.toggleFavorite(this.props.params.id, this.props.Session.AuthData.uid)
+    }
     render () {
         if (_.size(this.state.content) === 0) {
             return (
@@ -70,20 +75,25 @@ export default CSSModules(class MessageBox extends Component {
                                     align='center'>
                                     {this.state.content['Name']}
                                 </Heading>
-                                <div onClick={() => { console.log(location.href) }}
-                                    style={{
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        cursor: 'pointer',
-                                        margin: '0 0 0 10px'
-                                    }}>
-                                    <FacebookButton
-                                        url={location.href}
-                                        appId={1230566186983478}>
-                                        {/* <FacebookCount url={location.href} /> */}
-                                        &nbsp;{'share'}
-                                    </FacebookButton>
-                                </div>
+                            </div>
+                            <div className="btn_section" style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                cursor: 'pointer',
+                                margin: '0 0 0 10px'
+                            }}>
+                                <FacebookButton
+                                    className="FBshare"
+                                    url={location.href}
+                                    appId={1230566186983478}>
+                                    <SocialFacebookIcon />
+                                    {'share'}&nbsp;&nbsp;&nbsp;
+                                    <FacebookCount url={location.href} />
+                                </FacebookButton>
+                                <button onClick={this.toggleFavorite}>
+                                    <FavoriteIcon />{this.props.Profile.isFavorite === true ? '取消蒐藏' : '蒐藏此篇'}
+                                </button>
                             </div>
                             <Label style={{
                                 margin: '12px'
