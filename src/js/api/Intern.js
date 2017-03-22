@@ -21,8 +21,20 @@ export default {
             return snapshot.val()
         })
     },
+    getUserFavorite: (id) => {
+        return firebase.database().ref('/favoriteMap').orderByChild('userId').equalTo(id.toString()).once('value').then(function (snapshot) {
+            console.log('[favorite] get single: ', id, ' val: ', snapshot.val())
+            return snapshot.val()
+        })
+    },
     getAllMessage: () => {
         return firebase.database().ref('/messageMap').orderByKey().once('value').then(function (snapshot) {
+            return snapshot.val()
+        })
+    },
+    getUserMessage: (id) => {
+        return firebase.database().ref('/messageMap').orderByChild('userId').equalTo(id.toString()).once('value').then(function (snapshot) {
+            console.log('[message] get single: ', id, ' val: ', snapshot.val())
             return snapshot.val()
         })
     },

@@ -7,7 +7,9 @@ export default {
     getInternList: createAction('GET_INTERNLIST', Api.Intern.getInternList),
     getSinglePost: createAction('GET_SINGLEPOST', Api.Intern.getSinglePost),
     getAllMessage: createAction('GET_ALLMESSAGE', Api.Intern.getAllMessage),
+    getUserMessage: createAction('GET_USERMESSAGE', Api.Intern.getUserMessage),
     getAllFavorite: createAction('GET_FAVORITE', Api.Intern.getAllFavorite),
+    getUserFavorite: createAction('GET_USERFAVORITE', Api.Intern.getUserFavorite),
     toggleFavorite: createAction('TOGGLE_FAVORITE', Api.Intern.toggleFavorite),
 
     getMessage: createAction('GET_MESSAGE', Api.Intern.getMessage),

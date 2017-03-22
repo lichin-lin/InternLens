@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import CSSModules from 'react-css-modules'
 import _ from 'lodash'
-
+import { Link } from 'react-router'
+import Dotdotdot from 'react-dotdotdot'
+import CSSModules from 'react-css-modules'
+import { Modal, Input, message } from 'antd'
 import FormField from 'grommet/components/FormField'
-
-import { Modal, Input } from 'antd'
 
 export default CSSModules(class extends Component {
     constructor (props) {
@@ -23,11 +23,16 @@ export default CSSModules(class extends Component {
     }
     showModal () {
         this.setState({
+            newNickName: this.state.nickName,
             visible: true
         })
     }
     handleOk (e) {
         console.log('handle ok: ', this.state.newNickName)
+        if (this.state.newNickName === null || this.state.newNickName === '') {
+            message.warning('新暱稱不能空白唷~')
+            return
+        }
         this.props.setNickName(this.state.id, this.state.newNickName)
         .then(() => {
             this.props.getNickName(this.state.id)
@@ -63,12 +68,14 @@ export default CSSModules(class extends Component {
         console.log(newProps)
     }
     componentDidUpdate () {
-        console.log('[state] did update')
+        // console.log('[state] did update')
         // this.setState({ nickName: this.props.Profile.nickName })
         if (this.state.id !== this.props.Session.AuthData.uid) {
             this.setState({
                 id: this.props.Session.AuthData.uid
             }, () => {
+                this.props.getUserFavorite(this.state.id)
+                this.props.getUserMessage(this.state.id)
                 this.props.getNickName(this.props.Session.AuthData.uid)
                 .then(() => {
                     console.log(this.props.Profile.nickName)
@@ -79,6 +86,14 @@ export default CSSModules(class extends Component {
 
         if (this.state.nickName !== this.props.Profile.nickName) {
             this.setState({ nickName: this.props.Profile.nickName })
+        }
+
+        if (_.size(this.props.Intern.list) === 0) {
+            // need fetch post
+            this.props.getInternList(0, 10)
+            .then(() => {
+                // start render to page
+            })
         }
     }
     componentWillReceiveProps (nextProps) {
@@ -114,7 +129,7 @@ export default CSSModules(class extends Component {
                 </Modal>
                 <div className="userInfoContainer">
                     <div className="userInfo">
-                        <div className="imgContainer">
+                        <div className="imgContainer" onClick={() => { this.props.getUserFavorite(this.state.id) }}>
                             <img src={this.props.Session.AuthData.photoURL} />
                         </div>
                         Hi 你的暱稱: {this.state.nickName}
@@ -122,12 +137,28 @@ export default CSSModules(class extends Component {
                     </div>
                 </div>
                 {
-                    this.state.nickName !== 'no the same'
+                    this.state.nickName === 'no the same'
                     ? null : <div className="postContainer">
-
+                                <ul>
+                                    <h2>喜愛文章</h2>
+                                    {
+                                        _.map(this.props.Profile.favoriteList, (el, id) =>
+                                            el === undefined
+                                            ? null
+                                            : this.props.Intern.list[el.postId] === undefined
+                                            ? null : <Link to={`/InternLens/dashboard/post/${el.postId}`}>
+                                                        <li key={id} className="favoritePost">
+                                                            <h3>{this.props.Intern.list[el.postId].Name} | <span>點擊查看心得文</span></h3>
+                                                            <Dotdotdot clamp={1}>
+                                                                <p>{this.props.Intern.list[el.postId].Review}</p>
+                                                            </Dotdotdot>
+                                                        </li>
+                                                     </Link>
+                                        )
+                                    }
+                                </ul>
                              </div>
                 }
-
             </div>
         )
     }

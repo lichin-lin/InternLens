@@ -30,7 +30,6 @@
             box-shadow: none !important
 
 .userInfoContainer
-    margin-top: 50px
     display: flex
     flex-direction: column
     align-items: center
@@ -57,4 +56,45 @@
     margin-top: 30px
     width: 90%
     max-width: 1024px
+    padding: 20px
+    border-radius: 2px
     border: 1px solid black
+    ul
+        margin: 0
+        h2
+            font-weight: bold !important
+        a
+            text-decoration: none!important
+            .favoritePost
+                margin-top: 10px
+                max-width: 100% !important
+                display: flex
+                flex-direction: column
+                align-items: flex-start
+                padding: 10px 20px
+                cursor: pointer
+                border-radius: 5px
+                background: white
+                transition: all 0.25s ease
+                h3
+                    font-weight: bold !important
+                    margin: 0 10px 0 0
+                    width: auto
+                    span
+                        font-size: 16px
+                        font-weight: normal
+                        color: #075ca6
+                        opacity: 0.75
+                p
+                    line-height: 2 !important
+                    margin: 0px !important
+                    max-width: 100% !important
+            &:hover
+                .favoritePost
+                    transition: all 0.25s ease
+                    background: #EFEFEF
+                    span,
+                    h3,
+                    p
+                        box-shadow: none !important
+                        text-decoration: none!important

@@ -33,7 +33,32 @@ export default handleActions({
             }
         }
     },
-
+    GET_USERFAVORITE: {
+        next (state, action) {
+            return {
+                ...state,
+                favoriteList: action.payload
+            }
+        },
+        throw (state, action) {
+            return {
+                favoriteList: []
+            }
+        }
+    },
+    GET_USERMESSAGE: {
+        next (state, action) {
+            return {
+                ...state,
+                messageList: action.payload
+            }
+        },
+        throw (state, action) {
+            return {
+                messageList: []
+            }
+        }
+    },
     default: (state, action) => {
         return {
             ...state

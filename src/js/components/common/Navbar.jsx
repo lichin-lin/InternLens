@@ -92,7 +92,7 @@ export default CSSModules(class extends Component {
                       <div onClick={this.GoogleLogin} className="GoogleSection"><SocialGooglePlusIcon size='large'/>Google</div>
                   </div>
                 </Modal>
-                <Title>
+                <Title onClick={() => { this.props.router.push('/InternLens/dashboard') }}>
                     InternLens
                 </Title>&nbsp;&nbsp;&nbsp;
                 <Box flex={true}
