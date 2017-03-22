@@ -6,7 +6,8 @@ const initialState = {
     favorite: {},
     totalMessage: {},
     postMessage: {},
-    isLoading: true
+    isLoading: true,
+    isFavorite: false
 }
 
 export default handleActions({
@@ -91,6 +92,19 @@ export default handleActions({
         },
         throw (state, { payload }) {
             console.log('qq favorite toggle')
+            return state
+        }
+    },
+    CHECK_FAVORITE: {
+        next (state, action) {
+            console.log(action)
+            return {
+                ...state,
+                isFavorite: action.payload
+            }
+        },
+        throw (state, { payload }) {
+            console.log('qq is favorite')
             return state
         }
     },

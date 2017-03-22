@@ -1,4 +1,5 @@
 import firebase from 'firebase'
+import _ from 'lodash'
 
 export default {
     getInternList: (startIndex, endIndex) => {
@@ -45,7 +46,7 @@ export default {
             temp = snapshot.val()
             snapshot.val().map((el, id) => {
                 if (postId.toString() === el.postId.toString() && userId.toString() === el.userId.toString()) {
-                    console.log('get target! ', id)
+                    console.log('get target and cancel! ', id)
                     targetIndex = id
                     temp.splice(targetIndex, 1)
                 }
@@ -54,11 +55,28 @@ export default {
         .then(() => {
             if (targetIndex < 0) {
                 // not found need update
+                console.log('no target and add!')
                 temp.push({'postId': postId, 'userId': userId})
             }
         })
         .then(() => {
             firebase.database().ref('/favoriteMap').set(temp)
+        })
+    },
+    checkFavorite: (postId, userId) => {
+        console.log('in action: checkFavorite: ', postId, userId)
+        let isFound = false
+        return firebase.database().ref('/favoriteMap').orderByChild('postId').equalTo(postId.toString()).once('value').then(function (snapshot) {
+            _.map(snapshot.val(), (el, id) => {
+                console.log('check list: ', el.postId, ', ', el.userId)
+                if (el.postId === postId && el.userId === userId) {
+                    console.log('## found!')
+                    isFound = true
+                    return isFound
+                }
+                return false
+            })
+            return isFound
         })
     },
     setLoading: () => {

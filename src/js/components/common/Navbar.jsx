@@ -4,6 +4,7 @@ import cookie from 'react-cookie'
 import Radium from 'radium'
 import _ from 'lodash'
 
+import { Link } from 'react-router'
 import Title from 'grommet/components/Title'
 import Box from 'grommet/components/Box'
 import Button from 'grommet/components/Button'
@@ -112,19 +113,27 @@ export default CSSModules(class extends Component {
                     <Button
                         label='懶人包'
                         plain={true}
+                        href="https://www.facebook.com/media/set/?set=oa.255202131603654&type=1"
+                        target="_blank"
                         onClick={() => { console.log('click') }}
                         style={{
                             color: '#676767',
                             opacity: '1'
                         }}/>
-                    <Button
-                        label='關於本站'
-                        plain={true}
-                        onClick={() => { console.log('click') }}
-                        style={{
-                            color: '#676767',
-                            opacity: '1'
-                        }}/>
+                        {_.size(this.props.currentUser) === 0
+                            ? null
+                            : <Link to={`/InternLens/setting`}>
+                                <Button
+                                    label='個人頁'
+                                    plain={true}
+                                    onClick={() => { console.log('click') }}
+                                    style={{
+                                        color: '#676767',
+                                        opacity: '1'
+                                    }}/>
+                                </Link>
+                        }
+
                     <Box flex={true}
                         justify='end'
                         direction='row'

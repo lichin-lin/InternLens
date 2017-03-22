@@ -21,7 +21,9 @@ export default CSSModules(class MessageBox extends Component {
         this.toggleFavorite = this.toggleFavorite.bind(this)
         this.state = {
             content: {},
-            postId: 0
+            postId: 0,
+            userId: -1,
+            isFavorite: false
         }
     }
     updatePropsToState (newProps) {
@@ -36,11 +38,32 @@ export default CSSModules(class MessageBox extends Component {
         this.props.getMessage(this.props.params.id)
         this.props.getSinglePost(this.props.params.id)
     }
+    componentWillMount () {
+    }
     componentWillReceiveProps (nextProps) {
         this.updatePropsToState(nextProps)
     }
+    componentDidUpdate () {
+        if (_.size(this.props.Session.AuthData) === 0) {
+            return
+        }
+        if (this.state.userId !== this.props.Session.AuthData.uid) {
+            this.setState({
+                userId: this.props.Session.AuthData.uid
+            }, () => {
+                this.props.checkFavorite(this.props.params.id, this.props.Session.AuthData.uid)
+                .then(() => {
+                    this.setState({isFavorite: this.props.Intern.isFavorite})
+                })
+            })
+        }
+    }
     toggleFavorite () {
         this.props.toggleFavorite(this.props.params.id, this.props.Session.AuthData.uid)
+        .then(() => {
+            let temp = this.state.isFavorite
+            this.setState({isFavorite: !temp})
+        })
     }
     render () {
         if (_.size(this.state.content) === 0) {
@@ -92,7 +115,9 @@ export default CSSModules(class MessageBox extends Component {
                                     <FacebookCount url={location.href} />
                                 </FacebookButton>
                                 <button onClick={this.toggleFavorite}>
-                                    <FavoriteIcon />{this.props.Profile.isFavorite === true ? '取消蒐藏' : '蒐藏此篇'}
+                                    <FavoriteIcon />
+                                    {/* {this.props.Profile.isFavorite === true ? '取消蒐藏' : '蒐藏此篇'} */}
+                                    {this.state.isFavorite === true ? '取消蒐藏' : '蒐藏此篇'}
                                 </button>
                             </div>
                             <Label style={{

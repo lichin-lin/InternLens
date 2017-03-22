@@ -11,7 +11,8 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = (dispatch) => ({
     getMessage: (id) => dispatch(Actions.Intern.getMessage(id)),
     getSinglePost: (id) => dispatch(Actions.Intern.getSinglePost(id)),
-    toggleFavorite: (pid, uid) => dispatch(Actions.Intern.toggleFavorite(pid, uid))
+    toggleFavorite: (pid, uid) => dispatch(Actions.Intern.toggleFavorite(pid, uid)),
+    checkFavorite: (pid, uid) => dispatch(Actions.Intern.checkFavorite(pid, uid))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Components.pages.dashboard.InnerContent.Test)

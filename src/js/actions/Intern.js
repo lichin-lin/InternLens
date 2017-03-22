@@ -11,6 +11,7 @@ export default {
     getAllFavorite: createAction('GET_FAVORITE', Api.Intern.getAllFavorite),
     getUserFavorite: createAction('GET_USERFAVORITE', Api.Intern.getUserFavorite),
     toggleFavorite: createAction('TOGGLE_FAVORITE', Api.Intern.toggleFavorite),
+    checkFavorite: createAction('CHECK_FAVORITE', Api.Intern.checkFavorite),
 
     getMessage: createAction('GET_MESSAGE', Api.Intern.getMessage),
     postMessage: createAction('POST_MESSAGE', Api.Intern.postMessage),
