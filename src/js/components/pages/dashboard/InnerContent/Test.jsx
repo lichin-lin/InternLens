@@ -8,8 +8,9 @@ import Box from 'grommet/components/Box'
 import Label from 'grommet/components/Label'
 import Heading from 'grommet/components/Heading'
 import Value from 'grommet/components/Value'
-
 import Loading from 'react-loading'
+import { FacebookButton } from 'react-social'
+
 @Radium
 export default CSSModules(class MessageBox extends Component {
     constructor (props) {
@@ -57,12 +58,33 @@ export default CSSModules(class MessageBox extends Component {
                                 padding: '50px 0px',
                                 margin: '0px'
                             }}>
-                          <Heading strong={true}
-                              uppercase={false}
-                              truncate={false}
-                              align='center'>
-                              {this.state.content['Name']}
-                          </Heading>
+                            <div style={{
+                                width: '100%',
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center'
+                            }}>
+                                <Heading strong={true}
+                                    uppercase={false}
+                                    truncate={false}
+                                    align='center'>
+                                    {this.state.content['Name']}
+                                </Heading>
+                                <div onClick={() => { console.log(location.href) }}
+                                    style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        cursor: 'pointer',
+                                        margin: '0 0 0 10px'
+                                    }}>
+                                    <FacebookButton
+                                        url{location.href}
+                                        appId={1230566186983478}>
+                                        <FacebookCount url={location.href} />
+                                        &nbsp;{'share'}
+                                    </FacebookButton>
+                                </div>
+                            </div>
                             <Label style={{
                                 margin: '12px'
                             }}>
