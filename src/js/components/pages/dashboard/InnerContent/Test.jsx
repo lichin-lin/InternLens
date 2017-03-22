@@ -78,9 +78,9 @@ export default CSSModules(class MessageBox extends Component {
                                         margin: '0 0 0 10px'
                                     }}>
                                     <FacebookButton
-                                        url{location.href}
+                                        url={location.href}
                                         appId={1230566186983478}>
-                                        <FacebookCount url={location.href} />
+                                        {/* <FacebookCount url={location.href} /> */}
                                         &nbsp;{'share'}
                                     </FacebookButton>
                                 </div>
