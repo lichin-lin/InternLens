@@ -9,7 +9,7 @@ import Box from 'grommet/components/Box'
 import Button from 'grommet/components/Button'
 import SocialFacebookIcon from 'grommet/components/icons/base/SocialFacebook'
 import SocialGooglePlusIcon from 'grommet/components/icons/base/SocialGooglePlus'
-import { Modal, message } from 'antd'
+import { Modal } from 'antd'
 
 @Radium
 export default CSSModules(class extends Component {
@@ -29,8 +29,13 @@ export default CSSModules(class extends Component {
         this.props.FBLogin().then((state) => {
             cookie.save('user', state.payload.user)
             if (state.payload.user !== undefined) {
-                this.setState({displayName: this.props.currentUser.user.displayName})
-                location.href = location.href
+                this.props.getNickName(this.props.currentUser.user.uid)
+                .then(() => {
+                    this.setState({displayName: this.props.Profile.nickName})
+                })
+                .then(() => {
+                    location.href = location.href
+                })
             }
         })
     }
@@ -46,7 +51,6 @@ export default CSSModules(class extends Component {
     showModal () {
         console.log(this.props)
         if (_.size(this.props.currentUser) !== 0) {
-            message.info('已經登入過了!')
             this.props.router.push('/InternLens/setting')
             return
         }
@@ -68,9 +72,15 @@ export default CSSModules(class extends Component {
     }
     componentWillMount () {
         let checkUser = cookie.load('user')
+        console.log(checkUser)
         if (checkUser !== undefined) {
             this.props.CookieLogin(checkUser)
-            this.setState({displayName: checkUser.displayName})
+            .then(() => {
+                this.props.getNickName(checkUser.uid)
+                .then(() => {
+                    this.setState({displayName: this.props.Profile.nickName})
+                })
+            })
         }
     }
     render () {

@@ -33,15 +33,14 @@ export default CSSModules(class extends Component {
             message.warning('新暱稱不能空白唷~')
             return
         }
+        if (this.state.newNickName === this.state.nickName) {
+            message.warning('新暱稱不能跟原本一樣喔~')
+            return
+        }
         this.props.setNickName(this.state.id, this.state.newNickName)
         .then(() => {
             this.props.getNickName(this.state.id)
-        })
-        .then(() => {
-            this.setState({
-                newNickName: '',
-                visible: false
-            })
+            location.href = location.href
         })
     }
     handleCancel (e) {
@@ -146,8 +145,8 @@ export default CSSModules(class extends Component {
                                             el === undefined
                                             ? null
                                             : this.props.Intern.list[el.postId] === undefined
-                                            ? null : <Link to={`/InternLens/dashboard/post/${el.postId}`}>
-                                                        <li key={id} className="favoritePost">
+                                            ? null : <Link key={id} to={`/InternLens/dashboard/post/${el.postId}`}>
+                                                        <li className="favoritePost">
                                                             <h3>{this.props.Intern.list[el.postId].Name} | <span>點擊查看心得文</span></h3>
                                                             <Dotdotdot clamp={1}>
                                                                 <p>{this.props.Intern.list[el.postId].Review}</p>
