@@ -173,7 +173,7 @@ export default CSSModules(class extends Component {
                       分享你的真實工時、薪資資訊，讓我們一起改善資訊不透明的現況
                     </Heading>
                       <div className="submitNewPost--contain">
-                          <a className="submitNewPost" target='_blank' href='https://goo.gl/forms/d5KcGBZ1A83G8sR73'>
+                          <a className="submitNewPost" target='_blank' href='https://goo.gl/forms/RJ395aQxaFzxoYFp2'>
                               <button>
                               提交實習心得
                               </button>

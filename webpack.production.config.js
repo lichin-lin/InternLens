@@ -14,7 +14,7 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].[chunkhash].js',
         chunkFilename: '[id].[chunkhash].js',
-        publicPath: require('./config.js').publicPath
+        publicPath: '/InternLens'
     },
     debug: false,
     devtool: false,
