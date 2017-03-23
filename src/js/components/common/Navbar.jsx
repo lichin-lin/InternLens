@@ -117,9 +117,9 @@ export default CSSModules(class extends Component {
                     direction='row'
                     className="menu"
                     size='small'>
-                    <div>
-                        {this.state.displayName}
-                    </div>
+                    <Anchor>
+                        Hi, {this.state.displayName}
+                    </Anchor>
                     {_.size(this.props.currentUser) === 0
                         ? <Anchor onClick={this.showModal}>
                             登入
@@ -133,6 +133,11 @@ export default CSSModules(class extends Component {
                     <Anchor href='https://www.facebook.com/media/set/?set=oa.255202131603654&type=1'>
                         懶人包
                     </Anchor>
+                    <Link to={`/InternLens/dashboard`}>
+                        <Anchor href='https://www.facebook.com/media/set/?set=oa.255202131603654&type=1'>
+                            回到首頁
+                        </Anchor>
+                    </Link>
                     <Anchor href='https://www.facebook.com/media/set/?set=oa.255202131603654&type=1'>
                         關於網站
                     </Anchor>
