@@ -103,7 +103,7 @@ export default CSSModules(class extends Component {
     componentWillMount () {
         this.props.setLoading()
         .then(() => {
-            return this.props.getInternList(0, 10)
+            return this.props.getInternList(0, 50)
         })
         .then(() => {
             return this.props.getAllFavorite()

@@ -79,9 +79,7 @@ export default CSSModules(class Inner extends Component {
     }
     render () {
         return (
-            <div style={{
-                width: '100%'
-            }}>
+            <div className="internBoxWrapper">
                 <Animate enter={{'animation': 'fade', 'duration': 700, 'delay': 0}}
                     keep={false}
                     style={{

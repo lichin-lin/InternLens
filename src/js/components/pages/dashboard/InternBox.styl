@@ -1,15 +1,19 @@
-.actionButton
-    display: flex
-    margin-left: 10px
-    > *
-        margin: 0 3px
-    span
-        margin-right: 10px
+.internBoxWrapper
+    width: 100%
+    .actionButton
+        display: flex
+        margin-left: 10px
+        > *
+            margin: 0 3px
+        span
+            margin-right: 10px
 
-.InternBox
-    @media screen and (max-width: 768px)
-        width: 100% !important
+    .InternBox
+        @media screen and (max-width: 768px)
+            width: 100% !important
 
-.grommetux-app--hidden
-    position: fixed
-    overflow: hidden !important
+    .grommetux-app--hidden
+        position: fixed
+        overflow: hidden !important
+    @media screen and (min-width: 768px)
+        width: 50%

@@ -104,7 +104,7 @@ export default CSSModules(class MessageBox extends Component {
                           name='agree'
                           checked={this.state.agreement}
                           onChange={this.toggleAgreement}
-                          label='我知道這是匿名留言，且我不謾罵並為言論負責' />
+                          label='我為我的匿名言論負責'/>
                       </FormField>
                     </fieldset>
                 <input className="submitBtn" type="submit" value="送出留言" />

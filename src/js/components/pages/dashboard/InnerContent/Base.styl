@@ -34,7 +34,7 @@ $md-size = 44.9375em
 
 .btn_section
     .FBshare,
-    button
+    .postFavorite
         border: 2px solid $FB !important
         background: $FB !important
         color: white !important
@@ -50,8 +50,14 @@ $md-size = 44.9375em
             height: 18px !important
             fill: white !important
             margin-right: 10px
-    button
+    .postFavorite
         border: 2px solid $love !important
-        background: $love !important
+        &.active
+            background: $love !important
+        &.disable
+            color: $love !important
+            background: transparent !important
+            svg
+                stroke: $love !important
         svg
             stroke: white !important

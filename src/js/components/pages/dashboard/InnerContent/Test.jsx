@@ -119,9 +119,9 @@ export default CSSModules(class MessageBox extends Component {
                                     {'share'}&nbsp;&nbsp;&nbsp;
                                     <FacebookCount url={location.href} />
                                 </FacebookButton>
-                                <button onClick={this.toggleFavorite}>
+                                <button className={this.state.isFavorite === true ? 'postFavorite active' : 'postFavorite disable'}
+                                    onClick={this.toggleFavorite}>
                                     <FavoriteIcon />
-                                    {/* {this.props.Profile.isFavorite === true ? '取消蒐藏' : '蒐藏此篇'} */}
                                     {this.state.isFavorite === true ? '取消蒐藏' : '蒐藏此篇'}
                                 </button>
                             </div>
