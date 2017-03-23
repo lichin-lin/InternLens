@@ -7,7 +7,10 @@ import _ from 'lodash'
 import { Link } from 'react-router'
 import Title from 'grommet/components/Title'
 import Box from 'grommet/components/Box'
+import Menu from 'grommet/components/Menu'
+import Anchor from 'grommet/components/Anchor'
 import Button from 'grommet/components/Button'
+import Actions from 'grommet/components/icons/base/Actions'
 import SocialFacebookIcon from 'grommet/components/icons/base/SocialFacebook'
 import SocialGooglePlusIcon from 'grommet/components/icons/base/SocialGooglePlus'
 import { Modal } from 'antd'
@@ -103,13 +106,51 @@ export default CSSModules(class extends Component {
                       <div onClick={this.GoogleLogin} className="GoogleSection"><SocialGooglePlusIcon size='large'/>Google</div>
                   </div>
                 </Modal>
-                <Title onClick={() => { this.props.router.push('/InternLens/dashboard') }}>
+                <Title className="title" onClick={() => { this.props.router.push('/InternLens/dashboard') }}>
                     InternLens
                 </Title>&nbsp;&nbsp;&nbsp;
+                <Menu responsive={true}
+                    primary={false}
+                    icon={<Actions />}
+                    label='InternLens'
+                    inline={false}
+                    direction='row'
+                    className="menu"
+                    size='small'>
+                    <div>
+                        {this.state.displayName}
+                    </div>
+                    {_.size(this.props.currentUser) === 0
+                        ? <Anchor onClick={this.showModal}>
+                            登入
+                        </Anchor>
+                        : <Link to={`/InternLens/setting`}>
+                            <Anchor>
+                                個人頁
+                            </Anchor>
+                        </Link>
+                    }
+                    <Anchor href='https://www.facebook.com/media/set/?set=oa.255202131603654&type=1'>
+                        懶人包
+                    </Anchor>
+                    <Anchor href='https://www.facebook.com/media/set/?set=oa.255202131603654&type=1'>
+                        關於網站
+                    </Anchor>
+                </Menu>
                 <Box flex={true}
                   justify='start'
                   direction='row'
+                  className='navbar'
                   responsive={false}>
+                    <Button label='關於'
+                        plain={true}
+                        href="https://www.facebook.com/media/set/?set=oa.255202131603654&type=1"
+                        target="_blank"
+                        onClick={() => { console.log('click') }}
+                        style={{
+                            color: '#676767',
+                            opacity: '1'
+                        }}/>
                     <Button
                         label='懶人包'
                         plain={true}

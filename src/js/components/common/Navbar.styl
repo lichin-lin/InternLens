@@ -32,3 +32,30 @@
         &:hover
             background: #dd4b39
             transition: all 0.35s ease
+
+.navbar
+    a
+        span
+            font-size: 16px
+    div
+        button
+            font-size: 16px
+
+.title,
+.navbar
+    @media screen and (max-width: 768px)
+        display: none !important
+
+.menu
+    button
+        span.grommetux-button__label
+            font-weight: bold
+            font-size: 24px
+    @media screen and (min-width: 768px)
+        display: none !important
+.grommet
+    &.grommetux-drop
+        button
+            span
+                font-weight: bold
+                font-size: 24px
