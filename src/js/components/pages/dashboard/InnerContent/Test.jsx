@@ -9,6 +9,7 @@ import Label from 'grommet/components/Label'
 import Heading from 'grommet/components/Heading'
 import Value from 'grommet/components/Value'
 import Loading from 'react-loading'
+import { message } from 'antd'
 import { FacebookButton, FacebookCount } from 'react-social'
 import SocialFacebookIcon from 'grommet/components/icons/base/SocialFacebook'
 import FavoriteIcon from 'grommet/components/icons/base/Favorite'
@@ -59,6 +60,10 @@ export default CSSModules(class MessageBox extends Component {
         }
     }
     toggleFavorite () {
+        if (_.size(this.props.Session.AuthData) === 0) {
+            message.warning('先登入才能把文章加入蒐藏唷', 3)
+            return
+        }
         this.props.toggleFavorite(this.props.params.id, this.props.Session.AuthData.uid)
         .then(() => {
             let temp = this.state.isFavorite
@@ -82,7 +87,7 @@ export default CSSModules(class MessageBox extends Component {
                         <div
                             style={{
                                 width: '100%',
-                                height: '100%',
+                                // height: '100%',
                                 padding: '50px 0px',
                                 margin: '0px'
                             }}>

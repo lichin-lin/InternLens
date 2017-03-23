@@ -75,8 +75,6 @@ export default CSSModules(class MessageBox extends Component {
                                             : null
                                         )
                                     }
-                                {/* </div>
-                                <div> */}
                                     {
                                         _.map(el.tags, (value, id) =>
                                             value === -1
@@ -85,7 +83,7 @@ export default CSSModules(class MessageBox extends Component {
                                         )
                                     }
                                 </div>
-                                <Paragraph size='medium' style={{ marginLeft: '6px', margin: '12px 0' }}>
+                                <Paragraph size='medium' style={{ marginLeft: '6px', margin: '12px 0', wordBreak: 'break-all' }}>
                                     {el.content}
                                 </Paragraph>
                             </div>

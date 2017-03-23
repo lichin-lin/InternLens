@@ -34,7 +34,7 @@
     "react-share": "^1.12.1",
     "react-social": "^1.8.0",
     "react-time": "^4.2.0",
-    "react-truncate": "^2.0.5",
+    "react-truncate": "^2.1.0",
     "redux-actions": "^0.12.0",
     "redux-promise": "^0.5.3",
     "redux-react-firebase": "^2.5.1",
@@ -95,7 +95,7 @@
   "scripts": {
     "start": "node server.js",
     "lint": "eslint src",
-    "build": "NODE_ENV=production webpack -p --progress  --config ./webpack.production.config.js --bail && sw-precache --config=sw-precache-config.js",
+    "build": "NODE_ENV=production webpack -p --progress  --config ./webpack.production.config.js --bail",
     "dev": "npm i && NODE_ENV=development node server.js"
   },
   "repository": {

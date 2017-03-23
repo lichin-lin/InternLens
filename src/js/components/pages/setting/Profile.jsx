@@ -147,7 +147,7 @@ export default CSSModules(class extends Component {
                                             : this.props.Intern.list[el.postId] === undefined
                                             ? null : <Link key={id} to={`/InternLens/dashboard/post/${el.postId}`}>
                                                         <li className="favoritePost">
-                                                            <h3>{this.props.Intern.list[el.postId].Name} | <span>點擊查看心得文</span></h3>
+                                                            <h3>{this.props.Intern.list[el.postId].Name} | <span>查看心得文</span></h3>
                                                             <Dotdotdot clamp={1}>
                                                                 <p>{this.props.Intern.list[el.postId].Review}</p>
                                                             </Dotdotdot>

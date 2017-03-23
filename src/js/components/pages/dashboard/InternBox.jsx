@@ -3,13 +3,14 @@ import CSSModules from 'react-css-modules'
 import Radium from 'radium'
 import _ from 'lodash'
 import { Link } from 'react-router'
-import Dotdotdot from 'react-dotdotdot'
+// import Dotdotdot from 'react-dotdotdot'
+import Truncate from 'react-truncate'
 
 import Card from 'grommet/components/Card'
 import Tile from 'grommet/components/Tile'
 import Anchor from 'grommet/components/Anchor'
 import Animate from 'grommet/components/Animate'
-
+import { message } from 'antd'
 import FavoriteIcon from 'grommet/components/icons/base/Favorite'
 import ContactIcon from 'grommet/components/icons/base/Contact'
 @Radium
@@ -61,6 +62,10 @@ export default CSSModules(class Inner extends Component {
         })
     }
     toggleFavorite () {
+        if (_.size(this.props.Session.AuthData) === 0) {
+            message.warning('先登入才能把文章加入蒐藏唷', 3)
+            return
+        }
         this.props.toggleFavorite(this.state.id, this.props.currentUserId)
         .then(() => {
             this.props.getAllFavorite()
@@ -74,7 +79,9 @@ export default CSSModules(class Inner extends Component {
     }
     render () {
         return (
-            <div>
+            <div style={{
+                width: '100%'
+            }}>
                 <Animate enter={{'animation': 'fade', 'duration': 700, 'delay': 0}}
                     keep={false}
                     style={{
@@ -83,11 +90,13 @@ export default CSSModules(class Inner extends Component {
                     <Tile className="InternBox" size='medium'>
                         <Card heading={this.state.information['Name'] !== undefined ? this.state.information['Name'] : null}
                             description={
-                                <Dotdotdot clamp={3}>
+                                // <Dotdotdot clamp={3}>
+                                <Truncate lines={10} ellipsis={<span>...</span>}>
                                     <div style={{lineHeight: '1.5', minHeight: '75px'}}>
                                         {this.state.information['Review'] !== undefined ? this.state.information['Review'] : null}
                                     </div>
-                                </Dotdotdot>
+                                </Truncate>
+                                // </Dotdotdot>
                             }
                             headingStrong={false}
                             link= {

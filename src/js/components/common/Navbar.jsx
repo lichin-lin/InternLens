@@ -117,9 +117,12 @@ export default CSSModules(class extends Component {
                     direction='row'
                     className="menu"
                     size='small'>
-                    <Anchor>
-                        Hi, {this.state.displayName}
-                    </Anchor>
+                    {_.size(this.props.currentUser) === 0
+                        ? null
+                        : <Anchor>
+                            Hi, {this.state.displayName}
+                        </Anchor>
+                    }
                     {_.size(this.props.currentUser) === 0
                         ? <Anchor onClick={this.showModal}>
                             登入

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { IndexRoute, Router, Route, browserHistory } from 'react-router'
+import { IndexRedirect, IndexRoute, Router, Route, browserHistory } from 'react-router'
 import store from './stores/Store'
 import { syncHistoryWithStore } from 'react-router-redux'
 import Containers from './containers'
@@ -11,6 +11,7 @@ export default class Root extends Component {
         return (
             <Router history={history}>
                 <Route path="/InternLens" component={Containers.App} >
+                    <IndexRedirect to="dashboard/" />
                     <Route path="dashboard">
                         <IndexRoute component={Containers.pages.dashboard.Base} />
                         <Route path="post/:id" component={Containers.pages.dashboard.InnerContent.Test} />

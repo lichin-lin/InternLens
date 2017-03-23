@@ -225,7 +225,7 @@ export default CSSModules(class extends Component {
                 <InfiniteScroll
                     pageStart={0}
                     loadMore={this.getMoreIntern}
-                    hasMore={true || false}
+                    hasMore={this.state.isListEnd === false}
                     loader={
                         <div className="loader" style={{display: 'flex', justifyContent: 'center'}}>
                             <Loading type='cylon' color='#50514F' />

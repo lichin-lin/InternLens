@@ -5,7 +5,8 @@ import Actions from 'js/actions'
 const mapStateToProps = (state, ownProps) => ({
     InternBoxContent: {
         ...ownProps
-    }
+    },
+    Session: state.Session
 })
 
 const mapDispatchToProps = (dispatch) => ({
