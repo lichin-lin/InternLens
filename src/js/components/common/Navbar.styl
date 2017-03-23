@@ -47,6 +47,8 @@
         display: none !important
 
 .menu
+    width: 100% !important
+    // z-index: 999 !important
     button
         span.grommetux-button__label
             font-weight: bold
@@ -55,7 +57,13 @@
         display: none !important
 .grommet
     &.grommetux-drop
+        z-index: 999 !important
         button
             span
                 font-weight: bold
                 font-size: 24px
+
+.ant-message-notice-content
+    padding: 20px 30px !important
+    font-size: 1.25em !important
+    // background: black

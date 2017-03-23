@@ -45,11 +45,11 @@ export default CSSModules(class MessageBox extends Component {
     handleSubmit (event) {
         event.preventDefault()
         if (this.props.Session.AuthData.uid === undefined) {
-            message.error('尚未登入無法留言唷')
+            message.error('尚未登入無法留言唷', 3)
             return
         }
         if (this.state.content === null || this.state.content === '' || this.state.agreement === false) {
-            message.warning('留言內容空白或是未同意留言合約')
+            message.warning('留言內容空白或是未同意留言合約', 3)
             return
         }
         this.props.postMessage(this.state)
