@@ -55,7 +55,8 @@ export default CSSModules(class extends Component {
     showModal () {
         console.log(this.props)
         if (_.size(this.props.currentUser) !== 0) {
-            this.props.router.push('/InternLens/setting')
+            // this.props.router.push('/InternLens/setting')
+            this.props.router.push('/setting')
             return
         }
         this.setState({
@@ -106,7 +107,10 @@ export default CSSModules(class extends Component {
                       <div onClick={this.GoogleLogin} className="GoogleSection"><SocialGooglePlusIcon size='large'/>Google</div>
                   </div>
                 </Modal>
-                <Title className="title" onClick={() => { this.props.router.push('/InternLens/dashboard') }}>
+                <Title className="title" onClick={() => {
+                        // this.props.router.push('/InternLens/dashboard')
+                        this.props.router.push('/dashboard') 
+                    }}>
                     InternLens
                 </Title>&nbsp;&nbsp;&nbsp;
                 <Menu responsive={true}
