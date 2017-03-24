@@ -13,6 +13,8 @@ import Animate from 'grommet/components/Animate'
 import { message } from 'antd'
 import FavoriteIcon from 'grommet/components/icons/base/Favorite'
 import ContactIcon from 'grommet/components/icons/base/Contact'
+import base from 'js/utils/config'
+
 @Radium
 export default CSSModules(class Inner extends Component {
     constructor (props) {
@@ -98,7 +100,7 @@ export default CSSModules(class Inner extends Component {
                             }
                             headingStrong={false}
                             link= {
-                                <Link to={`/InternLens/dashboard/post/${this.state.id}`}>
+                                <Link to={`${base}/dashboard/post/${this.state.id}`}>
                                     <Anchor
                                         // onClick={this.props.onClose}
                                         id={this.state.id.toString()}

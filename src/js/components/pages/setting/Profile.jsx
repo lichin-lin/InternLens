@@ -5,6 +5,7 @@ import Dotdotdot from 'react-dotdotdot'
 import CSSModules from 'react-css-modules'
 import { Modal, Input, message } from 'antd'
 import FormField from 'grommet/components/FormField'
+import base from 'js/utils/config'
 
 export default CSSModules(class extends Component {
     constructor (props) {
@@ -145,7 +146,7 @@ export default CSSModules(class extends Component {
                                             el === undefined
                                             ? null
                                             : this.props.Intern.list[el.postId] === undefined
-                                            ? null : <Link key={id} to={`/InternLens/dashboard/post/${el.postId}`}>
+                                            ? null : <Link key={id} to={`${base}/dashboard/post/${el.postId}`}>
                                                         <li className="favoritePost">
                                                             <h3>{this.props.Intern.list[el.postId].Name} | <span>查看心得文</span></h3>
                                                             <Dotdotdot clamp={1}>

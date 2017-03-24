@@ -15,6 +15,8 @@ import SocialFacebookIcon from 'grommet/components/icons/base/SocialFacebook'
 import SocialGooglePlusIcon from 'grommet/components/icons/base/SocialGooglePlus'
 import { Modal } from 'antd'
 
+import base from 'js/utils/config'
+
 @Radium
 export default CSSModules(class extends Component {
     constructor (props) {
@@ -108,9 +110,8 @@ export default CSSModules(class extends Component {
                   </div>
                 </Modal>
                 <Title className="title" onClick={() => {
-                        // this.props.router.push('/InternLens/dashboard')
-                        this.props.router.push('/dashboard') 
-                    }}>
+                    this.props.router.push(`${base}/dashboard`)
+                }}>
                     InternLens
                 </Title>&nbsp;&nbsp;&nbsp;
                 <Menu responsive={true}
@@ -131,7 +132,7 @@ export default CSSModules(class extends Component {
                         ? <Anchor onClick={this.showModal}>
                             登入
                         </Anchor>
-                        : <Link to={`/InternLens/setting`}>
+                        : <Link to={`${base}/setting`}>
                             <Anchor>
                                 個人頁
                             </Anchor>
@@ -140,7 +141,7 @@ export default CSSModules(class extends Component {
                     <Anchor href='https://www.facebook.com/media/set/?set=oa.255202131603654&type=1'>
                         懶人包
                     </Anchor>
-                    <Link to={`/InternLens/dashboard`}>
+                    <Link to={`${base}/dashboard`}>
                         <Anchor href='https://www.facebook.com/media/set/?set=oa.255202131603654&type=1'>
                             回到首頁
                         </Anchor>
@@ -175,7 +176,7 @@ export default CSSModules(class extends Component {
                         }}/>
                         {_.size(this.props.currentUser) === 0
                             ? null
-                            : <Link to={`/InternLens/setting`}>
+                            : <Link to={`${base}/setting`}>
                                 <Button
                                     label='個人頁'
                                     plain={true}
