@@ -110,7 +110,7 @@ export default CSSModules(class extends Component {
                   </div>
                 </Modal>
                 <Title className="title" onClick={() => {
-                    this.props.router.push(`${base}/dashboard`)
+                    this.props.router.push(`${base}/`)
                 }}>
                     InternLens
                 </Title>&nbsp;&nbsp;&nbsp;
@@ -141,7 +141,7 @@ export default CSSModules(class extends Component {
                     <Anchor target="_blank" href='https://www.facebook.com/media/set/?set=oa.255202131603654&type=1'>
                         懶人包
                     </Anchor>
-                    <Link to={`${base}/dashboard`}>
+                    <Link to={`${base}/`}>
                         <Anchor>
                             回到首頁
                         </Anchor>

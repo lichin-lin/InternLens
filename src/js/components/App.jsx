@@ -9,9 +9,6 @@ import Box from 'grommet/components/Box'
 
 @Radium
 export default CSSModules(class extends Component {
-    // componentDidMount () {
-    //     this.props.router.push('/InternLens/dashboard')
-    // }
     render () {
         return (
             <StyleRoot>
