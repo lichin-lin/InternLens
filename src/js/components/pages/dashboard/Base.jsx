@@ -196,7 +196,7 @@ export default CSSModules(class extends Component {
                     </Box>
                     <Box flex={true}
                       justify='center'
-                      direction='column'
+                      direction='row'
                       responsive={false}
                       style={{
                           margin: '30px 0 0 0',
@@ -212,13 +212,14 @@ export default CSSModules(class extends Component {
                         iconAlign='start'
                         placeHolder='輸入公司名稱'
                         onDOMChange={this.changeFilterInput}
-                        onKeyPress={this.startFilter}
                         responsive={false}
                         dropAlign={{'right': 'right'}}
                         style={{
                             border: '2px solid #50514F',
                             margin: '0 auto'
                         }} />
+                    <div className="searchBtn"
+                        onClick={this.startFilter}>搜尋</div>
                     </Box>
 
                 </Header>

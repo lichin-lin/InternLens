@@ -138,32 +138,46 @@ export default CSSModules(class extends Component {
                             </Anchor>
                         </Link>
                     }
-                    <Anchor href='https://www.facebook.com/media/set/?set=oa.255202131603654&type=1'>
+                    <Anchor target="_blank" href='https://www.facebook.com/media/set/?set=oa.255202131603654&type=1'>
                         懶人包
                     </Anchor>
                     <Link to={`${base}/dashboard`}>
-                        <Anchor href='https://www.facebook.com/media/set/?set=oa.255202131603654&type=1'>
+                        <Anchor>
                             回到首頁
                         </Anchor>
                     </Link>
-                    <Anchor href='https://www.facebook.com/media/set/?set=oa.255202131603654&type=1'>
-                        關於網站
-                    </Anchor>
+                    <Link to={`${base}/about`}>
+                        <Anchor>
+                            關於網站
+                        </Anchor>
+                    </Link>
+                    <Link to={`${base}/feedback`}>
+                        <Anchor>
+                            填寫回饋問卷
+                        </Anchor>
+                    </Link>
                 </Menu>
                 <Box flex={true}
                   justify='start'
                   direction='row'
                   className='navbar'
                   responsive={false}>
-                    <Button label='關於'
-                        plain={true}
-                        href="https://www.facebook.com/media/set/?set=oa.255202131603654&type=1"
-                        target="_blank"
-                        onClick={() => { console.log('click') }}
-                        style={{
-                            color: '#676767',
-                            opacity: '1'
-                        }}/>
+                    <Link to={`${base}/about`}>
+                        <Button label='關於網頁'
+                            plain={true}
+                            style={{
+                                color: '#676767',
+                                opacity: '1'
+                            }}/>
+                    </Link>
+                    <Link to={`${base}/feedback`}>
+                        <Button label='回饋問卷'
+                            plain={true}
+                            style={{
+                                color: '#676767',
+                                opacity: '1'
+                            }}/>
+                    </Link>
                     <Button
                         label='懶人包'
                         plain={true}

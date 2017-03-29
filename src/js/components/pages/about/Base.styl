@@ -1,0 +1,28 @@
+.aboutSection
+    width: 100%
+    max-width: 768px
+    padding: 20px
+    h3
+        margin-top: 30px !important
+        margin-bottom: 0px !important
+    li
+        list-style-type: none
+        max-width: 768px !important
+    p
+        max-width: 768px !important
+    li:before
+        content: "•" !important /* Insert content that looks like bullets */
+        padding-right: 8px !important
+        color: #50514F !important /* Or a color you prefer */
+    .innerList
+        margin-left: 2rem !important
+        li:before
+            color: #aaa !important /* Or a color you prefer */
+    .aboutSection
+        width: 100%
+        display: flex
+        flex-direction: column
+        justify-content: flex-start
+        align-items: center
+        @media screen and (max-width: 768px)
+            padding: 15px

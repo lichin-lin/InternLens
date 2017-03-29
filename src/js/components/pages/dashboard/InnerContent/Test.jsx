@@ -125,13 +125,19 @@ export default CSSModules(class MessageBox extends Component {
                                     {this.state.isFavorite === true ? '取消蒐藏' : '蒐藏此篇'}
                                 </button>
                             </div>
-                            <Label style={{
-                                margin: '12px'
+                            <div style={{
+                                display: 'flex',
+                                justifyContent: 'center'
                             }}>
-                                {this.state.content['Job_Title']}
-                                {(this.state.content['Job_Title'].length > 0 && this.state.content['Start_Year'].length > 0) ? ', ' : ''}
-                                {this.state.content['Start_Year']}
-                          </Label>
+                                <Label style={{
+                                    margin: '12px'
+                                }}>
+                                    {this.state.content['Job_Title']}
+                                    {(this.state.content['Job_Title'].length > 0 && this.state.content['Start_Year'].length > 0) ? ', ' : ''}
+                                    {this.state.content['Start_Year']}
+                                </Label>
+                            </div>
+
                           <div className="InnerTipsContain">
                                 {
                                     [

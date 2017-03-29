@@ -18,6 +18,8 @@ export default class Root extends Component {
                     </Route>
                     <Route path="favorite" component={Containers.pages.favorite.wishList} />
                     <Route path="setting" component={Containers.pages.setting.Profile} />
+                    <Route path="about" component={Containers.pages.about.Base} />
+                    <Route path="feedback" component={Containers.pages.about.Feedback} />
                 </Route>
             </Router>
         )
