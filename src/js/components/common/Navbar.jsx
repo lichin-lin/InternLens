@@ -138,12 +138,19 @@ export default CSSModules(class extends Component {
                             </Anchor>
                         </Link>
                     }
-                    <Anchor target="_blank" href='https://www.facebook.com/media/set/?set=oa.255202131603654&type=1'>
-                        懶人包
-                    </Anchor>
                     <Link to={`${base}/`}>
                         <Anchor>
-                            回到首頁
+                            Home
+                        </Anchor>
+                    </Link>
+                    <Link>
+                        <Anchor target="_blank" href='https://www.facebook.com/media/set/?set=oa.255202131603654&type=1'>
+                            懶人包
+                        </Anchor>
+                    </Link>
+                    <Link to={`${base}/about`}>
+                        <Anchor target="_blank" href='https://www.facebook.com/media/set/?set=oa.255202131603654&type=1'>
+                            FB社團
                         </Anchor>
                     </Link>
                     <Link to={`${base}/about`}>
@@ -173,6 +180,16 @@ export default CSSModules(class extends Component {
                     <Link to={`${base}/feedback`}>
                         <Button label='回饋問卷'
                             plain={true}
+                            style={{
+                                color: '#676767',
+                                opacity: '1'
+                            }}/>
+                    </Link>
+                    <Link>
+                        <Button label='FB社團'
+                            plain={true}
+                            target="_blank"
+                            href='https://www.facebook.com/groups/241235806333620/'
                             style={{
                                 color: '#676767',
                                 opacity: '1'

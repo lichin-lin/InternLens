@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import CSSModules from 'react-css-modules'
+import { Link } from 'react-router'
 
 import Box from 'grommet/components/Box'
 // import Logo from 'grommet/components/Logo'
@@ -9,6 +10,8 @@ import Footer from 'grommet/components/Footer'
 // import Paragraph from 'grommet/components/Paragraph'
 import SocialGithubIcon from 'grommet/components/icons/base/SocialGithub'
 import SocialFacebookIcon from 'grommet/components/icons/base/SocialFacebook'
+
+import base from 'js/utils/config'
 
 export default CSSModules(class extends Component {
     render () {
@@ -33,10 +36,14 @@ export default CSSModules(class extends Component {
                         <Anchor icon={<SocialGithubIcon />}
                             target="_blank"
                             href='https://github.com/internlens-tw/InternLens' />
-                        <p style={{
-                            margin: '5px 0',
-                            paddingTop: '5px'
-                        }}>© 2017 InternLens</p>
+                        <div className="footerText"
+                            style={{
+                                margin: '5px 0',
+                                paddingTop: '5px'
+                            }}>
+                            © 2017 InternLens
+                            <Link to={`${base}/about`}>使用條款</Link>
+                        </div>
                     </div>
                 </Box>
             </Footer>

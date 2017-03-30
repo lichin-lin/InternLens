@@ -20,6 +20,7 @@ export default class Root extends Component {
                     <Route path="setting" component={Containers.pages.setting.Profile} />
                     <Route path="about" component={Containers.pages.about.Base} />
                     <Route path="feedback" component={Containers.pages.about.Feedback} />
+                    <Route path="terms" component={Containers.pages.about.Terms} />
                 </Route>
             </Router>
         )
