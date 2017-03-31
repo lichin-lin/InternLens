@@ -16,4 +16,4 @@ const mapDispatchToProps = (dispatch) => ({
     getUserMessage: (id) => dispatch(Actions.Intern.getUserMessage(id))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Components.pages.setting.Profile)
+export default connect(mapStateToProps, mapDispatchToProps)(Components.pages.profile.Profile)

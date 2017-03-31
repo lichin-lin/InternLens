@@ -58,7 +58,7 @@ export default CSSModules(class extends Component {
         console.log(this.props)
         if (_.size(this.props.currentUser) !== 0) {
             // this.props.router.push('/InternLens/setting')
-            this.props.router.push('/setting')
+            this.props.router.push('/profile')
             return
         }
         this.setState({
@@ -104,10 +104,16 @@ export default CSSModules(class extends Component {
                 <Modal title="歡迎登入" visible={this.state.visible}
                   onOk={this.handleOk} onCancel={this.handleCancel}
                   footer={[]}>
-                  <div className="loginContain">
-                      <div onClick={this.FBLogin} className="FBSection"><SocialFacebookIcon size='large'/>Facebook</div>
-                      <div onClick={this.GoogleLogin} className="GoogleSection"><SocialGooglePlusIcon size='large'/>Google</div>
-                  </div>
+                    <div className="loginContain">
+                        <div onClick={this.FBLogin} className="FBSection"><SocialFacebookIcon size='large'/>Facebook</div>
+                        <div onClick={this.GoogleLogin} className="GoogleSection"><SocialGooglePlusIcon size='large'/>Google</div>
+                    </div>
+                    <div style={{
+                        margin: '20px 0 0',
+                        display: 'flex',
+                        justifyContent: 'flex-end'
+                    }}>* 登入即表示同意<Link onClick={this.handleOk} to={`${base}/terms`}><Anchor> 使用者條款與留言須知 </Anchor></Link></div>
+
                 </Modal>
                 <Title className="title" onClick={() => {
                     this.props.router.push(`${base}/`)
@@ -132,7 +138,7 @@ export default CSSModules(class extends Component {
                         ? <Anchor onClick={this.showModal}>
                             登入
                         </Anchor>
-                        : <Link to={`${base}/setting`}>
+                        : <Link to={`${base}/profile`}>
                             <Anchor>
                                 個人頁
                             </Anchor>
@@ -206,7 +212,7 @@ export default CSSModules(class extends Component {
                         }}/>
                         {_.size(this.props.currentUser) === 0
                             ? null
-                            : <Link to={`${base}/setting`} className="navbarLink">
+                            : <Link to={`${base}/profile`} className="navbarLink">
                                 <Button
                                     label='個人頁'
                                     plain={true}

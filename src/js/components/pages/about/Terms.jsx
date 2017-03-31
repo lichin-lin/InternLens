@@ -21,6 +21,21 @@ export default CSSModules(class extends Component {
                     ＊實習透視鏡團隊保留隨時因應需求修訂本協議之完整權利，您將會於本頁面或公告指定的頁面找到此協議的最新版本。
                     </Paragraph>
                     <Heading tag="h3">
+                        留言須知
+                    </Heading>
+                    <Paragraph>
+                        <li>留言採匿名制，但是都會確實記錄下每一位使用者的留言紀錄</li>
+                        <li>我們會保護留言並確保他人不會得知留言者的身分</li>
+                        <li>InternLens 是一個讓實習者與公司更瞭解彼此的平台，為了保護公司，我們有權在審查後刪除包含以下內容的帖子：
+                            <ul className="innerList">
+                                <li>評論包含太多個人偏見卻未附上相關事實描述</li>
+                                <li>無意義、情緒性的字詞與謾罵</li>
+                                <li>指名道姓的人身攻擊</li>
+                                <li>散佈公司機密資料或是偽造假消息</li>
+                            </ul>
+                        </li>
+                    </Paragraph>
+                    <Heading tag="h3">
                         註冊和帳號使用
                     </Heading>
                     <Paragraph>

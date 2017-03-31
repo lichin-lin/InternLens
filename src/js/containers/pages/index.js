@@ -1,10 +1,10 @@
 import dashboard from './dashboard'
 import favorite from './favorite'
-import setting from './setting'
+import profile from './profile'
 import about from './about'
 export default {
     dashboard,
     favorite,
-    setting,
+    profile,
     about
 }

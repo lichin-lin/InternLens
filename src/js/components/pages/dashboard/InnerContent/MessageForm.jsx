@@ -4,11 +4,14 @@ import Containers from 'js/containers'
 import Radium from 'radium'
 import _ from 'lodash'
 
+import { Link } from 'react-router'
 import { Timeline, Input, Icon, message } from 'antd'
 import Form from 'grommet/components/Form'
+import Anchor from 'grommet/components/Anchor'
 import FormField from 'grommet/components/FormField'
 import CheckBox from 'grommet/components/CheckBox'
 import 'antd/dist/antd.css'
+import base from 'js/utils/config'
 
 @Radium
 export default CSSModules(class MessageBox extends Component {
@@ -104,8 +107,14 @@ export default CSSModules(class MessageBox extends Component {
                           name='agree'
                           checked={this.state.agreement}
                           onChange={this.toggleAgreement}
-                          label='我為我的匿名言論負責'/>
+                          label='同意使用者條款與發言須知'/>
                       </FormField>
+                      <div style={{
+                          margin: '20px 0 0',
+                          display: 'flex',
+                          justifyContent: 'flex-end'
+                      }}>* 點此處查看<Link onClick={this.handleOk} to={`${base}/terms`}><Anchor> 使用者條款與留言須知 </Anchor></Link></div>
+
                     </fieldset>
                 <input className="submitBtn" type="submit" value="送出留言" />
                 </Form>
