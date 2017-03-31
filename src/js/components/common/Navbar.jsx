@@ -80,7 +80,7 @@ export default CSSModules(class extends Component {
     componentWillMount () {
         let checkUser = cookie.load('user')
         console.log(checkUser)
-        if (checkUser !== undefined) {
+        if (checkUser !== null && checkUser !== undefined) {
             this.props.CookieLogin(checkUser)
             .then(() => {
                 this.props.getNickName(checkUser.uid)
@@ -88,18 +88,22 @@ export default CSSModules(class extends Component {
                     this.setState({displayName: this.props.Profile.nickName})
                 })
             })
+            .then(() => {
+                // if we use cookie, we should no need FB,google redirect method.
+                return
+            })
+        } else {
+            this.props.FBRedirection()
+            .then((state) => {
+                if (state.payload !== null && state.payload !== undefined) {
+                    cookie.save('user', state.payload)
+                    this.props.getNickName(state.payload.uid)
+                    .then(() => {
+                        this.setState({displayName: this.props.Profile.nickName})
+                    })
+                }
+            })
         }
-        this.props.FBRedirection()
-        .then((state) => {
-            console.log('state: ', state)
-            cookie.save('user', state.payload)
-            if (state.payload !== undefined) {
-                this.props.getNickName(state.payload.uid)
-                .then(() => {
-                    this.setState({displayName: this.props.Profile.nickName})
-                })
-            }
-        })
     }
     render () {
         return (

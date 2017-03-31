@@ -109,55 +109,63 @@ export default CSSModules(class extends Component {
                 justifyContent: 'flex-start',
                 alignItems: 'center'
             }}>
-                <Modal title="修改暱稱" visible={this.state.visible}
-                  onOk={this.handleOk} onCancel={this.handleCancel}
-                  footer={[]}>
-                    <FormField label='更改暱稱'>
-                        <Input rows={1}
-                            size="large"
-                            type="text"
-                            placeholder=""
-                            value={this.state.newNickName}
-                            onChange={(event) => { this.setState({newNickName: event.target.value}) }}
-                            onPressEnter={this.handleOk}
-                            style={{borderRadius: '5px', fontSize: '20px'}} />
-                    </FormField>
-                    <div className="btnContainer">
-                        <div onClick={this.handleCancel}>放棄修改 cancel</div>
-                        <div onClick={this.handleOk}>確定修改 confirm</div>
-                    </div>
-                </Modal>
-                <div className="userInfoContainer">
-                    <div className="userInfo">
-                        <div className="imgContainer" onClick={() => { this.props.getUserFavorite(this.state.id) }}>
-                            <img src={this.props.Session.AuthData.photoURL} />
-                        </div>
-                        Hi 你的暱稱: {this.state.nickName}
-                        <div className="changeName" onClick={this.showModal}>點此修改暱稱</div>
-                    </div>
-                </div>
                 {
-                    this.state.nickName === 'no the same'
-                    ? null : <div className="postContainer">
-                                <ul>
-                                    <h2>喜愛文章</h2>
-                                    {
-                                        _.map(this.props.Profile.favoriteList, (el, id) =>
-                                            el === undefined
-                                            ? null
-                                            : this.props.Intern.list[el.postId] === undefined
-                                            ? null : <Link key={id} to={`${base}/post/${el.postId}`}>
-                                                        <li className="favoritePost">
-                                                            <h3>{this.props.Intern.list[el.postId].Name} | <span>查看心得文</span></h3>
-                                                            <Dotdotdot clamp={1}>
-                                                                <p>{this.props.Intern.list[el.postId].Review}</p>
-                                                            </Dotdotdot>
-                                                        </li>
-                                                     </Link>
-                                        )
-                                    }
-                                </ul>
-                             </div>
+                    _.size(this.props.Session.AuthData) === 0
+                    ? <div className="outerBeforeLogin">
+                        <img src="http://i.imgur.com/wwahyiK.png"/>
+                        <p>個人頁功能需要先登入才能查看唷</p>
+                      </div>
+                    : <div className="outerPostContainer"><Modal title="修改暱稱" visible={this.state.visible}
+                      onOk={this.handleOk} onCancel={this.handleCancel}
+                      footer={[]}>
+                        <FormField label='更改暱稱'>
+                            <Input rows={1}
+                                size="large"
+                                type="text"
+                                placeholder=""
+                                value={this.state.newNickName}
+                                onChange={(event) => { this.setState({newNickName: event.target.value}) }}
+                                onPressEnter={this.handleOk}
+                                style={{borderRadius: '5px', fontSize: '20px'}} />
+                        </FormField>
+                        <div className="btnContainer">
+                            <div onClick={this.handleCancel}>放棄修改 cancel</div>
+                            <div onClick={this.handleOk}>確定修改 confirm</div>
+                        </div>
+                    </Modal>
+                    <div className="userInfoContainer">
+                        <div className="userInfo">
+                            <div className="imgContainer" onClick={() => { this.props.getUserFavorite(this.state.id) }}>
+                                <img src={this.props.Session.AuthData.photoURL} />
+                            </div>
+                            Hi 你的暱稱: {this.state.nickName}
+                            <div className="changeName" onClick={this.showModal}>點此修改暱稱</div>
+                        </div>
+                    </div>
+                        {
+                            this.state.nickName === 'no the same'
+                            ? null : <div className="postContainer">
+                                        <ul>
+                                            <h2>喜愛文章</h2>
+                                            {
+                                                _.map(this.props.Profile.favoriteList, (el, id) =>
+                                                    el === undefined
+                                                    ? null
+                                                    : this.props.Intern.list[el.postId] === undefined
+                                                    ? null : <Link key={id} to={`${base}/post/${el.postId}`}>
+                                                                <li className="favoritePost">
+                                                                    <h3>{this.props.Intern.list[el.postId].Name} | <span>查看心得文</span></h3>
+                                                                    <Dotdotdot clamp={1}>
+                                                                        <p>{this.props.Intern.list[el.postId].Review}</p>
+                                                                    </Dotdotdot>
+                                                                </li>
+                                                             </Link>
+                                                )
+                                            }
+                                        </ul>
+                                     </div>
+                        }
+                    </div>
                 }
             </div>
         )

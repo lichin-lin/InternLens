@@ -37,8 +37,9 @@ export default CSSModules(class MessageBox extends Component {
     updatePropsToState (newProps) {
         console.log('in message form: ', newProps)
         this.setState({
-            postId: newProps.postId,
-            userId: newProps.userId
+            // postId: newProps.postId,
+            // userId: newProps.userId
+            postId: newProps.postId
         })
     }
     toggleAgreement () {
@@ -47,7 +48,7 @@ export default CSSModules(class MessageBox extends Component {
     }
     handleSubmit (event) {
         event.preventDefault()
-        if (this.props.Session.AuthData.uid === undefined) {
+        if (_.size(this.props.Session.AuthData) === 0 || this.props.Session.AuthData.uid === undefined) {
             message.error('尚未登入無法留言唷', 3)
             return
         }
@@ -55,7 +56,10 @@ export default CSSModules(class MessageBox extends Component {
             message.warning('留言內容空白或是未同意留言合約', 3)
             return
         }
-        this.props.postMessage(this.state)
+        this.props.postMessage({
+            ...this.state,
+            'userId': this.props.Session.AuthData.uid
+        })
         .then(() => {
             this.props.refreshMessage(this.state.postId)
         })

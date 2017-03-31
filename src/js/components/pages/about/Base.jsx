@@ -28,11 +28,11 @@ export default CSSModules(class extends Component {
                     <Paragraph>
                         「改變世界不是一個人做了很多，而是每個人都貢獻了一點點。」
                         <br/><br/>
-                        實習透視鏡是個年輕的團隊，我們知道有許多地方做還不夠好，所以我們需要大家的意見與幫忙。除了<a href="https://goo.gl/forms/RJ395aQxaFzxoYFp2" target="_blank">提交分享自己的實習心得</a>之外，你還可以花一點時間，<Link to={`${base}/feedback`}> 填網站回饋問卷 </Link>，留下自己對於平台的建議、以及可以改進的地方，或是你有什麼其他的建議以及想說的話，也歡迎到<a href='https://www.facebook.com/groups/241235806333620/' target='_blank'>實習透視鏡臉書社團</a>上跟大家討論，或是直接寫信和我們聯絡喔！
+                        實習透視鏡是個年輕的團隊，我們知道有許多地方做還不夠好，所以我們需要大家的意見與幫忙。除了<a href="https://goo.gl/forms/RJ395aQxaFzxoYFp2" target="_blank">提交分享自己的實習心得</a>之外，你還可以花一點時間，<Link to={`${base}/feedback`}> 填網站回饋問卷 </Link>，留下自己對於平台的建議、以及可以改進的地方，或是你有什麼其他的建議以及想說的話，也歡迎到<a href='https://www.facebook.com/groups/241235806333620/' target='_blank'>實習透視鏡臉書社團</a>上跟大家討論，或是直接<a href="mailto:internlens.tw@gmail.com">寫信</a>和我們聯絡喔！
                         <br/><br/>
                         台灣的實習環境需要勞資雙方及你我共同的努力，你一點一滴的意見都是讓台灣實習環境更好的動力。
                         <br/><br/>
-                        ＊熟悉 git 操作的朋友可以直接到我們的 GitHub repo 上回報 bugs 或是開設想要功能的 issue，你所許願的功能也許就會實現喔！ 也歡迎大家直接動手發 pull request～
+                        ＊熟悉 git 操作的朋友可以直接到我們的 <a href="https://github.com/internlens-tw/InternLens" target="_blank">GitHub repo</a> 上回報 bugs 或是開設想要功能的 issue，你所許願的功能也許就會實現喔！ 也歡迎大家直接動手發 pull request～
                     </Paragraph>
                 </Section>
                 <Section>
