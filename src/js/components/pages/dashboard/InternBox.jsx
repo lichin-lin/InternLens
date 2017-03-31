@@ -43,8 +43,8 @@ export default CSSModules(class Inner extends Component {
         _.map(newProps.FavoriteCount, (el) => {
             if (el.postId.toString() === newProps.id.toString()) {
                 nextFavoriteCounter += 1
-                if (newProps.currentUserId !== undefined) {
-                    if (el.userId.toString() === newProps.currentUserId.toString()) {
+                if (_.size(this.props.Session.AuthData) !== 0) {
+                    if (el.userId.toString() === this.props.Session.AuthData.uid.toString()) {
                         isFavorite = true
                     }
                 }
@@ -68,7 +68,7 @@ export default CSSModules(class Inner extends Component {
             message.warning('先登入才能把文章加入蒐藏唷', 3)
             return
         }
-        this.props.toggleFavorite(this.state.id, this.props.currentUserId)
+        this.props.toggleFavorite(this.state.id, this.props.Session.AuthData.uid)
         .then(() => {
             this.props.getAllFavorite()
         })
@@ -100,7 +100,9 @@ export default CSSModules(class Inner extends Component {
                             }
                             headingStrong={false}
                             link= {
-                                <Link to={`${base}/post/${this.state.id}`} target="_blank">
+                                <Link to={`${base}/post/${this.state.id}`}
+                                    // target="_blank"
+                                    >
                                     <Anchor
                                         // onClick={this.props.onClose}
                                         id={this.state.id.toString()}

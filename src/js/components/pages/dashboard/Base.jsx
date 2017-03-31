@@ -243,8 +243,7 @@ export default CSSModules(class extends Component {
                                         Content={intern}
                                         onClose={() => this.toggleWindowOpen(id)}
                                         FavoriteCount={this.props.Intern.favorite}
-                                        MessageCount={this.props.Intern.totalMessage}
-                                        currentUserId={this.props.Session.AuthData.uid}/>
+                                        MessageCount={this.props.Intern.totalMessage}/>
                         )
                     }
                     </Tiles>

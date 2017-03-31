@@ -9,6 +9,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     FBLogin: () => dispatch(Action.Session.FBLogin()),
+    FBRedirection: () => dispatch(Action.Session.FBRedirection()),
     GoogleLogin: () => dispatch(Action.Session.GoogleLogin()),
     CookieLogin: (data) => dispatch(Action.Session.CookieLogin(data)),
     getNickName: (id) => dispatch(Action.Intern.getNickName(id))

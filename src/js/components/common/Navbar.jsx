@@ -89,6 +89,17 @@ export default CSSModules(class extends Component {
                 })
             })
         }
+        this.props.FBRedirection()
+        .then((state) => {
+            console.log('state: ', state)
+            cookie.save('user', state.payload)
+            if (state.payload !== undefined) {
+                this.props.getNickName(state.payload.uid)
+                .then(() => {
+                    this.setState({displayName: this.props.Profile.nickName})
+                })
+            }
+        })
     }
     render () {
         return (
