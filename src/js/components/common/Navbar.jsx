@@ -148,7 +148,7 @@ export default CSSModules(class extends Component {
                             懶人包
                         </Anchor>
                     </Link>
-                    <Link to={`${base}/about`}>
+                    <Link>
                         <Anchor target="_blank" href='https://www.facebook.com/media/set/?set=oa.255202131603654&type=1'>
                             FB社團
                         </Anchor>
@@ -169,7 +169,7 @@ export default CSSModules(class extends Component {
                   direction='row'
                   className='navbar'
                   responsive={false}>
-                    <Link to={`${base}/about`}>
+                    <Link to={`${base}/about`} className="navbarLink">
                         <Button label='關於網頁'
                             plain={true}
                             style={{
@@ -177,7 +177,7 @@ export default CSSModules(class extends Component {
                                 opacity: '1'
                             }}/>
                     </Link>
-                    <Link to={`${base}/feedback`}>
+                    <Link to={`${base}/feedback`} className="navbarLink">
                         <Button label='回饋問卷'
                             plain={true}
                             style={{
@@ -185,19 +185,18 @@ export default CSSModules(class extends Component {
                                 opacity: '1'
                             }}/>
                     </Link>
-                    <Link>
-                        <Button label='FB社團'
-                            plain={true}
-                            target="_blank"
-                            href='https://www.facebook.com/groups/241235806333620/'
-                            style={{
-                                color: '#676767',
-                                opacity: '1'
-                            }}/>
-                    </Link>
+                    <Button label='FB社團'
+                        plain={true}
+                        target="_blank"
+                        href='https://www.facebook.com/groups/241235806333620/'
+                        style={{
+                            color: '#676767',
+                            opacity: '1'
+                        }}/>
                     <Button
                         label='懶人包'
                         plain={true}
+                        className="navbarLink"
                         href="https://www.facebook.com/media/set/?set=oa.255202131603654&type=1"
                         target="_blank"
                         onClick={() => { console.log('click') }}
@@ -207,7 +206,7 @@ export default CSSModules(class extends Component {
                         }}/>
                         {_.size(this.props.currentUser) === 0
                             ? null
-                            : <Link to={`${base}/setting`}>
+                            : <Link to={`${base}/setting`} className="navbarLink">
                                 <Button
                                     label='個人頁'
                                     plain={true}

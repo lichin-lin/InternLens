@@ -112,9 +112,9 @@ export default {
         return firebase.database().ref().update(updates)
     },
     getNickName: (uid) => {
-        return firebase.database().ref('/nameMap').orderByKey().equalTo(uid.toString()).once('value').then(function (snapshot) {
+        return firebase.database().ref('/nameMap/' + uid).once('value').then(function (snapshot) {
             console.log('in get nickname: ', snapshot.val())
-            return snapshot.val()[uid]['userName']
+            return snapshot.val()['userName']
         })
     }
 }
