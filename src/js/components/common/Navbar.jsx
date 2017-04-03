@@ -33,7 +33,9 @@ export default CSSModules(class extends Component {
     }
     FBLogin () {
         this.props.FBLogin().then((state) => {
-            cookie.save('user', state.payload.user)
+            const date = new Date()
+            date.setHours(date.getHours() + 1)
+            cookie.save('user', state.payload, {expires: date})
             if (state.payload.user !== undefined) {
                 this.props.getNickName(this.props.currentUser.user.uid)
                 .then(() => {
@@ -47,7 +49,9 @@ export default CSSModules(class extends Component {
     }
     GoogleLogin () {
         this.props.GoogleLogin().then((state) => {
-            cookie.save('user', state.payload.user)
+            let e = new Date()
+            e = new Date(e.getTime() + 1000 * 60 * 60)
+            cookie.save('user', state.payload, {expires: e})
             if (state.payload.user !== undefined) {
                 this.setState({displayName: this.props.currentUser.user.displayName})
                 location.href = location.href
@@ -56,7 +60,7 @@ export default CSSModules(class extends Component {
     }
     showModal () {
         console.log(this.props)
-        if (_.size(this.props.currentUser) !== 0) {
+        if (_.size(this.props.currentUser) !== 0 && this.props.currentUser !== 'undefined') {
             // this.props.router.push('/InternLens/setting')
             this.props.router.push('/profile')
             return
@@ -78,8 +82,8 @@ export default CSSModules(class extends Component {
         })
     }
     componentWillMount () {
-        let checkUser = cookie.load('user')
         console.log(checkUser)
+        let checkUser = cookie.load('user')
         if (checkUser !== null && checkUser !== undefined) {
             this.props.CookieLogin(checkUser)
             .then(() => {
@@ -93,9 +97,12 @@ export default CSSModules(class extends Component {
                 return
             })
         } else {
-            this.props.FBRedirection()
+            this.props.FirebaseRedirection()
             .then((state) => {
                 if (state.payload !== null && state.payload !== undefined) {
+                    // const date = new Date()
+                    // date.setHours(date.getHours() + 1)
+                    console.log('here: ', state)
                     cookie.save('user', state.payload)
                     this.props.getNickName(state.payload.uid)
                     .then(() => {

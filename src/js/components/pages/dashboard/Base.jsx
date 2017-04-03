@@ -170,7 +170,7 @@ export default CSSModules(class extends Component {
                       style={{
                           marginBottom: '10px'
                       }}>
-                      分享你的真實工時、薪資資訊，讓我們一起改善資訊不透明的現況
+                      實習透視鏡是全台灣最透明的實習經驗分享平台。
                     </Heading>
                       <div className="submitNewPost--contain">
                           <a className="submitNewPost" target='_blank' href='https://goo.gl/forms/RJ395aQxaFzxoYFp2'>

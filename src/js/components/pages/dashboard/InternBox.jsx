@@ -43,7 +43,7 @@ export default CSSModules(class Inner extends Component {
         _.map(newProps.FavoriteCount, (el) => {
             if (el.postId.toString() === newProps.id.toString()) {
                 nextFavoriteCounter += 1
-                if (_.size(this.props.Session.AuthData) !== 0) {
+                if (_.size(this.props.Session.AuthData) !== 0 && this.props.Session.AuthData !== 'undefined') {
                     if (el.userId.toString() === this.props.Session.AuthData.uid.toString()) {
                         isFavorite = true
                     }

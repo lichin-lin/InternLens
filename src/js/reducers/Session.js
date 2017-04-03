@@ -19,7 +19,7 @@ export default handleActions({
             }
         }
     },
-    FBRedirection: {
+    FirebaseRedirection: {
         next (state, action) {
             return {
                 ...state,

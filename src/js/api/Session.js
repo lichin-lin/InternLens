@@ -5,7 +5,7 @@ export default {
         var provider = new firebase.auth.FacebookAuthProvider()
         return firebase.auth().signInWithRedirect(provider)
     },
-    FBRedirection: function () {
+    FirebaseRedirection: function () {
         return firebase.auth().getRedirectResult().then(function (authData) {
             console.log(authData)
             return authData.user
@@ -18,6 +18,6 @@ export default {
     },
     GoogleLogin: function (data) {
         var provider = new firebase.auth.GoogleAuthProvider()
-        return firebase.auth().signInWithPopup(provider)
+        return firebase.auth().signInWithRedirect(provider)
     }
 }
