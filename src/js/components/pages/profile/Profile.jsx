@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import _ from 'lodash'
 import { Link } from 'react-router'
-import Dotdotdot from 'react-dotdotdot'
+// import Dotdotdot from 'react-dotdotdot'
+import Truncate from 'react-truncate'
+
 import CSSModules from 'react-css-modules'
 import { Modal, Input, message } from 'antd'
 import FormField from 'grommet/components/FormField'
@@ -155,9 +157,9 @@ export default CSSModules(class extends Component {
                                                     ? null : <Link key={id} to={`${base}/post/${el.postId}`}>
                                                                 <li className="favoritePost">
                                                                     <h3>{this.props.Intern.list[el.postId].Name} | <span>查看心得文</span></h3>
-                                                                    <Dotdotdot clamp={1}>
+                                                                    <Truncate lines={100} ellipsis={<span>...</span>}>
                                                                         <p>{this.props.Intern.list[el.postId].Review}</p>
-                                                                    </Dotdotdot>
+                                                                    </Truncate>
                                                                 </li>
                                                              </Link>
                                                 )
