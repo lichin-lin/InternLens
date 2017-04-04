@@ -7,7 +7,7 @@ export default {
         endIndex = endIndex.toString()
         // console.log(startIndex, endIndex)
         return firebase.database().ref('/list').orderByKey().startAt(startIndex).endAt(endIndex).once('value').then(function (snapshot) {
-            let returnArr = _.reverse(snapshot.val())
+            let returnArr = snapshot.val()
             return returnArr
         })
     },

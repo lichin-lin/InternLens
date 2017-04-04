@@ -28,6 +28,7 @@ export default CSSModules(class MessageBox extends Component {
         super(props)
         this.updatePropsToState = this.updatePropsToState.bind(this)
         this.refreshMessage = this.refreshMessage.bind(this)
+        this.renderMessageTagCounter = this.renderMessageTagCounter.bind(this)
         this.state = {
             id: 0,
             messageList: [],
@@ -38,12 +39,40 @@ export default CSSModules(class MessageBox extends Component {
     refreshMessage () {
         this.props.getMessage(this.state.id)
     }
+    renderMessageTagCounter (list) {
+        let pro = 0
+        let con = 0
+        this.props.setLoading()
+        .then(() => {
+            _.map(list, (el, id) => {
+                console.log('each post: ', el.tags)
+                if (el.tags !== undefined) {
+                    if (el.tags['dev'] === 1) {
+                        pro += 1
+                    } else if (el.tags['dev'] === -1) con += 1
+                    if (el.tags['jobs'] === 1) {
+                        pro += 1
+                    } else if (el.tags['jobs'] === -1) con += 1
+                    if (el.tags['money'] === 1) {
+                        pro += 1
+                    } else if (el.tags['money'] === -1) con += 1
+                }
+            })
+        })
+        .then(() => {
+            console.log(pro, con)
+            this.setState({
+                totalPros: pro,
+                totalCons: con
+            })
+        })
+    }
     updatePropsToState (newProps) {
         console.log(newProps)
         this.setState({
             id: newProps.id
         }, () => {
-            console.log(newProps.messageList)
+            this.renderMessageTagCounter(newProps.messageList)
         })
     }
     componentDidMount () {
@@ -65,7 +94,7 @@ export default CSSModules(class MessageBox extends Component {
                     style={{
                         marginBottom: '20px'
                     }}/>
-                {this.state.totalPros === 0 ? '尚無 ' : this.state.totalPros}正評, {this.state.totalCons === 0 ? '尚無 ' : this.state.totalCons}負評
+                <h4><b>{this.state.totalPros === 0 ? '尚無 ' : this.state.totalPros}正評標籤, {this.state.totalCons === 0 ? '尚無 ' : this.state.totalCons}負評標籤</b></h4>
                 <Timeline style={{width: '100%'}}>
                     {
                         _.map(this.props.messageList, (el, id) =>

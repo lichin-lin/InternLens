@@ -24,8 +24,8 @@ export default CSSModules(class Inner extends Component {
         this.state = {
             id: 1,
             information: {
-                'Name': 'Init',
-                'Review': 'init ii'
+                'Name': '公司名載入中',
+                'Review': '心得摘要載入中'
             },
             favoriteCount: 0,
             isFavorite: false,

@@ -61,7 +61,7 @@ export default CSSModules(class extends Component {
         })
     }
     toggleWindowOpen (id) {
-        console.log('toggle')
+        console.log('toggle: ', id)
         this.props.getMessage(id)
         .then(() => {
             this.setState({WindowContentIndex: id})
@@ -103,7 +103,7 @@ export default CSSModules(class extends Component {
     componentWillMount () {
         this.props.setLoading()
         .then(() => {
-            return this.props.getInternList(0, 50)
+            return this.props.getInternList(0, 400)
         })
         .then(() => {
             return this.props.getAllFavorite()
@@ -112,9 +112,11 @@ export default CSSModules(class extends Component {
             return this.props.getAllMessage()
         })
         .then(() => {
+            let reverseArr = _.reverse(_.values(this.props.Intern.list))
+            console.log(reverseArr)
             this.setState({
                 copyInternList: {
-                    ...this.props.Intern.list
+                    ...reverseArr
                 }
             })
         })
@@ -123,6 +125,7 @@ export default CSSModules(class extends Component {
         })
     }
     render () {
+        console.log('render reverse', this.state)
         return (
             <div style={{
                 width: '100%',
@@ -238,10 +241,10 @@ export default CSSModules(class extends Component {
                         _.map(this.state.renderInternList, (intern, id) =>
                             intern === undefined
                             ? null : <Containers.pages.dashboard.InternBox
-                                        id={id}
+                                        id={intern.ID}
                                         key={id}
                                         Content={intern}
-                                        onClose={() => this.toggleWindowOpen(id)}
+                                        onClose={() => this.toggleWindowOpen(intern.ID)}
                                         FavoriteCount={this.props.Intern.favorite}
                                         MessageCount={this.props.Intern.totalMessage}/>
                             )

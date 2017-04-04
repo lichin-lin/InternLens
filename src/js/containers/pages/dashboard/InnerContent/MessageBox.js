@@ -8,7 +8,8 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    getMessage: (id) => dispatch(Actions.Intern.getMessage(id))
+    getMessage: (id) => dispatch(Actions.Intern.getMessage(id)),
+    setLoading: () => dispatch(Actions.Intern.setLoading())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Components.pages.dashboard.InnerContent.MessageBox)

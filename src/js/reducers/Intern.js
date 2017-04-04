@@ -16,6 +16,7 @@ export default handleActions({
             let obj = action.payload
             if (Array.isArray(action.payload)) {
                 let arr = action.payload
+                console.log('in reducer')
                 obj = {}
                 for (let i = 0; i < arr.length; ++i) {
                     if (arr[i] === undefined) {
