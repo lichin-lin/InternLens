@@ -26,6 +26,7 @@ export default CSSModules(class MessageBox extends Component {
     constructor (props) {
         super(props)
         this.updatePropsToState = this.updatePropsToState.bind(this)
+        this.toggleHandler = this.toggleHandler.bind(this)
         this.state = {
             key: 'money',
             value: 0
@@ -36,6 +37,13 @@ export default CSSModules(class MessageBox extends Component {
             key: newProps.name,
             value: newProps.value
         })
+    }
+    toggleHandler (key, action) {
+        if (this.state.value === action) {
+            this.props.toggleTag(this.state.key, 0)
+        } else {
+            this.props.toggleTag(this.state.key, action)
+        }
     }
     componentDidMount () {
         this.updatePropsToState(this.props)
@@ -51,12 +59,12 @@ export default CSSModules(class MessageBox extends Component {
                  <b>{key2title[this.state.key]}:</b>
                 <CheckableTag
                   checked={this.state.value === 1}
-                  onChange={() => { this.props.toggleTag(this.state.key, 1) }}>
+                  onChange={() => { this.toggleHandler(this.state.key, 1) }}>
                   {key2good[this.state.key]}
                 </CheckableTag>
                 <CheckableTag
                   checked={this.state.value === -1}
-                  onChange={() => { this.props.toggleTag(this.state.key, -1) }}>
+                  onChange={() => { this.toggleHandler(this.state.key, -1) }}>
                   {key2bad[this.state.key]}
                 </CheckableTag>
             </div>

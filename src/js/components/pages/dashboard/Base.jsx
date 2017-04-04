@@ -244,7 +244,7 @@ export default CSSModules(class extends Component {
                                         onClose={() => this.toggleWindowOpen(id)}
                                         FavoriteCount={this.props.Intern.favorite}
                                         MessageCount={this.props.Intern.totalMessage}/>
-                        )
+                            )
                     }
                     </Tiles>
                 </InfiniteScroll>

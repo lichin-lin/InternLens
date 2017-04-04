@@ -30,7 +30,9 @@ export default CSSModules(class MessageBox extends Component {
         this.refreshMessage = this.refreshMessage.bind(this)
         this.state = {
             id: 0,
-            messageList: []
+            messageList: [],
+            totalPros: 0,
+            totalCons: 0
         }
     }
     refreshMessage () {
@@ -40,12 +42,16 @@ export default CSSModules(class MessageBox extends Component {
         console.log(newProps)
         this.setState({
             id: newProps.id
+        }, () => {
+            console.log(newProps.messageList)
         })
     }
     componentDidMount () {
+        console.log('receive did')
         this.updatePropsToState(this.props)
     }
     componentWillReceiveProps (nextProps) {
+        console.log('receive will')
         this.updatePropsToState(nextProps)
     }
     render () {
@@ -59,6 +65,7 @@ export default CSSModules(class MessageBox extends Component {
                     style={{
                         marginBottom: '20px'
                     }}/>
+                {this.state.totalPros === 0 ? '尚無 ' : this.state.totalPros}正評, {this.state.totalCons === 0 ? '尚無 ' : this.state.totalCons}負評
                 <Timeline style={{width: '100%'}}>
                     {
                         _.map(this.props.messageList, (el, id) =>
@@ -71,14 +78,14 @@ export default CSSModules(class MessageBox extends Component {
                                     {
                                         _.map(el.tags, (value, id) =>
                                             value === 1
-                                            ? <Tag color="#6FBFF4" key={id}>{key2good[id]}</Tag>
+                                            ? <Tag color="#6FBFF4" key={id} className="pros">{key2good[id]}</Tag>
                                             : null
                                         )
                                     }
                                     {
                                         _.map(el.tags, (value, id) =>
                                             value === -1
-                                            ? <Tag color="#F37996" key={id}>{key2bad[id]}</Tag>
+                                            ? <Tag color="#F37996" key={id} className="cons">{key2bad[id]}</Tag>
                                             : null
                                         )
                                     }

@@ -35,7 +35,6 @@ export default CSSModules(class MessageBox extends Component {
         }
     }
     updatePropsToState (newProps) {
-        console.log('in message form: ', newProps)
         this.setState({
             // postId: newProps.postId,
             // userId: newProps.userId
