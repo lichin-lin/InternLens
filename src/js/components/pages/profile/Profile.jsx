@@ -31,7 +31,6 @@ export default CSSModules(class extends Component {
         })
     }
     handleOk (e) {
-        console.log('handle ok: ', this.state.newNickName)
         if (this.state.newNickName === null || this.state.newNickName === '') {
             message.warning('新暱稱不能空白唷~')
             return
@@ -47,7 +46,6 @@ export default CSSModules(class extends Component {
         })
     }
     handleCancel (e) {
-        console.log('cancel', this.state)
         this.setState({
             newNickName: '',
             visible: false
@@ -57,7 +55,6 @@ export default CSSModules(class extends Component {
         this.setState({newNickName: event.target.value})
     }
     componentDidMount () {
-        console.log('[state] did mount')
         console.log(this.props.Session.AuthData)
         if (_.size(this.props.Session.AuthData) === 0) {
             console.log('not yet')

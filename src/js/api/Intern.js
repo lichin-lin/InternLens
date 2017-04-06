@@ -8,6 +8,7 @@ export default {
         // console.log(startIndex, endIndex)
         return firebase.database().ref('/list').orderByKey().startAt(startIndex).endAt(endIndex).once('value').then(function (snapshot) {
             let returnArr = snapshot.val()
+            console.log('get init list', returnArr)
             return returnArr
         })
     },

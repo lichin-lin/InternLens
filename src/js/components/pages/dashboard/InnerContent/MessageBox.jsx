@@ -45,7 +45,6 @@ export default CSSModules(class MessageBox extends Component {
         this.props.setLoading()
         .then(() => {
             _.map(list, (el, id) => {
-                console.log('each post: ', el.tags)
                 if (el.tags !== undefined) {
                     if (el.tags['dev'] === 1) {
                         pro += 1
@@ -60,7 +59,6 @@ export default CSSModules(class MessageBox extends Component {
             })
         })
         .then(() => {
-            console.log(pro, con)
             this.setState({
                 totalPros: pro,
                 totalCons: con
@@ -76,11 +74,9 @@ export default CSSModules(class MessageBox extends Component {
         })
     }
     componentDidMount () {
-        console.log('receive did')
         this.updatePropsToState(this.props)
     }
     componentWillReceiveProps (nextProps) {
-        console.log('receive will')
         this.updatePropsToState(nextProps)
     }
     render () {

@@ -7,7 +7,6 @@ export default {
     },
     FirebaseRedirection: function () {
         return firebase.auth().getRedirectResult().then(function (authData) {
-            console.log(authData)
             return authData.user
         }).catch(function (error) {
             console.log(error)

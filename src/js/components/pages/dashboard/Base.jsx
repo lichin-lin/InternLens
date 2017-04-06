@@ -113,7 +113,6 @@ export default CSSModules(class extends Component {
         })
         .then(() => {
             let reverseArr = _.reverse(_.values(this.props.Intern.list))
-            console.log(reverseArr)
             this.setState({
                 copyInternList: {
                     ...reverseArr
@@ -125,7 +124,6 @@ export default CSSModules(class extends Component {
         })
     }
     render () {
-        console.log('render reverse', this.state)
         return (
             <div style={{
                 width: '100%',

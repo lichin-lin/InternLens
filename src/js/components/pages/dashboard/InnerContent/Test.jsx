@@ -3,6 +3,7 @@ import CSSModules from 'react-css-modules'
 import Radium from 'radium'
 import Containers from 'js/containers'
 import _ from 'lodash'
+import DocumentMeta from 'react-document-meta'
 
 import Box from 'grommet/components/Box'
 import Label from 'grommet/components/Label'
@@ -76,11 +77,15 @@ export default CSSModules(class MessageBox extends Component {
                 <Loading type='cylon' color='#50514F' />
             )
         }
+        let meta = {
+            title: '實習透視鏡 InternLens | ' + this.state.content['Name']
+        }
         return (
             <div style={{
                 width: '100%',
                 maxWidth: '1024px'
             }}>
+                <DocumentMeta {...meta} />
                 <Box justify='start' align='center' wrap={false} pad='medium' margin='small'
                     className='BoxWrapper'>
                     {

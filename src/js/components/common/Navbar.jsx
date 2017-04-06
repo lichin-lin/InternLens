@@ -60,7 +60,6 @@ export default CSSModules(class extends Component {
         })
     }
     showModal () {
-        console.log(this.props)
         if (_.size(this.props.currentUser) !== 0 && this.props.currentUser !== 'undefined') {
             // this.props.router.push('/InternLens/setting')
             this.props.router.push('/profile')
@@ -80,13 +79,11 @@ export default CSSModules(class extends Component {
         // })
     }
     handleOk (e) {
-        console.log(e)
         this.setState({
             visible: false
         })
     }
     handleCancel (e) {
-        console.log(e)
         this.setState({
             visible: false
         })
@@ -112,7 +109,6 @@ export default CSSModules(class extends Component {
                 if (state.payload !== null && state.payload !== undefined) {
                     // const date = new Date()
                     // date.setHours(date.getHours() + 1)
-                    console.log('here: ', state)
                     cookie.save('user', state.payload)
                     this.props.getNickName(state.payload.uid)
                     .then(() => {
