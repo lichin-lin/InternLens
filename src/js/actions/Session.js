@@ -4,7 +4,7 @@ export default {
     FBLogin: createAction('FBLogin', Api.Session.FBLogin),
     FirebaseRedirection: createAction('FirebaseRedirection', Api.Session.FirebaseRedirection),
     GoogleLogin: createAction('GoogleLogin', Api.Session.GoogleLogin),
-    FBLogout: createAction('FBLogout', Api.Session.FBLogout),
+    AuthLogout: createAction('AuthLogout', Api.Session.AuthLogout),
     CookieLogin: createAction('CookieLogin', function (data) {
         return new Promise(function (resolve, reject) {
             resolve(data)

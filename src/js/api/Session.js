@@ -13,7 +13,7 @@ export default {
             console.log(error)
         })
     },
-    FBLogout: function (data) {
+    AuthLogout: function (data) {
         return firebase.auth().signOut()
     },
     GoogleLogin: function (data) {

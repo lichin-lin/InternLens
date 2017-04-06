@@ -26,6 +26,7 @@ export default CSSModules(class extends Component {
         this.handleOk = this.handleOk.bind(this)
         this.handleCancel = this.handleCancel.bind(this)
         this.showModal = this.showModal.bind(this)
+        this.logout = this.logout.bind(this)
         this.state = {
             displayName: '',
             visible: false
@@ -68,6 +69,15 @@ export default CSSModules(class extends Component {
         this.setState({
             visible: true
         })
+    }
+    logout () {
+        this.props.AuthLogout()
+        // .then(() => {
+        cookie.remove('user')
+        // })
+        // .then(() => {
+        location.href = location.href
+        // })
     }
     handleOk (e) {
         console.log(e)
@@ -191,6 +201,14 @@ export default CSSModules(class extends Component {
                             填寫回饋問卷
                         </Anchor>
                     </Link>
+                    {_.size(this.props.currentUser) === 0
+                        ? null
+                        : <Link>
+                            <Anchor onClick={this.logout}>
+                                登出
+                            </Anchor>
+                        </Link>
+                    }
                 </Menu>
                 <Box flex={true}
                   justify='start'
@@ -251,10 +269,19 @@ export default CSSModules(class extends Component {
                         direction='row'
                         responsive={false}>
                         <Button
-                            label={this.state.displayName === undefined || this.state.displayName.length <= 0
+                            label={_.size(this.props.currentUser) === 0
                                 ? '登入' : 'Hi! ' + this.state.displayName}
                             plain={true}
                             onClick={this.showModal}
+                            style={{
+                                color: '#676767',
+                                opacity: '1'
+                            }}/>
+                        <Button
+                            label={_.size(this.props.currentUser) === 0
+                                ? null : '登出'}
+                            plain={true}
+                            onClick={this.logout}
                             style={{
                                 color: '#676767',
                                 opacity: '1'

@@ -32,7 +32,7 @@ export default handleActions({
             }
         }
     },
-    FBLogout: {
+    AuthLogout: {
         next (state, action) {
             return {
                 ...state,

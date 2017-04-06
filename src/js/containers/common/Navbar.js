@@ -12,6 +12,7 @@ const mapDispatchToProps = (dispatch) => ({
     FirebaseRedirection: () => dispatch(Action.Session.FirebaseRedirection()),
     GoogleLogin: () => dispatch(Action.Session.GoogleLogin()),
     CookieLogin: (data) => dispatch(Action.Session.CookieLogin(data)),
+    AuthLogout: () => dispatch(Action.Session.AuthLogout()),
     getNickName: (id) => dispatch(Action.Intern.getNickName(id))
 })
 
