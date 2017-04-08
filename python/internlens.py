@@ -1,5 +1,5 @@
 #!/usr/bin/python
-
+# target link: https://docs.google.com/spreadsheets/d/1pTgvUcZoaVcrdiFRgow4PdAURbUaCGnszL853UntAew/export?format=csv&id=1pTgvUcZoaVcrdiFRgow4PdAURbUaCGnszL853UntAew&gid=138064684
 import sys, getopt
 import csv
 import json
@@ -32,6 +32,7 @@ def read_csv(file, json_file, format):
     with open(file) as csvfile:
         reader = csv.DictReader(csvfile)
         title = reader.fieldnames
+        print(title)
         for row in reader:
             csv_rows.extend([{title[i]:row[title[i]] for i in range(len(title))}])
         write_json(csv_rows, json_file, format)
