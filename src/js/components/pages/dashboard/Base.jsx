@@ -26,7 +26,7 @@ export default CSSModules(class extends Component {
             copyInternList: {},
             renderInternList: {},
             filterInput: '',
-            currentIndex: 1,
+            currentIndex: -1,
             oneQueryCount: 6,
             WindowContentIndex: 1,
             isWindowClose: true,
@@ -42,6 +42,7 @@ export default CSSModules(class extends Component {
         this.setState({currentIndex: 0})
         this.setState({isListEnd: false})
         let rowData = this.props.Intern.list
+        console.log('row', rowData)
         let filterData = {}
         _.map(rowData, (el, id) => {
             let flag = false
@@ -81,6 +82,7 @@ export default CSSModules(class extends Component {
         }
         let pushInList = {}
         let isEnd = 0
+        console.log('load: ', this.props.Intern.list)
         for (let count = 0; count < this.state.oneQueryCount; count++) {
             let t = this.state.currentIndex + count
             if (this.props.Intern.list[t] !== undefined) {
@@ -103,7 +105,7 @@ export default CSSModules(class extends Component {
     componentWillMount () {
         this.props.setLoading()
         .then(() => {
-            return this.props.getInternList(0, 400)
+            return this.props.getInternList(0, 500)
         })
         .then(() => {
             return this.props.getAllFavorite()
@@ -120,10 +122,12 @@ export default CSSModules(class extends Component {
             })
         })
         .then(() => {
+            console.log('component:', this.state.copyInternList)
             this.setState({isLoading: false})
         })
     }
     render () {
+        console.log('state: ', this.state)
         return (
             <div style={{
                 width: '100%',
