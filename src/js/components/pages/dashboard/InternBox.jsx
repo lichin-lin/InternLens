@@ -101,7 +101,7 @@ export default CSSModules(class Inner extends Component {
                             headingStrong={false}
                             link= {
                                 <Link to={`${base}/post/${this.state.id}`}
-                                    // target="_blank"
+                                    target="_blank"
                                     >
                                     <Anchor
                                         // onClick={this.props.onClose}

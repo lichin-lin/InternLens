@@ -22,6 +22,7 @@ export default CSSModules(class extends Component {
         this.toggleWindowClose = this.toggleWindowClose.bind(this)
         this.getMoreIntern = this.getMoreIntern.bind(this)
         this.startFilter = this.startFilter.bind(this)
+        this.handleKeyPress = this.handleKeyPress.bind(this)
         this.state = {
             copyInternList: {},
             renderInternList: {},
@@ -37,20 +38,23 @@ export default CSSModules(class extends Component {
     changeFilterInput (event) {
         this.setState({filterInput: event.target.value})
     }
+    handleKeyPress (event) {
+        if (event.key === 'Enter') {
+            this.startFilter()
+        }
+    }
     startFilter () {
         this.setState({renderInternList: {}})
         this.setState({currentIndex: 0})
         this.setState({isListEnd: false})
-        let rowData = this.props.Intern.list
-        console.log('row', rowData)
+        let rowData = _.reverse(_.values(this.props.Intern.list))
+        // console.log('row', rowData)
         let filterData = {}
         _.map(rowData, (el, id) => {
             let flag = false
-            _.map(el, (value) => {
-                if (value.toString().indexOf(this.state.filterInput) !== -1) {
-                    flag = true
-                }
-            })
+            if (el['Name'] !== undefined && el['Name'].toString().indexOf(this.state.filterInput) !== -1) {
+                flag = true
+            }
             if (flag) {
                 filterData[id] = el
             }
@@ -82,7 +86,7 @@ export default CSSModules(class extends Component {
         }
         let pushInList = {}
         let isEnd = 0
-        console.log('load: ', this.props.Intern.list)
+        // console.log('load: ', this.props.Intern.list)
         for (let count = 0; count < this.state.oneQueryCount; count++) {
             let t = this.state.currentIndex + count
             if (this.props.Intern.list[t] !== undefined) {
@@ -122,12 +126,11 @@ export default CSSModules(class extends Component {
             })
         })
         .then(() => {
-            console.log('component:', this.state.copyInternList)
+            // console.log('component:', this.state.copyInternList)
             this.setState({isLoading: false})
         })
     }
     render () {
-        console.log('state: ', this.state)
         return (
             <div style={{
                 width: '100%',
@@ -178,7 +181,7 @@ export default CSSModules(class extends Component {
                       實習透視鏡是全台灣最透明的實習經驗分享平台。
                     </Heading>
                       <div className="submitNewPost--contain">
-                          <a className="submitNewPost" target='_blank' href='https://goo.gl/forms/RJ395aQxaFzxoYFp2'>
+                          <a className="submitNewPost" target='_blank' href='https://goo.gl/forms/T4qXfrm2rhFC64cB2'>
                               <button>
                               提交實習心得
                               </button>
@@ -217,6 +220,7 @@ export default CSSModules(class extends Component {
                         iconAlign='start'
                         placeHolder='輸入公司名稱'
                         onDOMChange={this.changeFilterInput}
+                        onKeyPress={this.handleKeyPress}
                         responsive={false}
                         dropAlign={{'right': 'right'}}
                         style={{
@@ -240,7 +244,14 @@ export default CSSModules(class extends Component {
                     <Tiles fill={true}
                         flush={false}>
                     {
-                        _.map(this.state.renderInternList, (intern, id) =>
+                        (this.state.isLoading === false && _.size(this.state.copyInternList) === 0)
+                        ? <div style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            margin: '10vh 0'
+                        }}>搜尋無相關結果，試著換換關鍵字吧</div>
+                        : _.map(this.state.renderInternList, (intern, id) =>
                             intern === undefined
                             ? null : <Containers.pages.dashboard.InternBox
                                         id={intern.ID}

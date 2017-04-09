@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import CSSModules from 'react-css-modules'
-import Containers from 'js/containers'
+// import Containers from 'js/containers'
 import Radium from 'radium'
 import _ from 'lodash'
 
@@ -91,7 +91,7 @@ export default CSSModules(class MessageBox extends Component {
                         value={this.state.content}
                         onChange={(event) => { this.setState({content: event.target.value}) }}
                         style={{borderRadius: '5px', fontSize: '20px'}} />
-                    <div>
+                    {/* <div>
                         <div style={{
                             margin: '10px 0 20px 10px'
                         }}><strong>並選取以下符合的描述</strong>
@@ -103,7 +103,7 @@ export default CSSModules(class MessageBox extends Component {
                             value={value}
                             toggleTag={this.toggleTag}/>
                       ))}
-                    </div>
+                    </div> */}
                     <fieldset>
                       <FormField>
                         <CheckBox id='agree'

@@ -11,7 +11,6 @@ import Label from 'grommet/components/Label'
 import Button from 'grommet/components/Button'
 import Heading from 'grommet/components/Heading'
 import Value from 'grommet/components/Value'
-
 @Radium
 export default CSSModules(class Base extends Component {
     constructor (props) {

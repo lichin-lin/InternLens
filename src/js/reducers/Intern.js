@@ -14,7 +14,7 @@ export default handleActions({
     GET_INTERNLIST: {
         next (state, action) {
             let obj = action.payload
-            console.log('reducer: ', action.payload)
+            // console.log('reducer: ', action.payload)
             if (Array.isArray(action.payload)) {
                 let arr = action.payload
                 console.log('in reducer')
@@ -26,7 +26,7 @@ export default handleActions({
                     obj[arr[i]['ID']] = arr[i]
                 }
             }
-            console.log('reducer: ', obj)
+            // console.log('reducer: ', obj)
             _.assign(obj, {'name': 'test'})
             return {
                 ...state,

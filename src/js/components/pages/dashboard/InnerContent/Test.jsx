@@ -15,6 +15,7 @@ import { FacebookButton, FacebookCount } from 'react-social'
 import SocialFacebookIcon from 'grommet/components/icons/base/SocialFacebook'
 import FavoriteIcon from 'grommet/components/icons/base/Favorite'
 
+import Rater from 'react-rater'
 @Radium
 export default CSSModules(class MessageBox extends Component {
     constructor (props) {
@@ -155,7 +156,11 @@ export default CSSModules(class MessageBox extends Component {
                                                     {el.title}
                                                 </Heading>
                                             <Heading tag='h4' align='center'>
-                                                {el.content.length > 0 ? el.content : '發文者並未提供'}
+                                                {
+                                                    el.title === '綜合評價'
+                                                    ? el.content.length > 0 ? <Rater total={5} rating={parseInt(el.content)} interactive={false} /> : '發文者並未提供'
+                                                    : el.content.length > 0 ? el.content : '發文者並未提供'
+                                                }
                                             </Heading>
                                         </Box>
                                     )
