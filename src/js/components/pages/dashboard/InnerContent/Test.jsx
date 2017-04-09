@@ -202,6 +202,7 @@ export default CSSModules(class MessageBox extends Component {
                                 {
                                     [
                                         {'title': '實習長度', 'content': this.state.content['Duration']},
+                                        {'title': '實習招募資訊來源', 'content': this.state.content['Path']},
                                         {'title': '勞健保', 'content': this.state.content['Protection']},
                                         {'title': '給實習者建議', 'content': this.state.content['Advice']},
                                         {'title': '實習期間的內容對你的未來有幫助嗎(1分為完全沒幫助,5分是非常有幫助)', 'content': this.state.content['Future']},
