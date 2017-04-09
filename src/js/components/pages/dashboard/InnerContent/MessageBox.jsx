@@ -90,7 +90,7 @@ export default CSSModules(class MessageBox extends Component {
                     style={{
                         marginBottom: '20px'
                     }}/>
-                <h4><b>{this.state.totalPros === 0 ? '尚無 ' : this.state.totalPros}正評標籤, {this.state.totalCons === 0 ? '尚無 ' : this.state.totalCons}負評標籤</b></h4>
+                {/* <h4><b>{this.state.totalPros === 0 ? '尚無 ' : this.state.totalPros}正評標籤, {this.state.totalCons === 0 ? '尚無 ' : this.state.totalCons}負評標籤</b></h4> */}
                 <Timeline style={{width: '100%'}}>
                     {
                         _.map(this.props.messageList, (el, id) =>
