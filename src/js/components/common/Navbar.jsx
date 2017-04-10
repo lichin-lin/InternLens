@@ -128,6 +128,7 @@ export default CSSModules(class extends Component {
                 margin='none'
                 size='full'
                 full='horizontal'
+                className="navbarWarpper"
                 colorIndex='light-1'>
                 <Modal title="歡迎登入" visible={this.state.visible}
                   onOk={this.handleOk} onCancel={this.handleCancel}

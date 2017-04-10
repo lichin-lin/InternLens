@@ -176,9 +176,9 @@ export default CSSModules(class MessageBox extends Component {
                                 <Value value={'實習經歷'} colorIndex='accent-1' />
                                 {
                                     [
+                                        {'title': '實習長度', 'content': this.state.content['Duration']},
                                         {'title': '實習工作內容', 'content': this.state.content['Content']},
                                         {'title': '實習學到的技能', 'content': this.state.content['Study']},
-                                        {'title': '實際實習與當初招募的落差', 'content': this.state.content['Diff']},
                                         {'title': '實習總體心得', 'content': this.state.content['Review']},
                                         {'title': '你覺得實習合理嗎?', 'content': this.state.content['Reason']}
                                     ].map((el, id) =>
@@ -201,12 +201,13 @@ export default CSSModules(class MessageBox extends Component {
                                 <Value value={'其他補充'} colorIndex='accent-1' />
                                 {
                                     [
-                                        {'title': '實習長度', 'content': this.state.content['Duration']},
-                                        {'title': '實習招募資訊來源', 'content': this.state.content['Path']},
                                         {'title': '勞健保', 'content': this.state.content['Protection']},
-                                        {'title': '給實習者建議', 'content': this.state.content['Advice']},
+                                        {'title': '實習招募資訊來源', 'content': this.state.content['Path']},
+                                        {'title': '實際的實習經驗對照當初招募資訊差異程度 (1分為完全無差異,5分是差異很大)', 'content': this.state.content['Gap']},
+                                        {'title': '實際實習與當初招募的落差內容', 'content': this.state.content['Diff']},
                                         {'title': '實習期間的內容對你的未來有幫助嗎(1分為完全沒幫助,5分是非常有幫助)', 'content': this.state.content['Future']},
-                                        {'title': '實際的實習經驗對照當初招募資訊差異程度 (1分為完全沒幫助,5分是非常有幫助)', 'content': this.state.content['Future']}
+                                        {'title': '給實習者建議', 'content': this.state.content['Advice']}
+
                                     ].map((el, id) =>
                                         <Box key={id} direction='column' justify='start' align='start' wrap={true} pad='medium' margin='small'
                                             style={{
@@ -218,9 +219,11 @@ export default CSSModules(class MessageBox extends Component {
                                             </Heading>
                                             <Heading tag='h4' align='start'>
                                                 {
-                                                    el.title === '實習期間的內容對你的未來有幫助嗎(1分為完全沒幫助,5分是非常有幫助)' || el.title === '實際的實習經驗對照當初招募資訊差異程度 (1分為完全沒幫助,5分是非常有幫助)'
+                                                    el.title === '實習期間的內容對你的未來有幫助嗎(1分為完全沒幫助,5分是非常有幫助)'
                                                     ? el.content.length > 0 ? <Rater total={5} rating={parseInt(el.content)} interactive={false} /> : '發文者並未提供'
-                                                    : el.content.length > 0 ? el.content : '發文者並未提供'
+                                                    : (el.title === '實際的實習經驗對照當初招募資訊差異程度 (1分為完全無差異,5分是差異很大)'
+                                                        ? el.content.length > 0 ? <Rater total={5} rating={parseInt(el.content)} interactive={false} /> : '發文者並未提供'
+                                                            : el.content.length > 0 ? el.content : '發文者並未提供')
                                                 }
                                             </Heading>
                                         </Box>
