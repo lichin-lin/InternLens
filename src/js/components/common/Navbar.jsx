@@ -148,7 +148,7 @@ export default CSSModules(class extends Component {
                     this.props.router.push(`${base}/`)
                 }}>
                     InternLens
-                </Title>&nbsp;&nbsp;&nbsp;
+                </Title>
                 <Menu responsive={true}
                     primary={false}
                     icon={<Actions />}
