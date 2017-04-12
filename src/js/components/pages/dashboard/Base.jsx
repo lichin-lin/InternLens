@@ -147,7 +147,7 @@ export default CSSModules(class extends Component {
                     responsive={false}
                     style={{
                         padding: '100px 20px',
-                        background: '#A8E0FF',
+                        background: 'rgb(255, 231, 153)',
                         position: 'relative',
                         margin: '0',
                         width: '100%'
@@ -159,8 +159,8 @@ export default CSSModules(class extends Component {
                             height: '100%',
                             top: '0',
                             left: '0',
-                            opacity: '0.25',
-                            backgroundImage: 'url("http://i.imgur.com/KTwxuTh.png")',
+                            opacity: '0.35',
+                            backgroundImage: 'url("http://i.imgur.com/8wSPTs8.png")',
                             backgroundSize: 'cover',
                             backgroundPosition: 'center'
                         }}></div>
@@ -168,7 +168,10 @@ export default CSSModules(class extends Component {
                       truncate={false}
                       strong={true}
                       align='center'
-                      margin='none'>
+                      margin='none'
+                      style={{
+                          zIndex: '1'
+                      }}>
                       實習透視鏡
                     </Heading>
                     <Heading truncate={false}
@@ -176,9 +179,10 @@ export default CSSModules(class extends Component {
                       tag='h4'
                       margin='none'
                       style={{
-                          marginBottom: '10px'
+                          marginBottom: '10px',
+                          zIndex: '1'
                       }}>
-                      實習透視鏡是全台灣最透明的實習經驗分享平台。
+                      全台灣最透明的實習經驗分享平台。
                     </Heading>
                       <div className="submitNewPost--contain">
                           <a className="submitNewPost" target='_blank' href='https://goo.gl/forms/T4qXfrm2rhFC64cB2'>
@@ -187,20 +191,6 @@ export default CSSModules(class extends Component {
                               </button>
                           </a>
                         </div>
-                      {/* <Menu responsive={true}
-                        icon={<Actions />}
-                        label='排序'
-                        inline={false}
-                        primary={false}
-                        size='small'>
-                        <Anchor href='#'
-                          className='active'>
-                          人氣點閱
-                        </Anchor>
-                        <Anchor href='#'>
-                          最多留言
-                        </Anchor>
-                      </Menu> */}
                     </Box>
                     <Box flex={true}
                       justify='center'

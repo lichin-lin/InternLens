@@ -91,11 +91,21 @@ export default CSSModules(class Inner extends Component {
                         <Card heading={this.state.information['Name'] !== undefined ? this.state.information['Name'] : null}
                             description={
                                 // <Dotdotdot clamp={3}>
-                                <Truncate lines={10} ellipsis={<span>...</span>}>
-                                    <div style={{lineHeight: '1.5', minHeight: '75px'}}>
-                                        {this.state.information['Review'] !== undefined ? this.state.information['Review'] : null}
-                                    </div>
-                                </Truncate>
+                                <div style={{lineHeight: '1.5', minHeight: '75px'}}>
+                                    <Truncate lines={10} ellipsis={<span>...</span>}>
+                                            {this.state.information['Review'] !== undefined
+                                                ? this.state.information['Review'].split('\n').map((line, i, arr) => {
+                                                    const tmpLine = <span key={i}>{line}</span>
+                                                    if (i === arr.length - 1) {
+                                                        return tmpLine
+                                                    } else {
+                                                        return [tmpLine, <br key={i + 'br'} />]
+                                                    }
+                                                })
+                                                : null}
+
+                                    </Truncate>
+                                </div>
                                 // </Dotdotdot>
                             }
                             headingStrong={false}
