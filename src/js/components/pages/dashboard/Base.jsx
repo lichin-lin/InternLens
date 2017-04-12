@@ -160,7 +160,7 @@ export default CSSModules(class extends Component {
                             top: '0',
                             left: '0',
                             opacity: '0.35',
-                            backgroundImage: 'url("http://i.imgur.com/8wSPTs8.png")',
+                            backgroundImage: 'url("http://imgur.com/LnL7Cgr")',
                             backgroundSize: 'cover',
                             backgroundPosition: 'center'
                         }}></div>
