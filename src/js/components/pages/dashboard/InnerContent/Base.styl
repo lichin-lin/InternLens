@@ -1,0 +1,73 @@
+$FB = #3b5998
+$love = #E6734B
+$md-size = 44.9375em
+.grommetux-layer__container
+    width: 100%
+.BoxWrapper
+    min-height: 100vh
+    max-width: 100%
+    overflow-x: hidden
+    overflow-y: scroll
+// @media screen and (max-width: $md-size)
+.InnerTipsContain
+    padding: 0 !important
+    flex-direction: column !important
+    flex-wrap: nowrap !important
+    align-items: stretch !important
+    .InnerTips
+        position: relative
+        flex: 1
+        flex-basis: 33.3% !important
+        align-items: center !important
+        border: 3px solid #0AF
+        border-radius: 5px
+        box-sizing: content-box
+@media screen and (min-width: $md-size)
+    .InnerTipsContain
+        max-width: $md-size
+        flex-direction: row !important
+        margin: 0 auto !important
+        .InnerTips
+            flex-direction: column !important
+    .InnerBox
+        width: 50%
+        h4
+            word-break: break-all
+
+.btn_section
+    .FBshare,
+    .postFavorite
+        border: 2px solid $FB !important
+        background: $FB !important
+        color: white !important
+        border-radius: 5px !important
+        padding: 2.5px 10px !important
+        font-size: 14px !important
+        font-weight: normal !important
+        display: flex
+        align-items: center
+        margin: 0 5px
+        svg
+            width: 18px !important
+            height: 18px !important
+            fill: white !important
+            margin-right: 10px
+    .postFavorite
+        border: 2px solid $love !important
+        &.active
+            background: $love !important
+        &.disable
+            color: $love !important
+            background: transparent !important
+            svg
+                stroke: $love !important
+        svg
+            stroke: white !important
+
+
+.react-rater
+    a
+        color: #ddd !important
+        text-decoration: none !important
+    a.is-active
+        color: #F5BB00 !important

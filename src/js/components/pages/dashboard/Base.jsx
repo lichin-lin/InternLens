@@ -1,40 +1,36 @@
 import React, { Component } from 'react'
 import Containers from 'js/containers'
 import CSSModules from 'react-css-modules'
-import Dotdotdot from 'react-dotdotdot'
 import Radium from 'radium'
 import _ from 'lodash'
 
 import Box from 'grommet/components/Box'
-import Card from 'grommet/components/Card'
-import Menu from 'grommet/components/Menu'
-import Anchor from 'grommet/components/Anchor'
 import Search from 'grommet/components/Search'
 import Header from 'grommet/components/Header'
-import Actions from 'grommet/components/icons/base/Actions'
-import WorkshopIcon from 'grommet/components/icons/base/Workshop'
 import Tiles from 'grommet/components/Tiles'
-import Tile from 'grommet/components/Tile'
-import Button from 'grommet/components/Button'
-import Animate from 'grommet/components/Animate'
+import Heading from 'grommet/components/Heading'
+
+import Loading from 'react-loading'
+import InfiniteScroll from 'react-infinite-scroller'
 
 @Radium
 export default CSSModules(class extends Component {
     constructor (props) {
         super(props)
         this.changeFilterInput = this.changeFilterInput.bind(this)
+        this.toggleWindowOpen = this.toggleWindowOpen.bind(this)
         this.toggleWindowClose = this.toggleWindowClose.bind(this)
         this.getMoreIntern = this.getMoreIntern.bind(this)
         this.startFilter = this.startFilter.bind(this)
-        this.show = this.show.bind(this)
+        this.handleKeyPress = this.handleKeyPress.bind(this)
         this.state = {
             copyInternList: {},
             renderInternList: {},
             filterInput: '',
-            currentIndex: 1,
-            oneQueryCount: 5,
-            isWindowClose: true,
+            currentIndex: -1,
+            oneQueryCount: 6,
             WindowContentIndex: 1,
+            isWindowClose: true,
             isLoading: true,
             isListEnd: false
         }
@@ -42,22 +38,23 @@ export default CSSModules(class extends Component {
     changeFilterInput (event) {
         this.setState({filterInput: event.target.value})
     }
+    handleKeyPress (event) {
+        if (event.key === 'Enter') {
+            this.startFilter()
+        }
+    }
     startFilter () {
-        // if (this.state.filterInput === '') {
-        //     return
-        // }
         this.setState({renderInternList: {}})
         this.setState({currentIndex: 0})
         this.setState({isListEnd: false})
-        let rowData = this.props.Intern.list
+        let rowData = _.reverse(_.values(this.props.Intern.list))
+        // console.log('row', rowData)
         let filterData = {}
         _.map(rowData, (el, id) => {
             let flag = false
-            _.map(el, (value) => {
-                if (value.toString().indexOf(this.state.filterInput) !== -1) {
-                    flag = true
-                }
-            })
+            if (el['Name'] !== undefined && el['Name'].toString().indexOf(this.state.filterInput) !== -1) {
+                flag = true
+            }
             if (flag) {
                 filterData[id] = el
             }
@@ -67,18 +64,18 @@ export default CSSModules(class extends Component {
                 ...filterData
             }
         })
-        console.log(filterData)
     }
     toggleWindowOpen (id) {
-        console.log(id)
-        this.setState({WindowContentIndex: id})
-        this.setState({isWindowClose: !this.state.isWindowClose})
+        console.log('toggle: ', id)
+        this.props.getMessage(id)
+        .then(() => {
+            this.setState({WindowContentIndex: id})
+            this.setState({isWindowClose: !this.state.isWindowClose})
+        })
     }
     toggleWindowClose () {
+        console.log('toggle close')
         this.setState({isWindowClose: !this.state.isWindowClose})
-    }
-    show () {
-        console.log(this.state)
     }
     getMoreIntern () {
         if (this.state.isListEnd === true) {
@@ -89,6 +86,7 @@ export default CSSModules(class extends Component {
         }
         let pushInList = {}
         let isEnd = 0
+        // console.log('load: ', this.props.Intern.list)
         for (let count = 0; count < this.state.oneQueryCount; count++) {
             let t = this.state.currentIndex + count
             if (this.props.Intern.list[t] !== undefined) {
@@ -111,99 +109,157 @@ export default CSSModules(class extends Component {
     componentWillMount () {
         this.props.setLoading()
         .then(() => {
-            return this.props.getInternList(0, 10)
+            return this.props.getInternList(0, 500)
         })
         .then(() => {
+            return this.props.getAllFavorite()
+        })
+        .then(() => {
+            return this.props.getAllMessage()
+        })
+        .then(() => {
+            let reverseArr = _.reverse(_.values(this.props.Intern.list))
             this.setState({
                 copyInternList: {
-                    ...this.props.Intern.list
+                    ...reverseArr
                 }
             })
         })
         .then(() => {
+            // console.log('component:', this.state.copyInternList)
             this.setState({isLoading: false})
         })
     }
     render () {
         return (
             <div style={{
-                'width': '100%'
+                width: '100%',
+                maxWidth: '1024px'
             }}>
-                <Header>
+                <Header style={{
+                    marginBottom: '50px',
+                    display: 'flex',
+                    flexDirection: 'column'
+                }}>
                   <Box flex={true}
                     justify='end'
-                    direction='row'
-                    responsive={false}>
-                    <Menu responsive={true}
-                      icon={<Actions />}
-                      label='排序'
-                      inline={false}
-                      primary={false}
-                      onClick={this.show}
-                      size='small'>
-                      <Anchor href='#'
-                        className='active'>
-                        人氣點閱
-                      </Anchor>
-                      <Anchor href='#'>
-                        最多留言
-                      </Anchor>
-                    </Menu>
-                    <Search inline={true}
-                      fill={true}
-                      size='small'
-                      value={this.state.filterInput}
-                      iconAlign='start'
-                      placeHolder='使用透視鏡!'
-                      onDOMChange={this.changeFilterInput}
-                      dropAlign={{'right': 'right'}} />
+                    direction='column'
+                    responsive={false}
+                    style={{
+                        padding: '100px 20px',
+                        background: 'rgb(255, 231, 153)',
+                        position: 'relative',
+                        margin: '0',
+                        width: '100%'
+                    }}>
+                    <div
+                        style={{
+                            position: 'absolute',
+                            width: '100%',
+                            height: '100%',
+                            top: '0',
+                            left: '0',
+                            opacity: '0.35',
+                            backgroundImage: 'url("http://i.imgur.com/8wSPTs8.png")',
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center'
+                        }}></div>
+                    <Heading uppercase={true}
+                      truncate={false}
+                      strong={true}
+                      align='center'
+                      margin='none'
+                      style={{
+                          zIndex: '1'
+                      }}>
+                      實習透視鏡
+                    </Heading>
+                    <Heading truncate={false}
+                      align='center'
+                      tag='h4'
+                      margin='none'
+                      style={{
+                          marginBottom: '10px',
+                          zIndex: '1'
+                      }}>
+                      全台灣最透明的實習經驗分享平台。
+                    </Heading>
+                      <div className="submitNewPost--contain">
+                          <a className="submitNewPost" target='_blank' href='https://goo.gl/forms/T4qXfrm2rhFC64cB2'>
+                              <button>
+                              提交實習心得
+                              </button>
+                          </a>
+                        </div>
                     </Box>
-                    <Button
-                        icon={<WorkshopIcon />}
-                        label='查詢'
-                        plain={true}
-                        onClick={this.startFilter}/>
+                    <Box flex={true}
+                      justify='center'
+                      direction='row'
+                      responsive={false}
+                      style={{
+                          margin: '30px 0 0 0',
+                          padding: '0 15px',
+                          position: 'relative',
+                          width: '100%',
+                          maxWidth: '1024px'
+                      }}>
+                      <Search inline={true}
+                        fill={true}
+                        size='small'
+                        value={this.state.filterInput}
+                        iconAlign='start'
+                        placeHolder='輸入公司名稱'
+                        onDOMChange={this.changeFilterInput}
+                        onKeyPress={this.handleKeyPress}
+                        responsive={false}
+                        dropAlign={{'right': 'right'}}
+                        style={{
+                            border: '2px solid #50514F',
+                            margin: '0 auto'
+                        }} />
+                    <div className="searchBtn"
+                        onClick={this.startFilter}>搜尋</div>
+                    </Box>
+
                 </Header>
-                <Tiles fill={true}
-                    flush={false}
-                    onMore={this.getMoreIntern}>
-                {
-                    // this.props.Intern.list.filter(this.isSearchMatch).map((intern, id) =>
-                    _.map(this.state.renderInternList, (intern, id) =>
-                        intern === undefined
-                        ? null : <Animate key={id} enter={{'animation': 'fade', 'duration': 700, 'delay': 0}}
-                            keep={false}>
-                            <Tile size='medium'>
-                                <Card heading={intern['Name']}
-                                    description={
-                                        <Dotdotdot clamp={3}>
-                                            <div style={{lineHeight: '1.5', minHeight: '75px'}}>
-                                                {intern['Review']}
-                                            </div>
-                                        </Dotdotdot>
-                                    }
-                                    headingStrong={false}
-                                    link= {
-                                        <Anchor
-                                            onClick={this.toggleWindowOpen.bind(this, id)}
-                                            id={id}
-                                            label='查看心得全文'
-                                            style={{
-                                                marginTop: '10px'
-                                            }} />
-                                    }
-                                    style={{
-                                        width: '100%'
-                                    }}/>
-                            </Tile>
-                        </Animate>
-                    )
-                }
-                </Tiles>
-                <Containers.pages.dashboard.Inner
+                <InfiniteScroll
+                    pageStart={0}
+                    loadMore={this.getMoreIntern}
+                    hasMore={this.state.isListEnd === false}
+                    loader={
+                        <div className="loader" style={{display: 'flex', justifyContent: 'center'}}>
+                            <Loading type='cylon' color='#50514F' />
+                        </div>}
+                >
+                    <Tiles fill={true}
+                        flush={false}>
+                    {
+                        (this.state.isLoading === false && _.size(this.state.copyInternList) === 0)
+                        ? <div style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            margin: '10vh 0'
+                        }}>搜尋無相關結果，試著換換關鍵字吧</div>
+                        : _.map(this.state.renderInternList, (intern, id) =>
+                            intern === undefined
+                            ? null : <Containers.pages.dashboard.InternBox
+                                        id={intern.ID}
+                                        key={id}
+                                        Content={intern}
+                                        onClose={() => this.toggleWindowOpen(intern.ID)}
+                                        FavoriteCount={this.props.Intern.favorite}
+                                        MessageCount={this.props.Intern.totalMessage}/>
+                            )
+                    }
+                    </Tiles>
+                </InfiniteScroll>
+                <Containers.pages.dashboard.InnerContent.Base
                     isClose={this.state.isWindowClose}
-                    content={this.props.Intern.list[this.state.WindowContentIndex]}/>
+                    content={this.state.renderInternList[this.state.WindowContentIndex]}
+                    postId={this.state.WindowContentIndex}
+                    onClose={() => this.toggleWindowClose()}/>
             </div>
         )
     }
-})
+}, require('./Base.styl'))

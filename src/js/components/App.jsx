@@ -5,17 +5,17 @@ import Radium, { StyleRoot } from 'radium'
 // import { Link } from 'react-router'
 import App from 'grommet/components/App'
 import Box from 'grommet/components/Box'
-import Title from 'grommet/components/Title'
+// import Title from 'grommet/components/Title'
 
 @Radium
 export default CSSModules(class extends Component {
-    componentDidMount () {
-        this.props.router.push('/InternLens/dashboard')
-    }
     render () {
         return (
             <StyleRoot>
-                <App>
+                <App style={{
+                    maxWidth: '100%',
+                    background: 'white'
+                }}>
                     <Box justify='start'
                       align='center'
                       wrap={true}
@@ -24,37 +24,25 @@ export default CSSModules(class extends Component {
                       size='full'
                       flex={true}
                       full={true}
-                      colorIndex='light-2'>
+                      colorIndex='light-2'
+                      style={{
+                          background: 'white'
+                      }}>
+                    <Containers.common.Navbar {...this.props}/>
                       <Box direction='row'
                         justify='center'
-                        align='center'
+                        align='start'
                         wrap={true}
-                        pad='medium'
-                        margin='none'
-                        size='full'
-                        full='horizontal'
-                        colorIndex='light-1'>
-                        {/* <Link to={`/InternLens/dashboard`}>
-                            總版dashboard
-                        </Link>&nbsp;&nbsp;&nbsp; */}
-                        <Title>
-                            InternLens
-                        </Title>&nbsp;&nbsp;&nbsp;
-                        {/* <Link to={`/InternLens/dashboard`}>
-                            心願單favorite
-                        </Link> */}
-                      </Box>
-
-                      <Box direction='row'
-                        justify='start'
-                        align='center'
-                        wrap={true}
-                        pad='medium'
+                        pad='none'
                         margin='none'
                         size='full'
                         flex={true}
                         full='horizontal'
-                        colorIndex='light-1'>
+                        colorIndex='light-1'
+                        style={{
+                            marginTop: '150px',
+                            background: 'white'
+                        }}>
                         {this.props.children}
                       </Box>
                       <Box direction='row'
