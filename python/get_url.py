@@ -9,6 +9,7 @@ import json
 import requests
 import pyrebase
 from time import gmtime, strftime
+from datetime import datetime
 from bs4 import BeautifulSoup
 
 # Firebase config
@@ -22,8 +23,8 @@ firebase = pyrebase.initialize_app(config)
 
 
 # Get a reference to the auth service
-email = "EMAIL"
-password = "PASSWORD"
+email = ""
+password = ""
 auth = firebase.auth()
 user = auth.sign_in_with_email_and_password(email, password)
 user = auth.refresh(user['refreshToken'])
@@ -50,9 +51,9 @@ mappingTable = {
     '你實際參與的工作內容？': 'Content',
     '可以跟我們分享更多實際實習生訓練制度、學習方面心得？(好、壞皆可)': 'Review',
     '公司所屬產業？': 'Catagory',
-    '你覺得實際的實習經驗對照當初招募資訊差異程度？': 'Gap',
+    '你覺得實際的實習經驗對照當初招募資訊相符程度？': 'Gap',
     '主要有學到的東西或有幫助的地方是？': 'Study',
-    '若覺得有差異，主要差在什麼部份？': 'Diff',
+    '若覺得有差距，主要是在什麼部份？': 'Diff',
     '當初招募資訊': 'Path',
 
 }
@@ -89,7 +90,8 @@ while True:
     }
     db = firebase.database()
     results = db.child('list').update(csv_object, user['idToken'])
-    time.sleep(60)
+    print('Fetch data, ', datetime.now())
+    time.sleep(300)
 
 ### shut down the script
 sys.stdout.flush()
