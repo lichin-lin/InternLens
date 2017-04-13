@@ -3,6 +3,7 @@ import Containers from 'js/containers'
 import CSSModules from 'react-css-modules'
 import Radium from 'radium'
 import _ from 'lodash'
+// import { browserHistory } from 'react-router'
 
 import Box from 'grommet/components/Box'
 import Search from 'grommet/components/Search'
@@ -52,7 +53,7 @@ export default CSSModules(class extends Component {
         let filterData = {}
         _.map(rowData, (el, id) => {
             let flag = false
-            if (el['Name'] !== undefined && el['Name'].toString().indexOf(this.state.filterInput) !== -1) {
+            if (el['Name'] !== undefined && el['Name'].toString().toLowerCase().indexOf(this.state.filterInput.toLowerCase()) !== -1) {
                 flag = true
             }
             if (flag) {
@@ -64,6 +65,9 @@ export default CSSModules(class extends Component {
                 ...filterData
             }
         })
+        if (this.state.filterInput !== undefined && this.state.filterInput !== '') {
+            console.log('set url: ', this.props.router.push('/?search=' + this.state.filterInput))
+        }
     }
     toggleWindowOpen (id) {
         console.log('toggle: ', id)
@@ -124,6 +128,17 @@ export default CSSModules(class extends Component {
                     ...reverseArr
                 }
             })
+        })
+        .then(() => {
+            let queryInput = this.props.location.query.search
+            if (queryInput !== undefined) {
+                console.log('get query: ', queryInput)
+                this.setState({
+                    filterInput: queryInput
+                }, () => {
+                    this.startFilter()
+                })
+            }
         })
         .then(() => {
             // console.log('component:', this.state.copyInternList)
