@@ -30,32 +30,38 @@ user = auth.sign_in_with_email_and_password(email, password)
 user = auth.refresh(user['refreshToken'])
 # target url
 url = 'https://docs.google.com/spreadsheets/d/1pTgvUcZoaVcrdiFRgow4PdAURbUaCGnszL853UntAew/export?format=csv&id=1pTgvUcZoaVcrdiFRgow4PdAURbUaCGnszL853UntAew&gid=138064684'
-
 # title fieldnames
 title = []
 
 mappingTable = {
-    '實習的職稱或工作性質？': 'Job_Title',
-    '承上，你覺得合理/不合理的主要原因是？': 'Reason',
-    '公司有幫你保勞健保或是團保嗎？': 'Protection',
-    '綜合來說，你對這個實習經驗的推薦指數': 'Rating',
     'Timestamp': 'Timestamp',
-    '你覺得你做的這些職務與所得的薪資是合理的嗎？(滿分5分)': 'Reasonability',
-    '實習期間的內容對你的未來有幫助或是學習到新東西嗎？': 'Future',
+    '公司名稱': 'Name',
+    '公司所屬產業': 'Catagory',
+    '職稱或工作性質': 'Job_Title',
+    '實習年份': 'Start_Year',
     '實習時間長度': 'Duration',
-    '是從什麼時候開始實習的？': 'Start_Year',
-    '你之前去哪實習呢？': 'Name',
-    '有什麼建議可以給想申請同一個實習機會的學弟妹？': 'Advice',
-    '你的實習有給薪嗎？有給薪的話時薪是多少呢?(NTD)': 'Payment',
-    '你一週實習的工時大概多少呢？(hr.)': 'Week_Hour',
-    '你實際參與的工作內容？': 'Content',
-    '可以跟我們分享更多實際實習生訓練制度、學習方面心得？(好、壞皆可)': 'Review',
-    '公司所屬產業？': 'Catagory',
-    '你覺得實際的實習經驗對照當初招募資訊相符程度？': 'Gap',
-    '主要有學到的東西或有幫助的地方是？': 'Study',
-    '若覺得有差距，主要是在什麼部份？': 'Diff',
+    '一週工時(hr.)': 'Week_Hour',
+    '保險': 'Protection',
     '當初招募資訊': 'Path',
-
+    '招募資訊相符程度[評分(1-5)]': 'PathRating',
+    '實際情況與招募資訊的差異': 'Gap',
+    '工作內容': 'Content',
+    '薪資給付方式': 'PaymentType',
+    '時薪': 'HourPayment',
+    '時薪其他說明': 'HourPaymentInfo',
+    '月薪': 'MonthPayment',
+    '月薪其他說明': 'MonthPaymentInfo',
+    '其他支薪方式': 'OtherPayment',
+    '薪資合理程度[評分(1-5)]': 'PaymentRating',
+    '覺得合理/不合理的原因': 'PaymentReason',
+    '學習成效[評分(1-5)]': 'StudyRating',
+    '學到的東西': 'Study',
+    '對未來幫助程度[評分(1-5)]': 'FutureRating',
+    '主要有幫助的點': 'Future',
+    '綜合心得': 'Review',
+    '推薦指數': 'TotalRating',
+    '給學弟妹的意見': 'Advice',
+    '聯絡資料': 'Contact'
 }
 while True:
     ### make url request
