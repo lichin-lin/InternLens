@@ -66,7 +66,8 @@ export default CSSModules(class extends Component {
             }
         })
         if (this.state.filterInput !== undefined && this.state.filterInput !== '') {
-            console.log('set url: ', this.props.router.push('/?search=' + this.state.filterInput))
+            this.props.router.push('/?search=' + this.state.filterInput)
+            // console.log('set url: ', this.props.router.push('/?search=' + this.state.filterInput))
         }
     }
     toggleWindowOpen (id) {

@@ -57,7 +57,7 @@ export default {
             if (targetIndex < 0) {
                 // not found need update
                 // console.log('no target and add!')
-                temp.push({'postId': postId, 'userId': userId})
+                temp.push({'postId': postId.toString(), 'userId': userId})
             }
         })
         .then(() => {
@@ -65,13 +65,13 @@ export default {
         })
     },
     checkFavorite: (postId, userId) => {
-        // console.log('in action: checkFavorite: ', postId, userId)
+        console.log('in action: checkFavorite: ', postId, userId)
         let isFound = false
         return firebase.database().ref('/favoriteMap').orderByChild('postId').equalTo(postId.toString()).once('value').then(function (snapshot) {
             _.map(snapshot.val(), (el, id) => {
-                // console.log('check list: ', el.postId, ', ', el.userId)
+                console.log('check list: ', el.postId, ', ', el.userId)
                 if (el.postId === postId && el.userId === userId) {
-                    // console.log('## found!')
+                    console.log('## found!')
                     isFound = true
                     return isFound
                 }
