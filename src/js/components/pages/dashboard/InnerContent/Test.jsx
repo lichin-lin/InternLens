@@ -51,9 +51,11 @@ export default CSSModules(class MessageBox extends Component {
             return
         }
         if (this.state.userId !== this.props.Session.AuthData.uid) {
+            console.log('favorite')
             this.setState({
                 userId: this.props.Session.AuthData.uid
             }, () => {
+                console.log('set isfavorite')
                 this.props.checkFavorite(this.props.params.id, this.props.Session.AuthData.uid)
                 .then(() => {
                     this.setState({isFavorite: this.props.Intern.isFavorite})
