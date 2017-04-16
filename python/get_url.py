@@ -35,33 +35,33 @@ title = []
 
 mappingTable = {
     'Timestamp': 'Timestamp',
-    '公司名稱': 'Name',
-    '公司所屬產業': 'Catagory',
-    '職稱或工作性質': 'Job_Title',
-    '實習年份': 'Start_Year',
+    '你之前去哪實習呢？': 'Name',
+    '公司所屬產業？': 'Catagory',
+    '實習的職稱或工作性質？': 'Job_Title',
+    '是從什麼時候開始實習的？': 'Start_Year',
     '實習時間長度': 'Duration',
-    '一週工時(hr.)': 'Week_Hour',
-    '保險': 'Protection',
+    '你一週實習的工時大概多少呢？(hr.)': 'Week_Hour',
+    '公司有幫你保勞健保或是團保嗎？': 'Protection',
     '當初招募資訊': 'Path',
-    '招募資訊相符程度[評分(1-5)]': 'PathRating',
-    '實際情況與招募資訊的差異': 'Gap',
-    '工作內容': 'Content',
-    '薪資給付方式': 'PaymentType',
-    '時薪': 'HourPayment',
-    '時薪其他說明': 'HourPaymentInfo',
-    '月薪': 'MonthPayment',
-    '月薪其他說明': 'MonthPaymentInfo',
-    '其他支薪方式': 'OtherPayment',
-    '薪資合理程度[評分(1-5)]': 'PaymentRating',
-    '覺得合理/不合理的原因': 'PaymentReason',
-    '學習成效[評分(1-5)]': 'StudyRating',
-    '學到的東西': 'Study',
-    '對未來幫助程度[評分(1-5)]': 'FutureRating',
-    '主要有幫助的點': 'Future',
-    '綜合心得': 'Review',
-    '推薦指數': 'TotalRating',
-    '給學弟妹的意見': 'Advice',
-    '聯絡資料': 'Contact'
+    '你覺得實際的實習經驗對照當初招募資訊相符程度？': 'PathRating',
+    '若覺得有差距，主要是在什麼部份？': 'Gap',
+    '你實際參與的工作內容？': 'Content',
+    '你的實習薪資待遇是哪一種呢？': 'PaymentType',
+    '那時薪是多少呢？(NTD)': 'HourPayment',
+    '除了時薪外的其他說明': 'HourPaymentInfo',
+    '那你的月薪是多少呢？(NTD)': 'MonthPayment',
+    '除了月薪外的其他說明': 'MonthPaymentInfo',
+    '你的給薪形式是什麼？多少錢呢(NTD)？': 'OtherPayment',
+    '你覺得你做的這些職務與所得的薪資合理程度？(滿分5分)': 'PaymentRating',
+    '承上，你覺得合理或不合理的主要原因是？': 'PaymentReason',
+    '實習期間有學習到新東西嗎？': 'StudyRating',
+    '主要有學習到的地方是？': 'Study',
+    '實習期間的內容對你的未來有幫助嗎？': 'FutureRating',
+    '主要有幫助的地方是？': 'Future',
+    '可以跟我們分享更多實際實習生訓練制度、學習方面心得？(好、壞皆可)': 'Review',
+    '綜合來說，你對這個實習經驗的推薦指數': 'TotalRating',
+    '有什麼建議可以給想申請同一個實習機會的學弟妹？': 'Advice',
+    '假如不介意讓有興趣的人進一步聯繫的話，可以留下聯絡資料喔～': 'Contact'
 }
 while True:
     ### make url request
@@ -74,6 +74,7 @@ while True:
         line_counter += 1
         if(line_counter == 6):
             title = row
+            print(title)
         if(line_counter > 6):
             csv_object[line_counter - 7] = {mappingTable[title[i]]: row[i] for i in range(len(title))}
             csv_object[line_counter - 7]['ID'] = line_counter - 6
