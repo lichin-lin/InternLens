@@ -83,6 +83,25 @@ export default CSSModules(class MessageBox extends Component {
         let meta = {
             title: '實習透視鏡 InternLens | ' + this.state.content['Name']
         }
+        let paymentType
+        if (this.state.content['PaymentType'] === '時薪' || this.state.content['PaymentType'] === '' || this.state.content['PaymentType'] === undefined) {
+            paymentType = '時薪: ' + this.state.content['HourPayment']
+        } else if (this.state.content['PaymentType'] === '月薪') {
+            paymentType = '月薪: ' + this.state.content['MonthPayment']
+        } else if (this.state.content['PaymentType'] === '無薪') {
+            paymentType = '無薪'
+        } else {
+            paymentType = '其他: ' + this.state.content['OtherPayment']
+        }
+
+        let paymentRatingTrans
+        if (this.state.content['PaymentRating'] === '不合理') {
+            paymentRatingTrans = '2'
+        } else if (this.state.content['PaymentRating'] === '十分合理，綜合的獲得上已滿足') {
+            paymentRatingTrans = '4'
+        } else {
+            paymentRatingTrans = this.state.content['PaymentRating']
+        }
         return (
             <div style={{
                 width: '100%',
@@ -150,8 +169,8 @@ export default CSSModules(class MessageBox extends Component {
                                 {
                                     [
                                         {'title': '單週時數', 'content': this.state.content['Week_Hour']},
-                                        {'title': '綜合評價', 'content': this.state.content['Rating']},
-                                        {'title': '給付薪資', 'content': this.state.content['Payment']}
+                                        {'title': '綜合評價', 'content': this.state.content['TotalRating']},
+                                        {'title': '給付薪資', 'content': paymentType}
                                     ].map((el, id) =>
                                         <Box className="InnerTips" key={id} direction='row' justify='start' align='center' wrap={false} pad='medium' margin='small'>
                                                 <Heading tag='h3' align='center' strong={true}>
@@ -168,7 +187,7 @@ export default CSSModules(class MessageBox extends Component {
                                     )
                                 }
                           </div>
-                          <Box direction='row' justify='start' align='start' wrap={false} pad='none' margin='small'
+                          <Box direction='column' justify='start' align='start' wrap={false} pad='none' margin='small'
                               style={{
                                   width: '100%',
                                   margin: '0px',
@@ -180,9 +199,10 @@ export default CSSModules(class MessageBox extends Component {
                                     [
                                         {'title': '實習長度', 'content': this.state.content['Duration']},
                                         {'title': '實習工作內容', 'content': this.state.content['Content']},
+                                        {'title': '職務與所得的薪資合理程度？(非常滿意為5分)', 'content': paymentRatingTrans},
+                                        {'title': '承上，合理/不合理的主要原因是？', 'content': this.state.content['PaymentReason']},
                                         {'title': '實習學到的技能', 'content': this.state.content['Study']},
-                                        {'title': '實習總體心得', 'content': this.state.content['Review']},
-                                        {'title': '你覺得實習合理嗎?', 'content': this.state.content['Reason']}
+                                        {'title': '實習總體心得', 'content': this.state.content['Review']}
                                     ].map((el, id) =>
                                         <Box key={id} direction='column' justify='start' align='start' wrap={true} pad='medium' margin='small'
                                             style={{
@@ -193,7 +213,13 @@ export default CSSModules(class MessageBox extends Component {
                                                 {el.title}
                                             </Heading>
                                             <Heading tag='h4' align='start'>
-                                                {el.content.length > 0 ? el.content : '發文者並未提供'}
+                                                {
+                                                    el.title === '職務與所得的薪資合理程度？(非常滿意為5分)'
+                                                    ? el.content.length > 0 ? <Rater total={5} rating={parseInt(el.content)} interactive={false} /> : '發文者並未提供'
+                                                    : (el.title === '實際的實習經驗對照當初招募資訊差異程度 (5分是差異很大)'
+                                                        ? el.content.length > 0 ? <Rater total={5} rating={parseInt(el.content)} interactive={false} /> : '發文者並未提供'
+                                                            : el.content.length > 0 ? el.content : '發文者並未提供')
+                                                }
                                             </Heading>
                                         </Box>
                                     )
@@ -205,9 +231,12 @@ export default CSSModules(class MessageBox extends Component {
                                     [
                                         {'title': '勞健保', 'content': this.state.content['Protection']},
                                         {'title': '實習招募資訊來源', 'content': this.state.content['Path']},
-                                        {'title': '實際的實習經驗對照當初招募資訊差異程度 (1分為完全無差異,5分是差異很大)', 'content': this.state.content['Gap']},
-                                        {'title': '實際實習與當初招募的落差內容', 'content': this.state.content['Diff']},
-                                        {'title': '實習期間的內容對你的未來有幫助嗎(1分為完全沒幫助,5分是非常有幫助)', 'content': this.state.content['Future']},
+                                        {'title': '實際的實習經驗對照當初招募資訊差異程度 (5分是差異很小)', 'content': this.state.content['PathRating']},
+                                        {'title': '實際實習與當初招募的落差內容', 'content': this.state.content['Gap']},
+                                        {'title': '實習期間有學習到新東西嗎？(5分是學習到很多)', 'content': this.state.content['StudyRating']},
+                                        {'title': '承上，學習到的事物:', 'content': this.state.content['Study']},
+                                        {'title': '實習期間的內容對你的未來有幫助嗎(5分是非常有幫助)', 'content': this.state.content['FutureRating']},
+                                        {'title': '承上，幫助到的方向為何:', 'content': this.state.content['Future']},
                                         {'title': '給實習者建議', 'content': this.state.content['Advice']}
 
                                     ].map((el, id) =>
@@ -221,11 +250,9 @@ export default CSSModules(class MessageBox extends Component {
                                             </Heading>
                                             <Heading tag='h4' align='start'>
                                                 {
-                                                    el.title === '實習期間的內容對你的未來有幫助嗎(1分為完全沒幫助,5分是非常有幫助)'
-                                                    ? el.content.length > 0 ? <Rater total={5} rating={parseInt(el.content)} interactive={false} /> : '發文者並未提供'
-                                                    : (el.title === '實際的實習經驗對照當初招募資訊差異程度 (1分為完全無差異,5分是差異很大)'
-                                                        ? el.content.length > 0 ? <Rater total={5} rating={parseInt(el.content)} interactive={false} /> : '發文者並未提供'
-                                                            : el.content.length > 0 ? el.content : '發文者並未提供')
+                                                    el.title === '實習期間的內容對你的未來有幫助嗎(5分是非常有幫助)' || el.title === '實際的實習經驗對照當初招募資訊差異程度 (5分是差異很小)' || el.title === '實習期間有學習到新東西嗎？(5分是學習到很多)'
+                                                    ? (el.content.length > 0 ? <Rater total={5} rating={parseInt(el.content)} interactive={false} /> : '發文者並未提供')
+                                                        : (el.content.length > 0 ? el.content : '發文者並未提供')
                                                 }
                                             </Heading>
                                         </Box>

@@ -29,6 +29,7 @@ export default CSSModules(class MessageBox extends Component {
         this.updatePropsToState = this.updatePropsToState.bind(this)
         this.refreshMessage = this.refreshMessage.bind(this)
         this.renderMessageTagCounter = this.renderMessageTagCounter.bind(this)
+        this.replaceNewLine = this.replaceNewLine.bind(this)
         this.state = {
             id: 0,
             messageList: [],
@@ -64,6 +65,9 @@ export default CSSModules(class MessageBox extends Component {
                 totalCons: con
             })
         })
+    }
+    replaceNewLine (input) {
+        return input.split('\n').join('<br/>')
     }
     updatePropsToState (newProps) {
         console.log(newProps)
@@ -115,8 +119,10 @@ export default CSSModules(class MessageBox extends Component {
                                         )
                                     }
                                 </div>
-                                <Paragraph size='medium' style={{ marginLeft: '6px', margin: '12px 0', wordBreak: 'break-all' }}>
-                                    {el.content}
+                                <Paragraph
+                                    dangerouslySetInnerHTML={{__html: this.replaceNewLine(el.content)}}
+                                    size='medium'
+                                    style={{ marginLeft: '6px', margin: '12px 0', wordBreak: 'break-all' }}>
                                 </Paragraph>
                             </div>
                         </Timeline.Item>
