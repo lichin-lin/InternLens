@@ -93,6 +93,15 @@ export default CSSModules(class MessageBox extends Component {
         } else {
             paymentType = '其他: ' + this.state.content['OtherPayment']
         }
+
+        let paymentRatingTrans
+        if (this.state.content['PaymentRating'] === '不合理') {
+            paymentRatingTrans = '2'
+        } else if (this.state.content['PaymentRating'] === '十分合理，綜合的獲得上已滿足') {
+            paymentRatingTrans = '4'
+        } else {
+            paymentRatingTrans = this.state.content['PaymentRating']
+        }
         return (
             <div style={{
                 width: '100%',
@@ -190,7 +199,7 @@ export default CSSModules(class MessageBox extends Component {
                                     [
                                         {'title': '實習長度', 'content': this.state.content['Duration']},
                                         {'title': '實習工作內容', 'content': this.state.content['Content']},
-                                        {'title': '職務與所得的薪資合理程度？(非常滿意為5分)', 'content': this.state.content['PaymentRating']},
+                                        {'title': '職務與所得的薪資合理程度？(非常滿意為5分)', 'content': paymentRatingTrans},
                                         {'title': '承上，合理/不合理的主要原因是？', 'content': this.state.content['PaymentReason']},
                                         {'title': '實習學到的技能', 'content': this.state.content['Study']},
                                         {'title': '實習總體心得', 'content': this.state.content['Review']}
