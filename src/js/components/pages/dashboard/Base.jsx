@@ -198,7 +198,7 @@ export default CSSModules(class extends Component {
                           marginBottom: '10px',
                           zIndex: '1'
                       }}>
-                      全台灣最透明的實習經驗分享平台。
+                      最透明的實習經驗分享平台。
                     </Heading>
                       <div className="submitNewPost--contain">
                           <a className="submitNewPost" target='_blank' href='https://goo.gl/forms/T4qXfrm2rhFC64cB2'>
