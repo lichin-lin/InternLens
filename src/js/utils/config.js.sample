@@ -1,1 +1,1 @@
-export default process.env.PRODUCTION ? 'PARAMS1' : 'PARAMS2'
+export default process.env.PRODUCTION ? '' : ''
