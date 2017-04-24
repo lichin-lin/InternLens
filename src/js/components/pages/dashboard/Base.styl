@@ -20,7 +20,10 @@
 
 .searchBtn
     min-width: 80px
-    background: #0AF !important
+    // background: #0AF !important
+    background: transparent !important
+    border: 2px solid #0AF
+    color: #0AF !important
     border-radius: 5px
     margin-left: 5px
     color: white
@@ -41,3 +44,23 @@
 :-moz-placeholder { /* Firefox 18- */
   color: black !important;
 }
+
+.catagoryList
+    margin: 0
+    padding: 10px 15px
+    width: 100%
+    display: flex
+    flex-direction: column
+    height: 35vh
+    min-height: 100px
+    overflow-y: scroll
+    align-items: center
+    li
+        width: 50%
+        cursor: pointer
+        font-size: 1.5em
+        text-align: center
+        margin: 5px 0
+        &.active
+            border: 2px solid #0AF
+            border-radius: 10px

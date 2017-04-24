@@ -42,7 +42,8 @@ export default CSSModules(class extends Component {
             isWindowClose: true,
             isLoading: true,
             isListEnd: false,
-            visible: false
+            visible: false,
+            targetCatagory: ''
         }
     }
     showModal () {
@@ -95,11 +96,11 @@ export default CSSModules(class extends Component {
         }
     }
     startCatagoryFilter (input) {
-        console.log('click on input: ', input)
         this.setState({visible: false})
         this.setState({renderInternList: {}})
         this.setState({currentIndex: 0})
         this.setState({isListEnd: false})
+        this.setState({targetCatagory: input})
         let rowData = _.reverse(_.values(this.props.Intern.list))
         // console.log('row', rowData)
         let filterData = {}
@@ -235,15 +236,14 @@ export default CSSModules(class extends Component {
                             display: 'flex',
                             justifyContent: 'flex-end'
                         }}>
-                            <ul>
-                                <li onClick={() => { this.startCatagoryFilter('傳產') }}>yoyo</li>
+                            <ul className="catagoryList">
                                 {
-                                    [
-                                        '網路服務', '科技', '電商', '顧問', '廣告公關', '金融', '媒體', '設計',
-                                        '文創', '醫療/生物', '教育', '旅遊', '農業', 'NPO/NGO', '傳產', '電信', '批發零售',
-                                        '食品', '學校', '研究機構', '遊戲', '運輸', '政府', '其他'
-                                    ].map((el, id) =>
-                                        <li key={id} onClick={() => { this.startCatagoryFilter(el) }}>{el}</li>
+                                    catagoryList.map((el, id) =>
+                                        <li className={this.state.targetCatagory === el ? 'active' : null}
+                                            key={id}
+                                            onClick={() => { this.startCatagoryFilter(el) }}>
+                                            {el}
+                                        </li>
                                     )
                                 }
                             </ul>
@@ -316,10 +316,10 @@ export default CSSModules(class extends Component {
                             margin: '0 auto'
                         }} />
                         <div className="searchBtn"
-                            onClick={this.startFilter}>搜尋
+                            onClick={this.startFilter}>單字搜尋
                         </div>
                         <div className="searchBtn"
-                            onClick={this.showModal}>類別
+                            onClick={this.showModal}>類別搜尋
                         </div>
                     </Box>
                 </Header>
