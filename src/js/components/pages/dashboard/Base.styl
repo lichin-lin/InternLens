@@ -1,3 +1,6 @@
+$brand_blue_light = lighten(#0AF, 25%)
+$brand_blue = darken(#0AF, 5%)
+
 .submitNewPost--contain
     display: flex
     justify-content: center
@@ -15,15 +18,15 @@
             margin: 0 !important
             padding: 10px !important
             border-radius: 5px !important
-            border-color: #0AF !important
-            background: #0AF !important
+            border-color: $brand_blue !important
+            background: $brand_blue !important
 
 .searchBtn
     min-width: 80px
-    // background: #0AF !important
+    // background: $brand_blue_light !important
     background: transparent !important
-    border: 2px solid #0AF
-    color: #0AF !important
+    border: 2px solid $brand_blue_light
+    color: $brand_blue_light !important
     border-radius: 5px
     margin-left: 5px
     color: white
@@ -50,17 +53,36 @@
     padding: 10px 15px
     width: 100%
     display: flex
-    flex-direction: column
+    flex-direction: row
+    flex-wrap: wrap
     height: 35vh
     min-height: 100px
     overflow-y: scroll
     align-items: center
     li
-        width: 50%
+        margin: 5px 5px
+        padding: 3px 20px
+        width: auto
         cursor: pointer
-        font-size: 1.5em
+        font-size: 1.25em
         text-align: center
-        margin: 5px 0
+        border-radius: 20px
+        font-weight: bold
+        border: 1px solid $brand_blue_light
         &.active
-            border: 2px solid #0AF
-            border-radius: 10px
+            color: white
+            background: $brand_blue_light
+
+.resultCounter
+    margin: 20px 0
+    font-size: 1.5em
+.ant-modal-content
+    input
+        width: 100%
+        border: 1px solid #50514F
+        border-radius: 5px
+        padding: 3px 5px
+        font-size: 1.5em
+        outline none
+        &focus
+            outline: none

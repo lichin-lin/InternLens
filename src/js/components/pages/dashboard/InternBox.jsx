@@ -87,6 +87,8 @@ export default CSSModules(class Inner extends Component {
                     style={{
                         marginBottom: '40px'
                     }}>
+                    <Link to={`${base}/post/${this.state.id}`}
+                        target="_blank">
                     <Tile className="InternBox" size='medium'>
                         <Card heading={this.state.information['Name'] !== undefined ? this.state.information['Name'] : null}
                             description={
@@ -110,17 +112,13 @@ export default CSSModules(class Inner extends Component {
                             }
                             headingStrong={false}
                             link= {
-                                <Link to={`${base}/post/${this.state.id}`}
-                                    target="_blank"
-                                    >
-                                    <Anchor
-                                        // onClick={this.props.onClose}
-                                        id={this.state.id.toString()}
-                                        label='查看心得全文'
-                                        style={{
-                                            marginTop: '10px'
-                                        }} />
-                                </Link>
+                                <Anchor
+                                    // onClick={this.props.onClose}
+                                    id={this.state.id.toString()}
+                                    label='查看心得全文'
+                                    style={{
+                                        marginTop: '10px'
+                                    }} />
                                 }
                                 style={{
                                     width: '100%'
@@ -143,6 +141,7 @@ export default CSSModules(class Inner extends Component {
                             }}/>
                         <span>{this.state.messageCount}</span>
                     </div>
+                    </Link>
                </Animate>
             </div>
         )

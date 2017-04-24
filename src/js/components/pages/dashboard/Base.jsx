@@ -6,7 +6,7 @@ import _ from 'lodash'
 // import { browserHistory } from 'react-router'
 
 import Box from 'grommet/components/Box'
-import Search from 'grommet/components/Search'
+// import Search from 'grommet/components/Search'
 import Header from 'grommet/components/Header'
 import Tiles from 'grommet/components/Tiles'
 import Heading from 'grommet/components/Heading'
@@ -29,7 +29,8 @@ export default CSSModules(class extends Component {
         this.startFilter = this.startFilter.bind(this)
         this.handleKeyPress = this.handleKeyPress.bind(this)
         this.startCatagoryFilter = this.startCatagoryFilter.bind(this)
-        this.showModal = this.showModal.bind(this)
+        this.showCatagoryModal = this.showCatagoryModal.bind(this)
+        this.showSearchModal = this.showSearchModal.bind(this)
         this.handleOk = this.handleOk.bind(this)
         this.handleCancel = this.handleCancel.bind(this)
         this.state = {
@@ -42,26 +43,35 @@ export default CSSModules(class extends Component {
             isWindowClose: true,
             isLoading: true,
             isListEnd: false,
-            visible: false,
+            catagoryVisible: false,
+            SearchVisible: false,
             targetCatagory: ''
         }
     }
-    showModal () {
+    showCatagoryModal () {
         this.setState({
-            visible: true
+            catagoryVisible: true
+        })
+    }
+    showSearchModal () {
+        this.setState({
+            SearchVisible: true
         })
     }
     handleOk (e) {
         this.setState({
-            visible: false
+            catagoryVisible: false,
+            SearchVisible: false
         })
     }
     handleCancel (e) {
         this.setState({
-            visible: false
+            catagoryVisible: false,
+            SearchVisible: false
         })
     }
     changeFilterInput (event) {
+        console.log(event.target)
         this.setState({filterInput: event.target.value})
     }
     handleKeyPress (event) {
@@ -73,8 +83,9 @@ export default CSSModules(class extends Component {
         this.setState({renderInternList: {}})
         this.setState({currentIndex: 0})
         this.setState({isListEnd: false})
+        this.setState({SearchVisible: false})
         let rowData = _.reverse(_.values(this.props.Intern.list))
-        // console.log('row', rowData)
+        console.log('row', this.state.filterInput)
         let filterData = {}
         _.map(rowData, (el, id) => {
             let flag = false
@@ -96,7 +107,7 @@ export default CSSModules(class extends Component {
         }
     }
     startCatagoryFilter (input) {
-        this.setState({visible: false})
+        this.setState({catagoryVisible: false})
         this.setState({renderInternList: {}})
         this.setState({currentIndex: 0})
         this.setState({isListEnd: false})
@@ -132,7 +143,6 @@ export default CSSModules(class extends Component {
         })
     }
     toggleWindowClose () {
-        console.log('toggle close')
         this.setState({isWindowClose: !this.state.isWindowClose})
     }
     getMoreIntern () {
@@ -188,7 +198,7 @@ export default CSSModules(class extends Component {
             if (queryInput.search !== undefined) {
                 console.log('get query: ', queryInput)
                 this.setState({
-                    filterInput: queryInput
+                    filterInput: queryInput.search
                 }, () => {
                     this.startFilter()
                 })
@@ -203,7 +213,6 @@ export default CSSModules(class extends Component {
         })
     }
     render () {
-        console.log('console: ', catagoryList)
         return (
             <div style={{
                 width: '100%',
@@ -226,7 +235,7 @@ export default CSSModules(class extends Component {
                         width: '100%'
                     }}>
 
-                    <Modal title="類別 catagory" visible={this.state.visible}
+                    <Modal title="類別搜尋 catagory" visible={this.state.catagoryVisible}
                       onOk={this.handleOk} onCancel={this.handleCancel}
                       footer={[]}>
                         <div className="loginContain">
@@ -249,7 +258,27 @@ export default CSSModules(class extends Component {
                             </ul>
                         </div>
                     </Modal>
-
+                    <Modal title="關鍵字搜尋 text Search" visible={this.state.SearchVisible}
+                      onOk={this.handleOk} onCancel={this.handleCancel}
+                      footer={[]}>
+                        <div className="loginContain">
+                        </div>
+                        <div style={{
+                            margin: '20px 0 0',
+                            display: 'flex',
+                            justifyContent: 'flex-end'
+                        }}>
+                        <input
+                            type="text"
+                            value={this.state.filterInput}
+                            onChange={this.changeFilterInput}
+                            onKeyPress={this.handleKeyPress}
+                        />
+                          <div className="searchBtn"
+                              onClick={this.startFilter}>搜尋
+                          </div>
+                        </div>
+                    </Modal>
                     <div
                         style={{
                             position: 'absolute',
@@ -290,36 +319,23 @@ export default CSSModules(class extends Component {
                           </a>
                         </div>
                     </Box>
+                    <div className="resultCounter">目前有 {_.size(this.state.copyInternList)} 筆搜尋</div>
                     <Box flex={true}
                       justify='center'
                       direction='row'
                       responsive={false}
                       style={{
-                          margin: '30px 0 0 0',
+                          margin: '0',
                           padding: '0 15px',
                           position: 'relative',
                           width: '100%',
                           maxWidth: '1024px'
                       }}>
-                      <Search inline={true}
-                        fill={true}
-                        size='small'
-                        value={this.state.filterInput}
-                        iconAlign='start'
-                        placeHolder='輸入公司名稱'
-                        onDOMChange={this.changeFilterInput}
-                        onKeyPress={this.handleKeyPress}
-                        responsive={false}
-                        dropAlign={{'right': 'right'}}
-                        style={{
-                            border: '2px solid #50514F',
-                            margin: '0 auto'
-                        }} />
                         <div className="searchBtn"
-                            onClick={this.startFilter}>單字搜尋
+                            onClick={this.showSearchModal}>單字搜尋
                         </div>
                         <div className="searchBtn"
-                            onClick={this.showModal}>類別搜尋
+                            onClick={this.showCatagoryModal}>類別搜尋
                         </div>
                     </Box>
                 </Header>
