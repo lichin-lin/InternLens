@@ -82,6 +82,7 @@ export default CSSModules(class Inner extends Component {
     render () {
         return (
             <div className="internBoxWrapper">
+                <div className="innerBoxWrapperContent">
                 <Animate enter={{'animation': 'fade', 'duration': 700, 'delay': 0}}
                     keep={false}
                     style={{
@@ -114,10 +115,13 @@ export default CSSModules(class Inner extends Component {
                             link= {
                                 <Anchor
                                     // onClick={this.props.onClose}
+                                    className="internBoxLink"
                                     id={this.state.id.toString()}
                                     label='查看心得全文'
                                     style={{
-                                        marginTop: '10px'
+                                        marginTop: '10px',
+                                        fontWeight: 'bold',
+                                        color: '#0AF !important'
                                     }} />
                                 }
                                 style={{
@@ -142,7 +146,8 @@ export default CSSModules(class Inner extends Component {
                         <span>{this.state.messageCount}</span>
                     </div>
                     </Link>
-               </Animate>
+                   </Animate>
+                </div>
             </div>
         )
     }
