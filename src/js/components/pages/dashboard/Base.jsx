@@ -332,7 +332,7 @@ export default CSSModules(class extends Component {
                           maxWidth: '1024px'
                       }}>
                         <div className="searchBtn"
-                            onClick={this.showSearchModal}>單字搜尋
+                            onClick={this.showSearchModal}>關鍵字搜尋
                         </div>
                         <div className="searchBtn"
                             onClick={this.showCatagoryModal}>類別搜尋

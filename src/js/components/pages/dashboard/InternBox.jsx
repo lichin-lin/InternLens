@@ -86,7 +86,7 @@ export default CSSModules(class Inner extends Component {
                 <Animate enter={{'animation': 'fade', 'duration': 700, 'delay': 0}}
                     keep={false}
                     style={{
-                        marginBottom: '40px'
+                        marginBottom: '20px'
                     }}>
                     <Link to={`${base}/post/${this.state.id}`}
                         target="_blank">
@@ -128,6 +128,7 @@ export default CSSModules(class Inner extends Component {
                                     width: '100%'
                                 }}/>
                     </Tile>
+                    </Link>
                     <div className='actionButton'>
                         <FavoriteIcon
                             onClick={this.toggleFavorite}
@@ -145,7 +146,6 @@ export default CSSModules(class Inner extends Component {
                             }}/>
                         <span>{this.state.messageCount}</span>
                     </div>
-                    </Link>
                    </Animate>
                 </div>
             </div>
