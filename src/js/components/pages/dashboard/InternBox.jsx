@@ -82,11 +82,14 @@ export default CSSModules(class Inner extends Component {
     render () {
         return (
             <div className="internBoxWrapper">
+                <div className="innerBoxWrapperContent">
                 <Animate enter={{'animation': 'fade', 'duration': 700, 'delay': 0}}
                     keep={false}
                     style={{
-                        marginBottom: '40px'
+                        marginBottom: '20px'
                     }}>
+                    <Link to={`${base}/post/${this.state.id}`}
+                        target="_blank">
                     <Tile className="InternBox" size='medium'>
                         <Card heading={this.state.information['Name'] !== undefined ? this.state.information['Name'] : null}
                             description={
@@ -110,22 +113,22 @@ export default CSSModules(class Inner extends Component {
                             }
                             headingStrong={false}
                             link= {
-                                <Link to={`${base}/post/${this.state.id}`}
-                                    target="_blank"
-                                    >
-                                    <Anchor
-                                        // onClick={this.props.onClose}
-                                        id={this.state.id.toString()}
-                                        label='查看心得全文'
-                                        style={{
-                                            marginTop: '10px'
-                                        }} />
-                                </Link>
+                                <Anchor
+                                    // onClick={this.props.onClose}
+                                    className="internBoxLink"
+                                    id={this.state.id.toString()}
+                                    label='查看心得全文'
+                                    style={{
+                                        marginTop: '10px',
+                                        fontWeight: 'bold',
+                                        color: '#0AF !important'
+                                    }} />
                                 }
                                 style={{
                                     width: '100%'
                                 }}/>
                     </Tile>
+                    </Link>
                     <div className='actionButton'>
                         <FavoriteIcon
                             onClick={this.toggleFavorite}
@@ -143,7 +146,8 @@ export default CSSModules(class Inner extends Component {
                             }}/>
                         <span>{this.state.messageCount}</span>
                     </div>
-               </Animate>
+                   </Animate>
+                </div>
             </div>
         )
     }

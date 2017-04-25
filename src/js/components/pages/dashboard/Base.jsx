@@ -6,14 +6,18 @@ import _ from 'lodash'
 // import { browserHistory } from 'react-router'
 
 import Box from 'grommet/components/Box'
-import Search from 'grommet/components/Search'
+// import Search from 'grommet/components/Search'
 import Header from 'grommet/components/Header'
 import Tiles from 'grommet/components/Tiles'
 import Heading from 'grommet/components/Heading'
+import { Modal } from 'antd'
 
 import Loading from 'react-loading'
 import InfiniteScroll from 'react-infinite-scroller'
 
+const catagoryList = ['網路服務', '科技', '電商', '顧問', '廣告公關', '金融', '媒體', '設計',
+    '文創', '醫療/生物', '教育', '旅遊', '農業', 'NPO/NGO', '傳產', '電信', '批發零售',
+    '食品', '學校', '研究機構', '遊戲', '運輸', '政府', '其他']
 @Radium
 export default CSSModules(class extends Component {
     constructor (props) {
@@ -24,6 +28,11 @@ export default CSSModules(class extends Component {
         this.getMoreIntern = this.getMoreIntern.bind(this)
         this.startFilter = this.startFilter.bind(this)
         this.handleKeyPress = this.handleKeyPress.bind(this)
+        this.startCatagoryFilter = this.startCatagoryFilter.bind(this)
+        this.showCatagoryModal = this.showCatagoryModal.bind(this)
+        this.showSearchModal = this.showSearchModal.bind(this)
+        this.handleOk = this.handleOk.bind(this)
+        this.handleCancel = this.handleCancel.bind(this)
         this.state = {
             copyInternList: {},
             renderInternList: {},
@@ -33,10 +42,36 @@ export default CSSModules(class extends Component {
             WindowContentIndex: 1,
             isWindowClose: true,
             isLoading: true,
-            isListEnd: false
+            isListEnd: false,
+            catagoryVisible: false,
+            SearchVisible: false,
+            targetCatagory: ''
         }
     }
+    showCatagoryModal () {
+        this.setState({
+            catagoryVisible: true
+        })
+    }
+    showSearchModal () {
+        this.setState({
+            SearchVisible: true
+        })
+    }
+    handleOk (e) {
+        this.setState({
+            catagoryVisible: false,
+            SearchVisible: false
+        })
+    }
+    handleCancel (e) {
+        this.setState({
+            catagoryVisible: false,
+            SearchVisible: false
+        })
+    }
     changeFilterInput (event) {
+        console.log(event.target)
         this.setState({filterInput: event.target.value})
     }
     handleKeyPress (event) {
@@ -48,8 +83,9 @@ export default CSSModules(class extends Component {
         this.setState({renderInternList: {}})
         this.setState({currentIndex: 0})
         this.setState({isListEnd: false})
+        this.setState({SearchVisible: false})
         let rowData = _.reverse(_.values(this.props.Intern.list))
-        // console.log('row', rowData)
+        console.log('row', this.state.filterInput)
         let filterData = {}
         _.map(rowData, (el, id) => {
             let flag = false
@@ -70,6 +106,34 @@ export default CSSModules(class extends Component {
             // console.log('set url: ', this.props.router.push('/?search=' + this.state.filterInput))
         }
     }
+    startCatagoryFilter (input) {
+        this.setState({catagoryVisible: false})
+        this.setState({renderInternList: {}})
+        this.setState({currentIndex: 0})
+        this.setState({isListEnd: false})
+        this.setState({targetCatagory: input})
+        let rowData = _.reverse(_.values(this.props.Intern.list))
+        // console.log('row', rowData)
+        let filterData = {}
+        _.map(rowData, (el, id) => {
+            let flag = false
+            if (el['Catagory'] !== undefined && el['Catagory'].toString().toLowerCase().indexOf(input.toLowerCase()) !== -1) {
+                flag = true
+            }
+            if (flag) {
+                filterData[id] = el
+            }
+        })
+        this.setState({
+            copyInternList: {
+                ...filterData
+            }
+        })
+        if (input !== undefined && input !== '') {
+            this.props.router.push('/?catagory=' + input)
+            // console.log('set url: ', this.props.router.push('/?search=' + this.state.filterInput))
+        }
+    }
     toggleWindowOpen (id) {
         console.log('toggle: ', id)
         this.props.getMessage(id)
@@ -79,7 +143,6 @@ export default CSSModules(class extends Component {
         })
     }
     toggleWindowClose () {
-        console.log('toggle close')
         this.setState({isWindowClose: !this.state.isWindowClose})
     }
     getMoreIntern () {
@@ -131,14 +194,17 @@ export default CSSModules(class extends Component {
             })
         })
         .then(() => {
-            let queryInput = this.props.location.query.search
-            if (queryInput !== undefined) {
+            let queryInput = this.props.location.query
+            if (queryInput.search !== undefined) {
                 console.log('get query: ', queryInput)
                 this.setState({
-                    filterInput: queryInput
+                    filterInput: queryInput.search
                 }, () => {
                     this.startFilter()
                 })
+            } else if (queryInput.catagory !== undefined) {
+                console.log('get query: ', queryInput)
+                this.startCatagoryFilter(queryInput.catagory)
             }
         })
         .then(() => {
@@ -168,6 +234,51 @@ export default CSSModules(class extends Component {
                         margin: '0',
                         width: '100%'
                     }}>
+
+                    <Modal title="類別搜尋 catagory" visible={this.state.catagoryVisible}
+                      onOk={this.handleOk} onCancel={this.handleCancel}
+                      footer={[]}>
+                        <div className="loginContain">
+                        </div>
+                        <div style={{
+                            margin: '20px 0 0',
+                            display: 'flex',
+                            justifyContent: 'flex-end'
+                        }}>
+                            <ul className="catagoryList">
+                                {
+                                    catagoryList.map((el, id) =>
+                                        <li className={this.state.targetCatagory === el ? 'active' : null}
+                                            key={id}
+                                            onClick={() => { this.startCatagoryFilter(el) }}>
+                                            {el}
+                                        </li>
+                                    )
+                                }
+                            </ul>
+                        </div>
+                    </Modal>
+                    <Modal title="關鍵字搜尋 text Search" visible={this.state.SearchVisible}
+                      onOk={this.handleOk} onCancel={this.handleCancel}
+                      footer={[]}>
+                        <div className="loginContain">
+                        </div>
+                        <div style={{
+                            margin: '20px 0 0',
+                            display: 'flex',
+                            justifyContent: 'flex-end'
+                        }}>
+                        <input
+                            type="text"
+                            value={this.state.filterInput}
+                            onChange={this.changeFilterInput}
+                            onKeyPress={this.handleKeyPress}
+                        />
+                          <div className="searchBtn"
+                              onClick={this.startFilter}>搜尋
+                          </div>
+                        </div>
+                    </Modal>
                     <div
                         style={{
                             position: 'absolute',
@@ -208,35 +319,25 @@ export default CSSModules(class extends Component {
                           </a>
                         </div>
                     </Box>
+                    <div className="resultCounter">目前有 {_.size(this.state.copyInternList)} 筆搜尋</div>
                     <Box flex={true}
                       justify='center'
                       direction='row'
                       responsive={false}
                       style={{
-                          margin: '30px 0 0 0',
+                          margin: '0',
                           padding: '0 15px',
                           position: 'relative',
                           width: '100%',
                           maxWidth: '1024px'
                       }}>
-                      <Search inline={true}
-                        fill={true}
-                        size='small'
-                        value={this.state.filterInput}
-                        iconAlign='start'
-                        placeHolder='輸入公司名稱'
-                        onDOMChange={this.changeFilterInput}
-                        onKeyPress={this.handleKeyPress}
-                        responsive={false}
-                        dropAlign={{'right': 'right'}}
-                        style={{
-                            border: '2px solid #50514F',
-                            margin: '0 auto'
-                        }} />
-                    <div className="searchBtn"
-                        onClick={this.startFilter}>搜尋</div>
+                        <div className="searchBtn"
+                            onClick={this.showSearchModal}>關鍵字搜尋
+                        </div>
+                        <div className="searchBtn"
+                            onClick={this.showCatagoryModal}>類別搜尋
+                        </div>
                     </Box>
-
                 </Header>
                 <InfiniteScroll
                     pageStart={0}
