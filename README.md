@@ -24,16 +24,6 @@ Inspired by https://github.com/allenwhale/react-redux-boilerplate
  - for latest release please checkout master branch
  - for contributing developpemnt please checkout dev branch 
 
- ## Note
- ---
-  - Our work flow is based on git flow but less complicated, more like git flow + github flow.
-  - That is to say, even the PRs are accepted, they won't be released immediately. Your changes will be merged into dev not master, waiting for the next version upgrade to be released.
-  - Good to know:
-  	- git flow
-  		https://datasift.github.io/gitflow/IntroducingGitFlow.html
-  	- github flow
-  		https://guides.github.com/introduction/flow/
-
 ### Issue tracking
 ---
  - Strongly suggested using zenhub
@@ -50,8 +40,19 @@ Inspired by https://github.com/allenwhale/react-redux-boilerplate
  - Pull from dev branch
  - Make your changes(solve the issue)
  - Send pull request
+ 
+### Note
+ ---
+  - Our work flow is based on git flow but less complicated, more like git flow + github flow.
+  - That is to say, even the PRs are accepted, they won't be released immediately. Your changes will be merged into dev not master, waiting for the next version upgrade to be released.
+  - Good to know:
+  	- git flow
+  		https://datasift.github.io/gitflow/IntroducingGitFlow.html
+  	- github flow
+  		https://guides.github.com/introduction/flow/
 
-Feel free to contact us via all sorts of methods.
+### Contact
+ ---
  - fb group: https://www.facebook.com/groups/internlens
  - email: internlens.tw@gmail.com
  - website: https://internlens.com/
