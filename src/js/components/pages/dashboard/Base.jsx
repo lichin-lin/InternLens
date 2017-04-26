@@ -146,6 +146,7 @@ export default CSSModules(class extends Component {
         this.setState({isWindowClose: !this.state.isWindowClose})
     }
     getMoreIntern () {
+        console.log('trigger load')
         if (this.state.isListEnd === true) {
             return
         }
