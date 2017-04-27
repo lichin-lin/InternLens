@@ -84,6 +84,7 @@ export default CSSModules(class extends Component {
         this.setState({currentIndex: 0})
         this.setState({isListEnd: false})
         this.setState({SearchVisible: false})
+        this.setState({targetCatagory: ''})
         let rowData = _.reverse(_.values(this.props.Intern.list))
         console.log('row', this.state.filterInput)
         let filterData = {}
@@ -357,7 +358,8 @@ export default CSSModules(class extends Component {
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            margin: '10vh 0'
+                            margin: '10vh 0',
+                            fontSize: '1.5em'
                         }}>搜尋無相關結果，試著換換關鍵字吧</div>
                         : _.map(this.state.renderInternList, (intern, id) =>
                             intern === undefined
