@@ -320,7 +320,7 @@ export default CSSModules(class extends Component {
                           </a>
                         </div>
                     </Box>
-                    <div className="resultCounter">目前有 {_.size(this.state.copyInternList)} 筆搜尋</div>
+                    <div className="resultCounter">{this.state.targetCatagory ? <b>{this.state.targetCatagory}類別</b> : null }有 {_.size(this.state.copyInternList)} 筆搜尋</div>
                     <Box flex={true}
                       justify='center'
                       direction='row'
