@@ -24,18 +24,23 @@ $brand_blue = darken(#58A0FC, 5%)
 .searchBtn
     min-width: 80px
     // background: $brand_blue_light !important
-    background: transparent !important
+    background: transparent
     border: 2px solid $brand_blue_light
-    color: $brand_blue_light !important
+    color: $brand_blue_light
     border-radius: 5px
     margin-left: 5px
-    color: white
     padding: 5px 15px
     display: flex
     align-items: center
     justify-content: center
     cursor: pointer
     font-size: 1.2em
+
+.searchBtn-select
+    color: white
+    background: $brand_blue_light
+    border: 2px solid $brand_blue_light
+
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   color: black !important;
 }
@@ -51,12 +56,12 @@ $brand_blue = darken(#58A0FC, 5%)
 
 .catagoryList
     margin: 0
-    padding: 10px 15px
+    /*padding: 10px 15px*/
     width: 100%
     display: flex
     flex-direction: row
     flex-wrap: wrap
-    height: 35vh
+    /*height: 35vh*/
     min-height: 100px
     overflow-y: scroll
     align-items: center
