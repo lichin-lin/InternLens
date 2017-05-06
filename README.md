@@ -21,8 +21,11 @@ Inspired by https://github.com/allenwhale/react-redux-boilerplate
 
 ### Contribution
 ---
- - for latest release please checkout master branch
- - for contributing developpemnt please checkout dev branch 
+ - For latest release please checkout master branch
+ - For contributing developpemnt please checkout dev branch 
+
+# Important
+ - After cloning or forking the repo, go to ```src/js/utils``` and change the ```confing.js.sample``` file into ```config.js``` to prevent critical building error.
 
 ### Issue tracking
 ---
@@ -38,6 +41,7 @@ Inspired by https://github.com/allenwhale/react-redux-boilerplate
  - Go to "Board" and pick a newbies issue
  - Fork repo
  - Pull from dev branch
+ - Fix the config problem mentioned above
  - Make your changes(solve the issue)
  - Send pull request
  
@@ -56,6 +60,3 @@ Inspired by https://github.com/allenwhale/react-redux-boilerplate
  - fb group: https://www.facebook.com/groups/internlens
  - email: internlens.tw@gmail.com
  - website: https://internlens.com/
-
-
-
