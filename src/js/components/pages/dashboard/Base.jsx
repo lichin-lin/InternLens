@@ -33,6 +33,7 @@ export default CSSModules(class extends Component {
         this.showSearchModal = this.showSearchModal.bind(this)
         this.handleOk = this.handleOk.bind(this)
         this.handleCancel = this.handleCancel.bind(this)
+        this.toggleFilter = this.toggleFilter.bind(this)
         this.state = {
             copyInternList: {},
             renderInternList: {},
@@ -45,7 +46,9 @@ export default CSSModules(class extends Component {
             isListEnd: false,
             catagoryVisible: false,
             SearchVisible: false,
-            targetCatagory: ''
+            targetCatagory: '',
+            filterBtnSelect: 'keyWordSearch',  // should be : 'keyWordSearch' or 'catagory'
+            ifMobile: false
         }
     }
     showCatagoryModal () {
@@ -70,6 +73,31 @@ export default CSSModules(class extends Component {
             SearchVisible: false
         })
     }
+    toggleFilter (action) {
+        if (this.state.ifMobile) {
+            switch (action) {
+                case 'keyWordSearch':
+                    console.log('!!!')
+                    this.setState({
+                        filterBtnSelect: '',
+                        SearchVisible: true
+                    })
+                    break
+                case 'catagory':
+                    this.setState({
+                        filterBtnSelect: '',
+                        catagoryVisible: true
+                    })
+                    break
+            }
+        } else {
+            this.setState({
+                filterBtnSelect: action,
+                SearchVisible: false,
+                catagoryVisible: false
+            })
+        }
+    }
     changeFilterInput (event) {
         console.log(event.target)
         this.setState({filterInput: event.target.value})
@@ -85,6 +113,7 @@ export default CSSModules(class extends Component {
         this.setState({isListEnd: false})
         this.setState({SearchVisible: false})
         this.setState({targetCatagory: ''})
+        this.setState({filterBtnSelect: 'keyWordSearch'})
         let rowData = _.reverse(_.values(this.props.Intern.list))
         console.log('row', this.state.filterInput)
         let filterData = {}
@@ -182,6 +211,13 @@ export default CSSModules(class extends Component {
             return this.props.getInternList(0, 500)
         })
         .then(() => {
+            if (window.innerWidth) {
+                if (window.innerWidth <= 768) {
+                    this.setState({ifMobile: true})
+                }
+            }
+        })
+        .then(() => {
             return this.props.getAllFavorite()
         })
         .then(() => {
@@ -215,6 +251,62 @@ export default CSSModules(class extends Component {
         })
     }
     render () {
+        var filterTab = ''
+        var keyWordClass = 'searchBtn '
+        var catagoryClass = 'searchBtn '
+
+        switch (this.state.filterBtnSelect) {
+            case 'keyWordSearch':
+                if (!this.state.ifMobile) {
+                    keyWordClass += 'searchBtn-select'
+                }
+                filterTab = (
+                    <div title="關鍵字搜尋 text Search">
+                            <div className="loginContain"></div>
+                            <div style={{
+                                margin: '20px 0 0',
+                                display: 'flex',
+                                justifyContent: 'flex-end'
+                            }}>
+                                <input
+                                    type="text"
+                                    value={this.state.filterInput}
+                                    onChange={this.changeFilterInput}
+                                    onKeyPress={this.handleKeyPress}
+                                />
+                                <div className="searchBtn"
+                                    onClick={this.startFilter}>搜尋
+                                </div>
+                            </div>
+                        </div>)
+                break
+            case 'catagory':
+                if (!this.state.ifMobile) {
+                    catagoryClass += 'searchBtn-select'
+                }
+                filterTab = (
+                    <div title="類別搜尋 catagory">
+                            <div className="loginContain"></div>
+                            <div style={{
+                                margin: '20px 0 0',
+                                display: 'flex',
+                                justifyContent: 'flex-end'
+                            }}>
+                                <ul className="catagoryList">
+                                    {
+                                        catagoryList.map((el, id) =>
+                                            <li className={this.state.targetCatagory === el ? 'active' : null}
+                                                key={id}
+                                                onClick={() => { this.startCatagoryFilter(el) }}>
+                                                {el}
+                                            </li>
+                                        )
+                                    }
+                                </ul>
+                            </div>
+                          </div>)
+                break
+        }
         return (
             <div style={{
                 width: '100%',
@@ -236,7 +328,6 @@ export default CSSModules(class extends Component {
                         margin: '0',
                         width: '100%'
                     }}>
-
                     <Modal title="類別搜尋 catagory" visible={this.state.catagoryVisible}
                       onOk={this.handleOk} onCancel={this.handleCancel}
                       footer={[]}>
@@ -262,7 +353,11 @@ export default CSSModules(class extends Component {
                     </Modal>
                     <Modal title="關鍵字搜尋 text Search" visible={this.state.SearchVisible}
                       onOk={this.handleOk} onCancel={this.handleCancel}
-                      footer={[]}>
+                      footer={
+                          <div className="searchBtn searchBtn-select"
+                              onClick={this.startFilter}>搜尋
+                          </div>
+                      }>
                         <div className="loginContain">
                         </div>
                         <div style={{
@@ -275,10 +370,10 @@ export default CSSModules(class extends Component {
                             value={this.state.filterInput}
                             onChange={this.changeFilterInput}
                             onKeyPress={this.handleKeyPress}
+                            style ={{
+                                margin: '0 0 20px 0'
+                            }}
                         />
-                          <div className="searchBtn"
-                              onClick={this.startFilter}>搜尋
-                          </div>
                         </div>
                     </Modal>
                     <div
@@ -333,13 +428,26 @@ export default CSSModules(class extends Component {
                           width: '100%',
                           maxWidth: '1024px'
                       }}>
-                        <div className="searchBtn"
-                            onClick={this.showSearchModal}>關鍵字搜尋
+                        <div className= {keyWordClass}
+                            onClick={this.toggleFilter.bind(this, 'keyWordSearch')}>關鍵字搜尋
                         </div>
-                        <div className="searchBtn"
-                            onClick={this.showCatagoryModal}>類別搜尋
+                        <div className= {catagoryClass}
+                            onClick={this.toggleFilter.bind(this, 'catagory')}>類別搜尋
                         </div>
                     </Box>
+                    <Box flex={true}
+                      justify='center'
+                      direction='row'
+                      responsive={false}
+                      style={{
+                          margin: '0',
+                          padding: '0 15px',
+                          position: 'relative',
+                          width: '100%',
+                          maxWidth: '1024px'
+                      }}>
+                            {filterTab}
+                        </Box>
                 </Header>
                 <InfiniteScroll
                     pageStart={0}
