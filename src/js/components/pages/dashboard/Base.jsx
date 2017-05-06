@@ -288,7 +288,7 @@ export default CSSModules(class extends Component {
                             height: '100%',
                             top: '0',
                             left: '0',
-                            opacity: '0.35',
+                            opacity: '0.2',
                             backgroundImage: 'url("http://i.imgur.com/LnL7Cgr.png")',
                             backgroundSize: 'cover',
                             backgroundPosition: 'center'
@@ -308,10 +308,14 @@ export default CSSModules(class extends Component {
                       tag='h4'
                       margin='none'
                       style={{
+                          fontSize: '24px',
+                          fontWeight: 'initial',
+                          letterSpacing: '0.2em',
+                          lineHeight: 'normal',
                           marginBottom: '10px',
                           zIndex: '1'
                       }}>
-                      最透明的實習經驗分享平台。
+                      最透明的實習經驗分享平台
                     </Heading>
                       <div className="submitNewPost--contain">
                           <a className="submitNewPost" target='_blank' href='https://goo.gl/forms/T4qXfrm2rhFC64cB2'>
