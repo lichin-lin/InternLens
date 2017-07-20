@@ -74,7 +74,7 @@ while True:
         line_counter += 1
         if(line_counter == 6):
             title = row
-            print(title)
+            # print(title)
         if(line_counter > 6):
             csv_object[line_counter - 7] = {mappingTable[title[i]]: row[i] for i in range(len(title))}
             csv_object[line_counter - 7]['ID'] = line_counter - 6
@@ -98,6 +98,14 @@ while True:
     db = firebase.database()
     results = db.child('list').update(csv_object, user['idToken'])
     print('Fetch data, ', datetime.now())
+
+    intern__list = db.child("list").get()
+    intern__favi = db.child("favoriteMap").get()
+    intern__messageMap = db.child("messageMap").get()
+    print('list count: #',len(intern__list.val()))
+    print('favi count: #',len(intern__favi.val()))
+    print('meg count: #',len(intern__messageMap.val()))
+
     time.sleep(300)
 
 ### shut down the script
