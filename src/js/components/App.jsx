@@ -14,7 +14,8 @@ export default CSSModules(class extends Component {
             <StyleRoot>
                 <App style={{
                     maxWidth: '100%',
-                    background: 'white'
+                    background: 'white',
+                    maxHeight: 'none'
                 }}>
                     <Box justify='start'
                       align='center'
@@ -26,7 +27,10 @@ export default CSSModules(class extends Component {
                       full={true}
                       colorIndex='light-2'
                       style={{
-                          background: 'white'
+                          background: 'white',
+                          maxHeight: 'none',
+                          height: 'auto',
+                          overflow: 'none'
                       }}>
                     <Containers.common.Navbar {...this.props}/>
                       <Box direction='row'
@@ -40,11 +44,15 @@ export default CSSModules(class extends Component {
                         full='horizontal'
                         colorIndex='light-1'
                         style={{
-                            marginTop: '150px',
-                            background: 'white'
+                            marginTop: '100px',
+                            background: 'white',
+                            Height: 'auto',
+                            minHeight: 'auto',
+                            maxHeight: 'none',
+                            overflow: 'none'
                         }}>
                         {this.props.children}
-                      </Box>
+                    </Box>
                       <Box direction='row'
                         justify='start'
                         align='center'

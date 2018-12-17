@@ -33,6 +33,7 @@ export default CSSModules(class extends Component {
         this.showSearchModal = this.showSearchModal.bind(this)
         this.handleOk = this.handleOk.bind(this)
         this.handleCancel = this.handleCancel.bind(this)
+        this.toggleFilter = this.toggleFilter.bind(this)
         this.state = {
             copyInternList: {},
             renderInternList: {},
@@ -45,7 +46,9 @@ export default CSSModules(class extends Component {
             isListEnd: false,
             catagoryVisible: false,
             SearchVisible: false,
-            targetCatagory: ''
+            targetCatagory: '',
+            filterBtnSelect: 'keyWordSearch',  // should be : 'keyWordSearch' or 'catagory'
+            ifMobile: false
         }
     }
     showCatagoryModal () {
@@ -70,6 +73,31 @@ export default CSSModules(class extends Component {
             SearchVisible: false
         })
     }
+    toggleFilter (action) {
+        if (this.state.ifMobile) {
+            switch (action) {
+                case 'keyWordSearch':
+                    console.log('!!!')
+                    this.setState({
+                        filterBtnSelect: '',
+                        SearchVisible: true
+                    })
+                    break
+                case 'catagory':
+                    this.setState({
+                        filterBtnSelect: '',
+                        catagoryVisible: true
+                    })
+                    break
+            }
+        } else {
+            this.setState({
+                filterBtnSelect: action,
+                SearchVisible: false,
+                catagoryVisible: false
+            })
+        }
+    }
     changeFilterInput (event) {
         console.log(event.target)
         this.setState({filterInput: event.target.value})
@@ -84,6 +112,8 @@ export default CSSModules(class extends Component {
         this.setState({currentIndex: 0})
         this.setState({isListEnd: false})
         this.setState({SearchVisible: false})
+        this.setState({targetCatagory: ''})
+        this.setState({filterBtnSelect: 'keyWordSearch'})
         let rowData = _.reverse(_.values(this.props.Intern.list))
         console.log('row', this.state.filterInput)
         let filterData = {}
@@ -146,6 +176,7 @@ export default CSSModules(class extends Component {
         this.setState({isWindowClose: !this.state.isWindowClose})
     }
     getMoreIntern () {
+        console.log('trigger load')
         if (this.state.isListEnd === true) {
             return
         }
@@ -178,6 +209,13 @@ export default CSSModules(class extends Component {
         this.props.setLoading()
         .then(() => {
             return this.props.getInternList(0, 500)
+        })
+        .then(() => {
+            if (window.innerWidth) {
+                if (window.innerWidth <= 768) {
+                    this.setState({ifMobile: true})
+                }
+            }
         })
         .then(() => {
             return this.props.getAllFavorite()
@@ -213,6 +251,62 @@ export default CSSModules(class extends Component {
         })
     }
     render () {
+        var filterTab = ''
+        var keyWordClass = 'searchBtn '
+        var catagoryClass = 'searchBtn '
+
+        switch (this.state.filterBtnSelect) {
+            case 'keyWordSearch':
+                if (!this.state.ifMobile) {
+                    keyWordClass += 'searchBtn-select'
+                }
+                filterTab = (
+                    <div title="關鍵字搜尋 text Search">
+                            <div className="loginContain"></div>
+                            <div style={{
+                                margin: '20px 0 0',
+                                display: 'flex',
+                                justifyContent: 'flex-end'
+                            }}>
+                                <input
+                                    type="text"
+                                    value={this.state.filterInput}
+                                    onChange={this.changeFilterInput}
+                                    onKeyPress={this.handleKeyPress}
+                                />
+                                <div className="searchBtn"
+                                    onClick={this.startFilter}>搜尋
+                                </div>
+                            </div>
+                        </div>)
+                break
+            case 'catagory':
+                if (!this.state.ifMobile) {
+                    catagoryClass += 'searchBtn-select'
+                }
+                filterTab = (
+                    <div title="類別搜尋 catagory">
+                            <div className="loginContain"></div>
+                            <div style={{
+                                margin: '20px 0 0',
+                                display: 'flex',
+                                justifyContent: 'flex-end'
+                            }}>
+                                <ul className="catagoryList">
+                                    {
+                                        catagoryList.map((el, id) =>
+                                            <li className={this.state.targetCatagory === el ? 'active' : null}
+                                                key={id}
+                                                onClick={() => { this.startCatagoryFilter(el) }}>
+                                                {el}
+                                            </li>
+                                        )
+                                    }
+                                </ul>
+                            </div>
+                          </div>)
+                break
+        }
         return (
             <div style={{
                 width: '100%',
@@ -234,7 +328,6 @@ export default CSSModules(class extends Component {
                         margin: '0',
                         width: '100%'
                     }}>
-
                     <Modal title="類別搜尋 catagory" visible={this.state.catagoryVisible}
                       onOk={this.handleOk} onCancel={this.handleCancel}
                       footer={[]}>
@@ -260,7 +353,11 @@ export default CSSModules(class extends Component {
                     </Modal>
                     <Modal title="關鍵字搜尋 text Search" visible={this.state.SearchVisible}
                       onOk={this.handleOk} onCancel={this.handleCancel}
-                      footer={[]}>
+                      footer={
+                          <div className="searchBtn searchBtn-select"
+                              onClick={this.startFilter}>搜尋
+                          </div>
+                      }>
                         <div className="loginContain">
                         </div>
                         <div style={{
@@ -273,10 +370,10 @@ export default CSSModules(class extends Component {
                             value={this.state.filterInput}
                             onChange={this.changeFilterInput}
                             onKeyPress={this.handleKeyPress}
+                            style ={{
+                                margin: '0 0 20px 0'
+                            }}
                         />
-                          <div className="searchBtn"
-                              onClick={this.startFilter}>搜尋
-                          </div>
                         </div>
                     </Modal>
                     <div
@@ -286,7 +383,7 @@ export default CSSModules(class extends Component {
                             height: '100%',
                             top: '0',
                             left: '0',
-                            opacity: '0.35',
+                            opacity: '0.2',
                             backgroundImage: 'url("http://i.imgur.com/LnL7Cgr.png")',
                             backgroundSize: 'cover',
                             backgroundPosition: 'center'
@@ -306,10 +403,14 @@ export default CSSModules(class extends Component {
                       tag='h4'
                       margin='none'
                       style={{
+                          fontSize: '24px',
+                          fontWeight: 'initial',
+                          letterSpacing: '0.2em',
+                          lineHeight: 'normal',
                           marginBottom: '10px',
                           zIndex: '1'
                       }}>
-                      全台灣最透明的實習經驗分享平台。
+                      最透明的實習經驗分享平台
                     </Heading>
                       <div className="submitNewPost--contain">
                           <a className="submitNewPost" target='_blank' href='https://goo.gl/forms/T4qXfrm2rhFC64cB2'>
@@ -319,7 +420,7 @@ export default CSSModules(class extends Component {
                           </a>
                         </div>
                     </Box>
-                    <div className="resultCounter">目前有 {_.size(this.state.copyInternList)} 筆搜尋</div>
+                    <div className="resultCounter">{this.state.targetCatagory ? <b>{this.state.targetCatagory}類別</b> : null }有 {_.size(this.state.copyInternList)} 筆搜尋</div>
                     <Box flex={true}
                       justify='center'
                       direction='row'
@@ -331,13 +432,26 @@ export default CSSModules(class extends Component {
                           width: '100%',
                           maxWidth: '1024px'
                       }}>
-                        <div className="searchBtn"
-                            onClick={this.showSearchModal}>關鍵字搜尋
+                        <div className= {keyWordClass}
+                            onClick={this.toggleFilter.bind(this, 'keyWordSearch')}>關鍵字搜尋
                         </div>
-                        <div className="searchBtn"
-                            onClick={this.showCatagoryModal}>類別搜尋
+                        <div className= {catagoryClass}
+                            onClick={this.toggleFilter.bind(this, 'catagory')}>類別搜尋
                         </div>
                     </Box>
+                    <Box flex={true}
+                      justify='center'
+                      direction='row'
+                      responsive={false}
+                      style={{
+                          margin: '0',
+                          padding: '0 15px',
+                          position: 'relative',
+                          width: '100%',
+                          maxWidth: '1024px'
+                      }}>
+                            {filterTab}
+                        </Box>
                 </Header>
                 <InfiniteScroll
                     pageStart={0}
@@ -356,7 +470,8 @@ export default CSSModules(class extends Component {
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            margin: '10vh 0'
+                            margin: '10vh 0',
+                            fontSize: '1.5em'
                         }}>搜尋無相關結果，試著換換關鍵字吧</div>
                         : _.map(this.state.renderInternList, (intern, id) =>
                             intern === undefined
